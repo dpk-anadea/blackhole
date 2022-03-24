@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require('path');
+const path = require('path')
 const mainRoutes = require('./routes/web/main.router')
 const productTypeRoutes = require('./routes/api/product_type.router')
 
@@ -15,6 +15,6 @@ app.use(express.json())
 
 app.use('/api', productTypeRoutes)
 
-app.use(express.static(path.join(__dirname, './client/dist')));
+app.use(express.static(path.join(__dirname, './client/dist')))
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
