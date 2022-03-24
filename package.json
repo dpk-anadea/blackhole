@@ -1,5 +1,5 @@
 {
-  "name": "testnodejs",
+  "name": "blackhole",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -12,10 +12,11 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "pg": "^8.7.3",
-    "vue": "^3.2.31"
+    "pg": "^8.7.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier-config-standard": "^5.0.0",
+    "webpack": "^5.70.0"
   }
 }
