@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HelloWord from '../components/HelloWorld'
+import HomePage from '../views/HomePage'
 import TuTu from '../components/TuTu'
 
 const router = createRouter({
@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: HelloWord
+      component: HomePage
     },
     {
       path: '/tutu',
