@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ShoppingCartIcon from "@/components/ShoppingCartIcon";
+import ShoppingCartIcon from "@/components/icons/ShoppingCartIcon";
 
 export default {
   name: 'HeaderSection',
@@ -31,8 +31,8 @@ export default {
         { name: 'Latest Product' },
         { name: 'Sample Packs' },
         { name: 'Plugins' },
-        { name: 'Free Downloads' },
-        { name: 'My Account' },
+        { name: 'Login' },
+        { name: 'Create account' },
         { name: 'Home Page' }
       ]
     }
@@ -71,12 +71,17 @@ export default {
 
 .nav-item {
   list-style-type: none;
+  cursor: pointer;
 
   color: white;
   font-size: 18px;
 
   &:not(:last-child) {
     margin-right: 20px;
+  }
+
+  &:hover {
+    color: #282828;
   }
 }
 

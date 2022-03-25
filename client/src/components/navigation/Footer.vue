@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import FacebookIcon from "@/components/FacebookIcon";
-import InstagramIcon from "@/components/InstagramIcon";
-import LinkedlnIcon from "@/components/LinkedlnIcon";
+import FacebookIcon from "@/components/icons/FacebookIcon";
+import InstagramIcon from "@/components/icons/InstagramIcon";
+import LinkedlnIcon from "@/components/icons/LinkedlnIcon";
 export default {
   name: "FooterSection",
   components: {LinkedlnIcon, InstagramIcon, FacebookIcon},

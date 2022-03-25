@@ -1,6 +1,6 @@
 <template>
 <div class="product-wrapper">
-  <img src="./productImg.png" alt="dog">
+  <img src="../../images/productImg.png" alt="dog">
   <div class="product-info">
     <h5 class="product-title">Origin: Vintage & Lofi FX</h5>
     <div class="product-description">

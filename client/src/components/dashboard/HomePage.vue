@@ -38,9 +38,9 @@
 </template>
 
 <script>
-import HeaderSection from "@/components/Header";
-import ProductItem from "@/components/ProductItem";
-import FooterSection from "@/components/Footer";
+import HeaderSection from "@/components/navigation/Header";
+import ProductItem from "@/components/products-list/ProductItem";
+import FooterSection from "@/components/navigation/Footer";
 
 export default {
   name: 'HelloWorld',
@@ -144,10 +144,4 @@ export default {
   background-color: black;
   font-size: 30px;
 }
-</style>
-
-<style>
- body {
-   margin: 0;
- }
 </style>
