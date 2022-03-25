@@ -1,50 +1,44 @@
 <template>
-  <div class="home-page-wrapper">
-    <!-- Header -->
-    <HeaderSection />
+  <MainLayout>
+    <template #main-content>
+      <section class="plugins-selection-wrapper">
+        <section class="free-download-wrapper">
+          <h1 class="free-download-title">
+            1.1GB OF FREE SAMPLES (Limited Time Only)
+          </h1>
+          <div class="free-download-sub-title">
+            Exclusive Samples Designed By 3x Grammy Winning Producer S1 for
+            <del class="cross-out-figure">$75</del> FREE
+          </div>
+          <button class="free-download-button">Free Download</button>
+        </section>
 
-    <!--Download section -->
-    <section class="free-download-wrapper">
-      <h1 class="free-download-title">
-        1.1GB OF FREE SAMPLES (Limited Time Only)
-      </h1>
-      <div class="free-download-sub-title">
-        Exclusive Samples Designed By 3x Grammy Winning Producer S1 for
-        <del class="cross-out-figure">$75</del> FREE
-      </div>
-      <button class="free-download-button">Free Download</button>
-    </section>
+        <h2 class="plugins-selection-title">
+          Download our free plugins to level up your music production
+        </h2>
+        <div class="products-list">
+          <ProductItem />
+          <ProductItem />
+          <ProductItem />
+        </div>
 
-    <!--Products selection -->
-    <main class="plugins-selection-wrapper">
-      <h2 class="plugins-selection-title">
-        Download our free plugins to level up your music production
-      </h2>
-      <div class="products-list">
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-      </div>
-    </main>
-
-    <div class="wrapper-packs">Download our most popular free sample packs</div>
-
-    <!--Footer -->
-    <FooterSection />
-  </div>
+        <div class="wrapper-packs">
+          Download our most popular free sample packs
+        </div>
+      </section>
+    </template>
+  </MainLayout>
 </template>
 
 <script>
-  import HeaderSection from '@/components/navigation/Header'
   import ProductItem from '@/components/products-list/ProductItem'
-  import FooterSection from '@/components/navigation/Footer'
+  import MainLayout from '@/components/layout/MainLayout'
 
   export default {
     name: 'HelloWorld',
     components: {
-      FooterSection,
-      ProductItem,
-      HeaderSection
+      MainLayout,
+      ProductItem
     },
     props: {
       msg: String
@@ -52,7 +46,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   .free-download-wrapper {
     display: flex;
@@ -108,12 +101,13 @@
   .plugins-selection-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     background-color: #1d1c1c;
   }
 
   .plugins-selection-title {
+    text-align: center;
+
     margin: 40px 0 60px;
 
     color: white;

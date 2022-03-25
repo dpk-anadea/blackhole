@@ -1,11 +1,11 @@
 <template>
   <header class="header-wrapper">
-    <nav class="nav-bar">
-      <div class="nav-bar-logo">LOGO</div>
+    <div class="nav-bar-logo">LOGO</div>
 
+    <nav class="nav-bar">
       <ul class="nav-items">
         <li
-          v-for="(item, index) of navBarItems"
+          v-for="(item, index) of $options.static.navBarItems"
           :key="'navItem' + index"
           class="nav-item">
           {{ item.name }}
@@ -24,17 +24,15 @@
     components: {
       ShoppingCartIcon
     },
-    computed: {
-      navBarItems() {
-        return [
-          { name: 'Latest Product' },
-          { name: 'Sample Packs' },
-          { name: 'Plugins' },
-          { name: 'Login' },
-          { name: 'Create account' },
-          { name: 'Home Page' }
-        ]
-      }
+    static: {
+      navBarItems: [
+        { name: 'Latest Product' },
+        { name: 'Sample Packs' },
+        { name: 'Plugins' },
+        { name: 'Login' },
+        { name: 'Create account' },
+        { name: 'Home Page' }
+      ]
     }
   }
 </script>
@@ -51,14 +49,20 @@
 
   .nav-bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 
     width: 100%;
-    padding: 0 30px;
+    padding: 0 30px 0 0;
   }
 
   .nav-bar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 30px;
+
     color: white;
   }
 

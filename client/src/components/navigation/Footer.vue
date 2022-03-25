@@ -1,7 +1,9 @@
 <template>
   <footer class="footer">
     <a class="cymantics"> © 2022, Cymatics.fm. </a>
-    <div v-for="(item, index) of privacyPolicyLinks" :key="'item' + index">
+    <div
+      v-for="(item, index) of $options.static.privacyPolicyLinks"
+      :key="'item' + index">
       <a class="cymantics">{{ item.name }}</a>
     </div>
     <div>
@@ -19,15 +21,13 @@
   export default {
     name: 'FooterSection',
     components: { LinkedlnIcon, InstagramIcon, FacebookIcon },
-    computed: {
-      privacyPolicyLinks() {
-        return [
-          { name: 'Privacy Policy' },
-          { name: 'Terms of Use' },
-          { name: 'Terms of Service' },
-          { name: 'Contact' }
-        ]
-      }
+    static: {
+      privacyPolicyLinks: [
+        { name: 'Privacy Policy' },
+        { name: 'Terms of Use' },
+        { name: 'Terms of Service' },
+        { name: 'Contact' }
+      ]
     }
   }
 </script>
