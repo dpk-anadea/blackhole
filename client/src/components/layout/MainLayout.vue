@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import MainHeader from '@/components/navigation/Header'
-  import MainFooter from '@/components/navigation/Footer'
+  import MainHeader from '@/components/navigation/MainHeader'
+  import MainFooter from '@/components/navigation/MainFooter'
 
   export default {
     name: 'MainLayout',
