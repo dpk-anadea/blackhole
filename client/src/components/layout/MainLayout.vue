@@ -1,21 +1,21 @@
 <template>
   <div class="main-layout-wrapper">
-    <HeaderSection />
+    <MainHeader />
 
     <main class="main-content">
       <slot name="main-content"></slot>
     </main>
 
-    <FooterSection />
+    <MainFooter />
   </div>
 </template>
 
 <script>
-  import HeaderSection from '@/components/navigation/Header'
-  import FooterSection from '@/components/navigation/Footer'
+  import MainHeader from '@/components/navigation/Header'
+  import MainFooter from '@/components/navigation/Footer'
 
   export default {
     name: 'MainLayout',
-    components: { FooterSection, HeaderSection }
+    components: { MainFooter, MainHeader }
   }
 </script>

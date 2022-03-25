@@ -19,7 +19,7 @@
   import InstagramIcon from '@/components/icons/InstagramIcon'
   import LinkedlnIcon from '@/components/icons/LinkedlnIcon'
   export default {
-    name: 'FooterSection',
+    name: 'MainFooter',
     components: { LinkedlnIcon, InstagramIcon, FacebookIcon },
     static: {
       privacyPolicyLinks: [

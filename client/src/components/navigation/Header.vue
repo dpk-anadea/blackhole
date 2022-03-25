@@ -20,7 +20,7 @@
   import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
 
   export default {
-    name: 'HeaderSection',
+    name: 'MainHeader',
     components: {
       ShoppingCartIcon
     },
