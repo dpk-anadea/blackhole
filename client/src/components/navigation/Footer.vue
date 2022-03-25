@@ -1,10 +1,7 @@
 <template>
   <footer class="footer">
-    <a class="cymantics">
-      © 2022, Cymatics.fm.
-    </a>
-    <div v-for="(item, index) of privacyPolicyLinks"
-         :key="'item' + index">
+    <a class="cymantics"> © 2022, Cymatics.fm. </a>
+    <div v-for="(item, index) of privacyPolicyLinks" :key="'item' + index">
       <a class="cymantics">{{ item.name }}</a>
     </div>
     <div>
@@ -16,53 +13,53 @@
 </template>
 
 <script>
-import FacebookIcon from "@/components/icons/FacebookIcon";
-import InstagramIcon from "@/components/icons/InstagramIcon";
-import LinkedlnIcon from "@/components/icons/LinkedlnIcon";
-export default {
-  name: "FooterSection",
-  components: {LinkedlnIcon, InstagramIcon, FacebookIcon},
-  computed: {
-    privacyPolicyLinks() {
-      return [
-        { name: "Privacy Policy" },
-        { name: "Terms of Use" },
-        { name: "Terms of Service" },
-        { name: "Contact" }
-      ]
+  import FacebookIcon from '@/components/icons/FacebookIcon'
+  import InstagramIcon from '@/components/icons/InstagramIcon'
+  import LinkedlnIcon from '@/components/icons/LinkedlnIcon'
+  export default {
+    name: 'FooterSection',
+    components: { LinkedlnIcon, InstagramIcon, FacebookIcon },
+    computed: {
+      privacyPolicyLinks() {
+        return [
+          { name: 'Privacy Policy' },
+          { name: 'Terms of Use' },
+          { name: 'Terms of Service' },
+          { name: 'Contact' }
+        ]
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  padding: 0 30px;
-  height: 73px;
+    padding: 0 30px;
+    height: 73px;
 
-  color: #282828;
-  background-color: #1d1c1c;
-}
-
-.cymantics {
-  cursor: pointer;
-
-  &:hover {
-    color: white;
+    color: #282828;
+    background-color: #1d1c1c;
   }
-}
 
-.social-network {
-  &:not(:last-child) {
-    margin-right: 15px;
+  .cymantics {
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+    }
   }
-}
 
-.icon {
-  width: 20px;
-}
+  .social-network {
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .icon {
+    width: 20px;
+  }
 </style>
