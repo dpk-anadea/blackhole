@@ -1,1 +1,1 @@
-export const presets = ['@vue/cli-plugin-babel/preset'];
+module.export = { presets: ['@vue/cli-plugin-babel/preset'] }
