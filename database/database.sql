@@ -5,11 +5,11 @@ create TABLE products_type(
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    user_first_name TEXT NOT NULL,
-    user_last_name TEXT NOT NULL,
-    user_phone_number VARCHAR NOT NULL,
-    user_email TEXT NOT NULL,
-    user_password VARCHAR NOT NULL
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    phone VARCHAR NOT NULL,
+    email TEXT NOT NULL,
+    password VARCHAR NOT NULL
 );
 
 create TABLE products(
