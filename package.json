@@ -9,7 +9,10 @@
     "build": "rimraf ./build && tsc",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch --detectOpenHandles",
-    "start:test": "NODE_ENV=test ts-node index"
+    "start:test": "NODE_ENV=test ts-node index",
+    "sq": "sequelize",
+    "sq:test": "NODE_ENV=test sequelize",
+    "sq:add-model": "sequelize model:generate"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +21,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.3",
     "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.17.0",
     "vue-router": "4"
   },
   "devDependencies": {
@@ -44,6 +49,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
+    "sequelize-cli": "^6.4.1",
     "stylus": "^0.57.0",
     "stylus-loader": "^6.2.0",
     "supertest": "^6.2.2",

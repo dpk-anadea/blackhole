@@ -1,16 +1,10 @@
-const Pool = require('pg').Pool
-const dotenv = require('dotenv')
+const Sequelize = require('sequelize')
+const dbConfig = require('./dbConfig')
 
-dotenv.config()
+const User = require('../models/User')
 
-const typeDB = process.env.NODE_ENV === 'test' ? 'TEST_DB_' : 'DB_'
+const connection = new Sequelize(dbConfig)
 
-const pool = new Pool({
-  user: process.env[typeDB + 'USERNAME'],
-  password: process.env[typeDB + 'PASSWORD'],
-  host: process.env[typeDB + 'HOST'],
-  port: process.env[typeDB + 'PORT'],
-  database: process.env[typeDB + 'DATABASE']
-})
+User.init(connection)
 
-module.exports = pool
+module.exports = connection
