@@ -12,12 +12,6 @@
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'ProductItem'
-  }
-</script>
-
 <style lang="scss" scoped>
   .product-wrapper {
     display: flex;

@@ -22,15 +22,8 @@
   </section>
 </template>
 
-<script>
+<script setup>
   import ProductItem from '@/components/products-list/ProductItem'
-
-  export default {
-    name: 'MainContent',
-    components: {
-      ProductItem
-    }
-  }
 </script>
 
 <style lang="scss" scoped>

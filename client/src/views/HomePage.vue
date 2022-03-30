@@ -6,15 +6,7 @@
   </MainLayout>
 </template>
 
-<script>
+<script setup>
   import MainLayout from '@/components/layout/MainLayout'
   import MainContent from '@/components/MainContent'
-
-  export default {
-    name: 'HelloWorld',
-    components: {
-      MainContent,
-      MainLayout
-    }
-  }
 </script>
