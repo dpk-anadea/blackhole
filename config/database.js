@@ -11,6 +11,7 @@ module.exports = {
     dialect: 'postgres',
     define: {
       timestamps: true,
+      underscored: true
     }
   },
   test: {
@@ -21,6 +22,7 @@ module.exports = {
     dialect: 'postgres',
     define: {
       timestamps: true,
+      underscored: true
     }
   }
 }

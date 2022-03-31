@@ -1,6 +1,6 @@
 import request from 'supertest'
 import app from '../../../app'
-import db from '../../../database/db'
+import { sequelize } from '../../../models'
 
 describe('Space test suite', () => {
   const initUser = {
@@ -12,28 +12,31 @@ describe('Space test suite', () => {
     password: '123456'
   }
 
-  beforeEach(() => {
-    return db.query('START TRANSACTION');
-  });
-  afterEach(() => {
-    return db.query('ROLLBACK');
-  });
+  // beforeEach(() => {
+  //   return sequelize.query('START TRANSACTION');
+  // });
+  // afterEach(() => {
+  //   return sequelize.query('ROLLBACK');
+  // });
   afterAll(() => {
-    return db.end()
+    return sequelize.close()
   })
 
   it.skip('tests post /users endpoints', async() => {
     const response = await request(app).post('/api/users').send(initUser)
 
+    console.log(response)
+
     expect(response.statusCode).toBe(200)
-    expect(response.body).toEqual(initUser)
   })
 
-  it.skip('tests get /users endpoints', async() => {
+  it('tests get /users endpoints', async() => {
     const response = await request(app).get('/api/users')
+
+    console.log(response)
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(2)
-    expect(response.body).toEqual(initUser)
+    // expect(response.body).toEqual(initUser)
   })
 })
