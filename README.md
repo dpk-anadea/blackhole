@@ -1,10 +1,6 @@
 * install node v 16.14.2
-* npm i (in project folder)
-* npm run dev
-
-
-.env
-
+* yarn (in project folder)
+* add .env file<br>
 APP_PORT=3030 <br>
 <br>
 DB_CONNECTION=pgsql<br>
@@ -20,3 +16,12 @@ TEST_DB_PORT=5432<br>
 TEST_DB_DATABASE=online_shop_test<br>
 TEST_DB_USERNAME=user<br>
 TEST_DB_PASSWORD=<br>
+
+* yarn sq db:create
+* yarn sq db:migrate
+
+* yarn (in client folder)
+
+
+
+
