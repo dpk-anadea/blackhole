@@ -1,11 +1,53 @@
+<script setup>
+  import { reactive, defineEmits } from 'vue'
+
+  const emit = defineEmits(['submit'])
+
+  const state = reactive({
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const submit = () => {
+    emit('submit', state)
+  }
+</script>
+
 <template>
-  <form class="register-form-wrapper">
-    <input class="input" id="first_name" placeholder="First Name" />
-    <input class="input" id="last_name" placeholder="Last Name" />
-    <input class="input" id="phone" placeholder="Phone" />
-    <input class="input" id="email" placeholder="Email" />
-    <input class="input" id="password" placeholder="Password" />
-    <button class="button">CREATE ACCOUNT</button>
+  <form class="register-form-wrapper" @submit.prevent="submit">
+    <input
+      v-model="state.firstName"
+      class="input"
+      id="first_name"
+      placeholder="First Name" />
+    <input
+      v-model="state.lastName"
+      class="input"
+      id="last_name"
+      placeholder="Last Name" />
+    <input
+      v-model="state.phoneNumber"
+      class="input"
+      id="phone"
+      placeholder="Phone" />
+    <input v-model="state.email" class="input" id="email" placeholder="Email" />
+    <input
+      v-model="state.password"
+      class="input"
+      type="password"
+      id="password"
+      placeholder="Password" />
+    <input
+      v-model="state.confirmPassword"
+      class="input"
+      type="password"
+      id="confirm_password"
+      placeholder="Confirm password" />
+    <button type="submit" class="button">CREATE ACCOUNT</button>
   </form>
 
   <div class="hint">
@@ -50,6 +92,15 @@
       font-weight: 400;
       font-family: 'Montserrat', sans-serif;
     }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+
+  input:focus {
+    background-color: transparent;
   }
 
   .button {

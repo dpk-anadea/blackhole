@@ -1,8 +1,31 @@
+<script setup>
+  import { reactive } from 'vue'
+
+  const state = reactive({
+    email: '',
+    password: ''
+  })
+
+  const submit = () => {
+    const loginFormData = {
+      email: state.email,
+      password: state.password
+    }
+
+    console.log(loginFormData)
+  }
+</script>
+
 <template>
-  <form class="register-form-wrapper">
-    <input class="input" id="email" placeholder="Email" />
-    <input class="input" id="password" placeholder="Password" />
-    <button class="button">LOGIN</button>
+  <form class="register-form-wrapper" @submit.prevent="submit">
+    <input v-model="state.email" class="input" id="email" placeholder="Email" />
+    <input
+      v-model="state.password"
+      class="input"
+      type="password"
+      id="password"
+      placeholder="Password" />
+    <button type="submit" class="button">LOGIN</button>
   </form>
 
   <div class="hint">
@@ -47,6 +70,11 @@
       font-weight: 400;
       font-family: 'Montserrat', sans-serif;
     }
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
   }
 
   .button {
