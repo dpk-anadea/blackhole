@@ -1,3 +1,8 @@
+<script setup>
+  import MainHeader from '@/components/navigation/MainHeader'
+  import MainFooter from '@/components/navigation/MainFooter'
+</script>
+
 <template>
   <div class="main-layout-wrapper">
     <MainHeader />
@@ -9,8 +14,3 @@
     <MainFooter />
   </div>
 </template>
-
-<script setup>
-  import MainHeader from '@/components/navigation/MainHeader'
-  import MainFooter from '@/components/navigation/MainFooter'
-</script>

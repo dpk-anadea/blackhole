@@ -1,3 +1,7 @@
+<script setup>
+  import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
+</script>
+
 <template>
   <header class="header-wrapper">
     <div class="nav-bar-logo">
@@ -17,10 +21,6 @@
     </nav>
   </header>
 </template>
-
-<script setup>
-  import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
-</script>
 
 <style lang="scss" scoped>
   .header-wrapper {

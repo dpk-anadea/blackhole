@@ -5,15 +5,6 @@
     email: '',
     password: ''
   })
-
-  const submit = () => {
-    const loginFormData = {
-      email: state.email,
-      password: state.password
-    }
-
-    console.log(loginFormData)
-  }
 </script>
 
 <template>
