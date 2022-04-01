@@ -69,6 +69,7 @@
   }
 
   .button {
+    cursor: pointer;
     outline: none;
 
     padding: 10px 15px;

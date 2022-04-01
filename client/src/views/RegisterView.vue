@@ -8,13 +8,12 @@
 
 <script setup>
   import { useStore } from 'vuex'
+  import { action } from '@/store/constants'
 
   import AccountLayout from '@/components/layout/AccountLayout'
   import RegisterForm from '@/components/forms/RegisterForm'
 
   const store = useStore()
-
-  const createUserAction = 'CREATE_USER'
 
   const onSubmit = (formData) => {
     const { firstName, lastName, phoneNumber, email, password } = formData
@@ -26,7 +25,7 @@
       password: password
     }
 
-    store.dispatch(createUserAction, registerFormData)
+    store.dispatch(action.CREATE_USER, registerFormData)
   }
 </script>
 
