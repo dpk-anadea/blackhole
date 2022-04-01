@@ -1,9 +1,7 @@
 <template>
   <footer class="footer">
     <a class="cymantics"> © 2022, Cymatics.fm. </a>
-    <div
-      v-for="(item, index) of $options.static.privacyPolicyLinks"
-      :key="'item' + index">
+    <div v-for="(item, index) of stat" :key="'item' + index">
       <a class="cymantics">{{ item.name }}</a>
     </div>
     <div>
@@ -14,22 +12,17 @@
   </footer>
 </template>
 
-<script>
+<script setup>
   import FacebookIcon from '@/components/icons/FacebookIcon'
   import InstagramIcon from '@/components/icons/InstagramIcon'
   import LinkedlnIcon from '@/components/icons/LinkedlnIcon'
-  export default {
-    name: 'MainFooter',
-    components: { LinkedlnIcon, InstagramIcon, FacebookIcon },
-    static: {
-      privacyPolicyLinks: [
-        { name: 'Privacy Policy' },
-        { name: 'Terms of Use' },
-        { name: 'Terms of Service' },
-        { name: 'Contact' }
-      ]
-    }
-  }
+
+  const stat = [
+    { name: 'Privacy Policy' },
+    { name: 'Terms of Use' },
+    { name: 'Terms of Service' },
+    { name: 'Contact' }
+  ]
 </script>
 
 <style lang="scss" scoped>

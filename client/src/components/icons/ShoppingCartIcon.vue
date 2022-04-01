@@ -69,9 +69,3 @@
     </g>
   </svg>
 </template>
-
-<script>
-  export default {
-    name: 'ShoppingCart'
-  }
-</script>

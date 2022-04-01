@@ -10,5 +10,8 @@ const fetch = async (action, resource, payload = null, config = null) => {
 export default {
   async getUsers() {
     return fetch('get', endpoint('users'))
+  },
+  async createUser(user) {
+    return fetch('post', endpoint('users'), user)
   }
 }

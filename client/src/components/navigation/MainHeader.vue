@@ -1,40 +1,25 @@
 <template>
   <header class="header-wrapper">
-    <div class="nav-bar-logo">LOGO</div>
+    <div class="nav-bar-logo">
+      <img class="logo-img" src="../../images/logo.png" alt="logo" />
+    </div>
 
     <nav class="nav-bar">
-      <ul class="nav-items">
-        <li
-          v-for="(item, index) of $options.static.navBarItems"
-          :key="'navItem' + index"
-          class="nav-item">
-          {{ item.name }}
-        </li>
-        <li class="shopping-cart-icon nav-item"><ShoppingCartIcon /></li>
-      </ul>
+      <div class="nav-items">
+        <router-link :to="{ name: 'register' }" class="nav-item">
+          Create account
+        </router-link>
+        <router-link :to="{ name: 'login' }" class="nav-item">
+          Login
+        </router-link>
+        <ShoppingCartIcon />
+      </div>
     </nav>
   </header>
 </template>
 
-<script>
+<script setup>
   import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
-
-  export default {
-    name: 'MainHeader',
-    components: {
-      ShoppingCartIcon
-    },
-    static: {
-      navBarItems: [
-        { name: 'Latest Product' },
-        { name: 'Sample Packs' },
-        { name: 'Plugins' },
-        { name: 'Login' },
-        { name: 'Create account' },
-        { name: 'Home Page' }
-      ]
-    }
-  }
 </script>
 
 <style lang="scss" scoped>
@@ -71,8 +56,12 @@
     align-items: center;
   }
 
+  .logo-img {
+    max-width: 50%;
+  }
+
   .nav-item {
-    list-style-type: none;
+    text-decoration: none;
     cursor: pointer;
 
     color: white;
