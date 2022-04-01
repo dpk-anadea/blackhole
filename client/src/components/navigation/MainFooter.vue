@@ -1,16 +1,3 @@
-<script setup>
-  import FacebookIcon from '@/components/icons/FacebookIcon'
-  import InstagramIcon from '@/components/icons/InstagramIcon'
-  import LinkedlnIcon from '@/components/icons/LinkedlnIcon'
-
-  const stat = [
-    { name: 'Privacy Policy' },
-    { name: 'Terms of Use' },
-    { name: 'Terms of Service' },
-    { name: 'Contact' }
-  ]
-</script>
-
 <template>
   <footer class="footer">
     <a class="cymantics"> © 2022, Cymatics.fm. </a>
@@ -24,6 +11,19 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+  import FacebookIcon from '@/components/icons/FacebookIcon'
+  import InstagramIcon from '@/components/icons/InstagramIcon'
+  import LinkedlnIcon from '@/components/icons/LinkedlnIcon'
+
+  const stat = [
+    { name: 'Privacy Policy' },
+    { name: 'Terms of Use' },
+    { name: 'Terms of Service' },
+    { name: 'Contact' }
+  ]
+</script>
 
 <style lang="scss" scoped>
   .footer {

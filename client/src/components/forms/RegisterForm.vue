@@ -1,22 +1,3 @@
-<script setup>
-  import { reactive, defineEmits } from 'vue'
-
-  const emit = defineEmits(['submit'])
-
-  const state = reactive({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
-
-  const submit = () => {
-    emit('submit', state)
-  }
-</script>
-
 <template>
   <form class="register-form-wrapper" @submit.prevent="submit">
     <input
@@ -64,6 +45,25 @@
     <a class="active-link">Activate Account</a>
   </div>
 </template>
+
+<script setup>
+  import { reactive, defineEmits } from 'vue'
+
+  const emit = defineEmits(['submit'])
+
+  const state = reactive({
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
+
+  const submit = () => {
+    emit('submit', state)
+  }
+</script>
 
 <style lang="scss" scoped>
   .register-form-wrapper {

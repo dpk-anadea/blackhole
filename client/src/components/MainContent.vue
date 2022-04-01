@@ -1,7 +1,3 @@
-<script setup>
-  import ProductItem from '@/components/products-list/ProductItem'
-</script>
-
 <template>
   <section class="plugins-selection-wrapper">
     <article class="free-download-wrapper">
@@ -25,6 +21,10 @@
     <div class="wrapper-packs">Download our most popular free sample packs</div>
   </section>
 </template>
+
+<script setup>
+  import ProductItem from '@/components/products-list/ProductItem'
+</script>
 
 <style lang="scss" scoped>
   .free-download-wrapper {

@@ -1,11 +1,3 @@
-<script setup>
-  import { defineProps } from 'vue'
-
-  defineProps({
-    title: String
-  })
-</script>
-
 <template>
   <div class="account-layout-wrapper">
     <router-link class="logo" :to="{ name: 'home' }">
@@ -18,6 +10,14 @@
     </div>
   </div>
 </template>
+
+<script setup>
+  import { defineProps } from 'vue'
+
+  defineProps({
+    title: String
+  })
+</script>
 
 <style scoped>
   .account-layout-wrapper {

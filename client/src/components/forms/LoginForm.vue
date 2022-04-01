@@ -1,12 +1,3 @@
-<script setup>
-  import { reactive } from 'vue'
-
-  const state = reactive({
-    email: '',
-    password: ''
-  })
-</script>
-
 <template>
   <form class="register-form-wrapper" @submit.prevent="submit">
     <input v-model="state.email" class="input" id="email" placeholder="Email" />
@@ -33,6 +24,15 @@
     </div>
   </div>
 </template>
+
+<script setup>
+  import { reactive } from 'vue'
+
+  const state = reactive({
+    email: '',
+    password: ''
+  })
+</script>
 
 <style lang="scss" scoped>
   .register-form-wrapper {

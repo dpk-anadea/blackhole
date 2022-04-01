@@ -1,8 +1,3 @@
-<script setup>
-  import MainLayout from '@/components/layout/MainLayout'
-  import MainContent from '@/components/MainContent'
-</script>
-
 <template>
   <MainLayout>
     <template #main-content>
@@ -10,3 +5,8 @@
     </template>
   </MainLayout>
 </template>
+
+<script setup>
+  import MainLayout from '@/components/layout/MainLayout'
+  import MainContent from '@/components/MainContent'
+</script>

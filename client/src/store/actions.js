@@ -12,10 +12,10 @@ export default {
   },
   async [action.CREATE_USER]({ commit }, userData) {
     try {
-      const { users } = await api.createUser({
+      const { user } = await api.createUser({
         ...userData
       })
-      commit(mutator.SET_USER, users)
+      commit(mutator.SET_USER, user)
     } catch (e) {
       console.log(e)
     }

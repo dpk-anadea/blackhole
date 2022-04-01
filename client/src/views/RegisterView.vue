@@ -1,3 +1,11 @@
+<template>
+  <AccountLayout title="Create Account">
+    <template #form>
+      <RegisterForm @submit="onSubmit" />
+    </template>
+  </AccountLayout>
+</template>
+
 <script setup>
   import { useStore } from 'vuex'
 
@@ -5,6 +13,8 @@
   import RegisterForm from '@/components/forms/RegisterForm'
 
   const store = useStore()
+
+  const createUserAction = 'CREATE_USER'
 
   const onSubmit = (formData) => {
     const { firstName, lastName, phoneNumber, email, password } = formData
@@ -16,16 +26,8 @@
       password: password
     }
 
-    store.dispatch('CREATE_USER', registerFormData)
+    store.dispatch(createUserAction, registerFormData)
   }
 </script>
-
-<template>
-  <AccountLayout title="Create Account">
-    <template #form>
-      <RegisterForm @submit="onSubmit" />
-    </template>
-  </AccountLayout>
-</template>
 
 <style scoped></style>
