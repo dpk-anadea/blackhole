@@ -12,7 +12,7 @@ export default {
   },
   async [action.CREATE_USER]({ commit }, userData) {
     try {
-      const { user } = await api.createUser({
+      const user = await api.createUser({
         ...userData
       })
       commit(mutator.SET_USER, user)
