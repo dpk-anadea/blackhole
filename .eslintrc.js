@@ -15,7 +15,8 @@ module.exports = {
   },
   plugins: [
     'vue',
-    '@typescript-eslint'
+    '@typescript-eslint',
+    'jest'
   ],
   rules: {
   }
