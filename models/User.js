@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     phone: DataTypes.STRING,
     password: DataTypes.STRING
-  }, 
+  },
   {
     sequelize,
     tableName: 'users',
-    modelName: 'User',
+    modelName: 'User'
   })
   return User
 }
