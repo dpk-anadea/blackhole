@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    download: DataTypes.Boolean
+    download: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Downloaded'
