@@ -1,10 +1,11 @@
 <template>
   <div class="product-wrapper">
-    <img src="../../images/productImg.png" alt="piano" />
+    <img class="img" src="../../images/productImg.png" alt="piano" />
     <div class="product-info">
       <h5 class="product-title">{{ title }}</h5>
       <div class="product-description">{{ description }}</div>
-      <button class="product-button">Free Download</button>
+      <div v-if="price" class="price">{{ price }}</div>
+      <button v-else class="product-button">Free Download</button>
     </div>
   </div>
 </template>
@@ -14,7 +15,11 @@
 
   defineProps({
     title: String,
-    description: String
+    description: String,
+    price: {
+      type: String,
+      default: null
+    }
   })
 </script>
 
@@ -23,6 +28,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     max-width: 26%;
   }
@@ -63,5 +69,18 @@
     color: white;
     background-color: #7cd380;
     font-size: 20px;
+  }
+
+  .img {
+    width: 80%;
+  }
+
+  .price {
+    opacity: 0.7;
+
+    margin: 30px 0;
+
+    font-size: 22px;
+    color: #ffffff;
   }
 </style>

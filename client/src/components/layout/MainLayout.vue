@@ -14,3 +14,11 @@
   import MainHeader from '@/components/navigation/MainHeader'
   import MainFooter from '@/components/navigation/MainFooter'
 </script>
+
+<style scoped>
+  .main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

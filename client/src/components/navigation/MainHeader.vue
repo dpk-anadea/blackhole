@@ -6,6 +6,12 @@
 
     <nav class="nav-bar">
       <div class="nav-items">
+        <router-link :to="{ name: 'home' }" class="nav-item">
+          Home
+        </router-link>
+        <router-link :to="{ name: 'products' }" class="nav-item">
+          Products
+        </router-link>
         <router-link :to="{ name: 'register' }" class="nav-item">
           Create account
         </router-link>
