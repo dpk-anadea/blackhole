@@ -1,4 +1,6 @@
 const state = {
+  isAuth: false,
+  user: null,
   users: null
 }
 

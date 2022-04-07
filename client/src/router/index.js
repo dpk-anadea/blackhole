@@ -9,12 +9,8 @@ const router = createRouter({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      component: HomePage
-    },
-    {
       name: 'home',
-      path: '/home',
+      path: '/',
       component: HomePage
     },
     {
