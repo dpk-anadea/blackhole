@@ -1,16 +1,22 @@
 <template>
   <div class="product-wrapper">
-    <img src="../../images/productImg.png" alt="dog" />
+    <img src="../../images/productImg.png" alt="piano" />
     <div class="product-info">
-      <h5 class="product-title">Origin: Vintage & Lofi FX</h5>
-      <div class="product-description">
-        Instantly make your sample sound like they're straight from a vinyl
-        record or tape machine.
-      </div>
+      <h5 class="product-title">{{ title }}</h5>
+      <div class="product-description">{{ description }}</div>
       <button class="product-button">Free Download</button>
     </div>
   </div>
 </template>
+
+<script setup>
+  import { defineProps } from 'vue'
+
+  defineProps({
+    title: String,
+    description: String
+  })
+</script>
 
 <style lang="scss" scoped>
   .product-wrapper {

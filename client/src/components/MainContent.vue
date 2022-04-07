@@ -15,7 +15,11 @@
       Download our free plugins to level up your music production
     </h2>
     <div class="products-list">
-      <ProductItem v-for="item in 3" :key="item" />
+      <ProductItem
+        v-for="item in bestProducts"
+        :key="item"
+        :title="item.name"
+        :description="item.description" />
     </div>
 
     <div class="wrapper-packs">Download our most popular free sample packs</div>
@@ -23,7 +27,19 @@
 </template>
 
 <script setup>
+  import { useStore } from 'vuex'
+  import { action } from '@/store/constants'
+  import { computed } from 'vue'
   import ProductItem from '@/components/products-list/ProductItem'
+
+  const store = useStore()
+  store.dispatch(action.GET_PRODUCTS)
+
+  const getProducts = computed(() => store.state.products)
+
+  const bestProducts = computed(() =>
+    getProducts.value?.filter((el) => el.type === 'One-Shots')
+  )
 </script>
 
 <style lang="scss" scoped>
