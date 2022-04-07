@@ -8,5 +8,7 @@ router.post('/users', userController.createUser)
 router.get('/users', userController.getUser)
 
 router.post('/login', authController.login)
+router.post('/logout', authController.logout)
+router.get('/refresh', authController.refresh)
 
 module.exports = router

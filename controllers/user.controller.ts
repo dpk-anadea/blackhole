@@ -1,31 +1,43 @@
-const { User } = require('../models')
+import { User } from '../models'
+const tokenService = require('../service/token.service')
+const ApiError = require('../src/helpers/api-error')
 
 class UsersController {
-  async createUser(req, res) {
-    const user = req.body
+  async createUser(req, res, next) {
+    const { first_name, last_name, email, password, phone } = req.body
     try {
+      const candidate =  await User.findOne({ where: { email: email } })
+
+      if (candidate) {
+        throw ApiError.BadRequest(`user with email ${email} already exists`)
+      }
+
       const newUser = await User.create({
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        password: user.password,
-        phone: user.phone
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: password,
+        phone: phone
       })
 
-      res.json(newUser)
+      const tokens = tokenService.generateTokens({ id: newUser.id, email: newUser.email })
+
+      await tokenService.saveToken(newUser.id, tokens.refreshToken)
+
+      res.cookie('refreshToken', tokens.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+
+      res.json({ ...tokens, user: newUser })
     } catch (err) {
-      console.log(err)
-      return res.status(500).json(err)
+      next(err)
     }
   }
 
-  async getUser (req, res) {
+  async getUser (req, res, next) {
     try {
       const users = await User.findAll()
       res.json(users)
     } catch (err) {
-      console.log(err)
-      return res.status(500).json(err)
+      next(err)
     }
   }
 }
