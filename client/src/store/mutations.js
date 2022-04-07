@@ -1,7 +1,13 @@
 import { mutator } from '@/store/constants'
 
 export default {
-  [mutator.SET_USER](state, users) {
+  [mutator.SET_USERS](state, users) {
     state.users = users
+  },
+  [mutator.SET_USER](state, user) {
+    state.user = user
+  },
+  [mutator.SET_AUTH](state, isAuth) {
+    state.isAuth = isAuth
   }
 }

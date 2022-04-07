@@ -27,11 +27,26 @@
 
 <script setup>
   import { reactive } from 'vue'
+  import { useStore } from 'vuex'
+  import { action } from '@/store/constants'
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
+
+  const store = useStore()
 
   const state = reactive({
     email: '',
     password: ''
   })
+
+  const submit = () => {
+    store.dispatch(action.LOGIN, {
+      email: state.email,
+      password: state.password
+    })
+    router.push({ name: 'home' })
+  }
 </script>
 
 <style lang="scss" scoped>

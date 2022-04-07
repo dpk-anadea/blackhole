@@ -9,7 +9,8 @@
         <router-link :to="{ name: 'register' }" class="nav-item">
           Create account
         </router-link>
-        <router-link :to="{ name: 'login' }" class="nav-item">
+        <button v-if="isAuth" @click="logout" class="nav-item">Logout</button>
+        <router-link v-else :to="{ name: 'login' }" class="nav-item">
           Login
         </router-link>
         <ShoppingCartIcon />
@@ -19,7 +20,18 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
+  import { action } from '@/store/constants'
+
   import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
+
+  const { state, dispatch } = useStore()
+  const isAuth = computed(() => state.isAuth)
+
+  const logout = () => {
+    dispatch(action.LOGOUT)
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +73,8 @@
   }
 
   .nav-item {
+    background-color: transparent;
+    border: none;
     text-decoration: none;
     cursor: pointer;
 
