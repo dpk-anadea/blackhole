@@ -2,8 +2,10 @@ import request from 'supertest'
 
 import app from '../../../app'
 import { sequelize } from '../../../models'
+import clearDB from '../../../tests/clearDB'
 
-describe('Space test suite', () => {
+
+describe.skip('fsdf', () => {
   const initUser = {
     first_name: 'Itan',
     last_name: 'Pol',
@@ -13,7 +15,7 @@ describe('Space test suite', () => {
   }
 
   beforeAll(async () => {
-    await sequelize.truncate({ cascade: true })
+    await clearDB()
   })
 
   afterAll(() => {
@@ -25,14 +27,10 @@ describe('Space test suite', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      accessToken: expect.any(String),
-      refreshToken: expect.any(String),
-      user: {
-        ...initUser,
-        id: expect.any(Number),
-        createdAt:  expect.any(String),
-        updatedAt:  expect.any(String)
-      }
+      ...initUser,
+      id: expect.any(Number),
+      createdAt:  expect.any(String),
+      updatedAt:  expect.any(String)
     })
   })
 
@@ -42,10 +40,14 @@ describe('Space test suite', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveLength(1)
     expect(response.body).toEqual([{
-      ...initUser,
-      id: expect.any(Number),
-      createdAt:  expect.any(String),
-      updatedAt:  expect.any(String)
+      accessToken: expect.any(String),
+      refreshToken: expect.any(String),
+      user: {
+        ...initUser,
+        id: expect.any(Number),
+        createdAt:  expect.any(String),
+        updatedAt:  expect.any(String)
+      }
     }])
   })
 })
