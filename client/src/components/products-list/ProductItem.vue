@@ -5,7 +5,7 @@
       <h5 class="product-title">{{ title }}</h5>
       <div class="product-description">{{ description }}</div>
       <div v-if="price" class="price">{{ price }}</div>
-      <button v-else class="product-button">Free Download</button>
+      <a href="#" download="" v-else class="product-button">Free Download</a>
     </div>
   </div>
 </template>
@@ -57,8 +57,12 @@
   }
 
   .product-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
-    text-align: center;
+    text-decoration: none;
 
     width: 250px;
     height: 50px;

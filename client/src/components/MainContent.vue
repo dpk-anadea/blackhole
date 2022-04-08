@@ -8,7 +8,7 @@
         Exclusive Samples Designed By 3x Grammy Winning Producer S1 for
         <del class="cross-out-figure">$75</del> FREE
       </div>
-      <button class="free-download-button">Free Download</button>
+      <a href="#" class="free-download-button" download="">Free Download</a>
     </article>
 
     <h2 class="plugins-selection-title">
@@ -77,8 +77,13 @@
   }
 
   .free-download-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 
     border: none;
 

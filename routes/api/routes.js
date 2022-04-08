@@ -6,7 +6,7 @@ const authController = require('../../controllers/auth.controller')
 const productController = require('../../controllers/product.controller')
 
 router.post('/users', userController.createUser)
-router.get('/users', userController.getUser)
+router.get('/users', userController.getUsers)
 
 router.post('/login', authController.login)
 router.post('/logout', authController.logout)

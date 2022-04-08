@@ -9,11 +9,13 @@
 <script setup>
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
+  import { useRouter } from 'vue-router'
 
   import AccountLayout from '@/components/layout/AccountLayout'
   import RegisterForm from '@/components/forms/RegisterForm'
 
   const store = useStore()
+  const router = useRouter()
 
   const onSubmit = (formData) => {
     const { firstName, lastName, phoneNumber, email, password } = formData
@@ -26,6 +28,7 @@
     }
 
     store.dispatch(action.CREATE_USER, registerFormData)
+    router.push({ name: 'home' })
   }
 </script>
 

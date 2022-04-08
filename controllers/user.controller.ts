@@ -33,7 +33,7 @@ class UsersController {
     }
   }
 
-  async getUser (req, res, next) {
+  async getUsers (req, res, next) {
     try {
       const users = await User.findAll()
       res.json(users)

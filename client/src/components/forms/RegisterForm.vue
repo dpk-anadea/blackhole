@@ -42,7 +42,6 @@
       *If you already placed an order and did not activate your account please
       click activate account below.
     </div>
-    <a class="active-link">Activate Account</a>
   </div>
 </template>
 
@@ -126,7 +125,7 @@
 
     width: 320px;
     max-width: 100%;
-    margin-top: 50px;
+    margin: 50px 0;
   }
 
   .hint-text {
