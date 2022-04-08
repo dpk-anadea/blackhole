@@ -1,22 +1,34 @@
 <template>
   <div class="product-wrapper">
-    <img src="../../images/productImg.png" alt="dog" />
+    <img class="img" src="../../images/productImg.png" alt="piano" />
     <div class="product-info">
-      <h5 class="product-title">Origin: Vintage & Lofi FX</h5>
-      <div class="product-description">
-        Instantly make your sample sound like they're straight from a vinyl
-        record or tape machine.
-      </div>
-      <button class="product-button">Free Download</button>
+      <h5 class="product-title">{{ title }}</h5>
+      <div class="product-description">{{ description }}</div>
+      <div v-if="price" class="price">{{ price }}</div>
+      <a href="#" download="" v-else class="product-button">Free Download</a>
     </div>
   </div>
 </template>
+
+<script setup>
+  import { defineProps } from 'vue'
+
+  defineProps({
+    title: String,
+    description: String,
+    price: {
+      type: String,
+      default: null
+    }
+  })
+</script>
 
 <style lang="scss" scoped>
   .product-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 
     max-width: 26%;
   }
@@ -45,8 +57,12 @@
   }
 
   .product-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
-    text-align: center;
+    text-decoration: none;
 
     width: 250px;
     height: 50px;
@@ -57,5 +73,18 @@
     color: white;
     background-color: #7cd380;
     font-size: 20px;
+  }
+
+  .img {
+    width: 80%;
+  }
+
+  .price {
+    opacity: 0.7;
+
+    margin: 30px 0;
+
+    font-size: 22px;
+    color: #ffffff;
   }
 </style>

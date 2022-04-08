@@ -40,5 +40,13 @@ export default {
     } catch (e) {
       console.log(e)
     }
+  },
+  async [action.GET_PRODUCTS]({ commit }) {
+    try {
+      const products = await api.getProducts()
+      commit(mutator.SET_PRODUCTS, products)
+    } catch (e) {
+      console.log(e)
+    }
   }
 }

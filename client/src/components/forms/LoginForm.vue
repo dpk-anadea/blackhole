@@ -15,7 +15,6 @@
       *If you already placed an order and did not activate your account please
       click activate account below.
     </div>
-    <a class="active-link">Activate Account</a>
     <div class="hint-text">
       *Don't have an account?
       <router-link :to="{ name: 'register' }" class="active-link">
@@ -106,7 +105,7 @@
 
     width: 320px;
     max-width: 100%;
-    margin-top: 50px;
+    margin: 50px 0;
   }
 
   .hint-text {

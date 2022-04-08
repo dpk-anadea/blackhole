@@ -3,10 +3,11 @@ const tokenService = require('../service/token.service')
 const ApiError = require('../src/helpers/api-error')
 
 class UsersController {
-  async createUser(req, res, next) {
+  async createUser (req, res, next) {
     const { first_name, last_name, email, password, phone } = req.body
+
     try {
-      const candidate =  await User.findOne({ where: { email: email } })
+      const candidate = await User.findOne({ where: { email: email } })
 
       if (candidate) {
         throw ApiError.BadRequest(`user with email ${email} already exists`)
@@ -32,7 +33,7 @@ class UsersController {
     }
   }
 
-  async getUser (req, res, next) {
+  async getUsers (req, res, next) {
     try {
       const users = await User.findAll()
       res.json(users)

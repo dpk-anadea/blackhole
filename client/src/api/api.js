@@ -13,5 +13,8 @@ export default {
   },
   async createUser(user) {
     return fetch('post', endpoint('users'), user)
+  },
+  async getProducts() {
+    return fetch('get', endpoint('products'))
   }
 }

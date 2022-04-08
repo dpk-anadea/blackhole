@@ -9,5 +9,8 @@ export default {
   },
   [mutator.SET_AUTH](state, isAuth) {
     state.isAuth = isAuth
+  },
+  [mutator.SET_PRODUCTS](state, products) {
+    state.products = products
   }
 }

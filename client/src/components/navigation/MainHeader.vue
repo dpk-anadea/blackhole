@@ -6,14 +6,19 @@
 
     <nav class="nav-bar">
       <div class="nav-items">
-        <router-link :to="{ name: 'register' }" class="nav-item">
+        <router-link :to="{ name: 'home' }" class="nav-item">
+          Home
+        </router-link>
+        <router-link :to="{ name: 'products' }" class="nav-item">
+          Products
+        </router-link>
+        <router-link v-if="!isAuth" :to="{ name: 'register' }" class="nav-item">
           Create account
         </router-link>
         <button v-if="isAuth" @click="logout" class="nav-item">Logout</button>
         <router-link v-else :to="{ name: 'login' }" class="nav-item">
           Login
         </router-link>
-        <ShoppingCartIcon />
       </div>
     </nav>
   </header>
@@ -23,8 +28,6 @@
   import { computed } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
-
-  import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
 
   const { state, dispatch } = useStore()
   const isAuth = computed(() => state.isAuth)
