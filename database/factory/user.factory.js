@@ -1,13 +1,16 @@
 const factory = require('factory-girl').factory
-const adapter = new factory.SequelizeAdapter();
-const { User } = require('../models')
+const SequelizeAdapter = require('factory-girl').SequelizeAdapter
 
-factory.setAdapter(adapter);
+const { User } = require('../../models')
+
+factory.setAdapter(new SequelizeAdapter())
  
 factory.define('user', User, {
   first_name: 'Itan',
   last_name: 'Pol',
   phone: '84312454',
-  email: 'qwe@qwe.com',
+  email: 'itan-pol@example.com',
   password: '123456'
 })
+
+module.exports = factory
