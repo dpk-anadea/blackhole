@@ -30,8 +30,8 @@ describe('Users endpoints', () => {
       user: {
         ...initUser,
         id: expect.any(Number),
-        createdAt:  expect.any(String),
-        updatedAt:  expect.any(String)
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String)
       }
     })
   })
@@ -44,8 +44,8 @@ describe('Users endpoints', () => {
     expect(response.body).toEqual([{
       ...initUser,
       id: expect.any(Number),
-      createdAt:  expect.any(String),
-      updatedAt:  expect.any(String)
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String)
     }])
   })
 })
