@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken')
-const { accessSecret, refreshSecret } =  require('../config/token-config')
+const { accessSecret, refreshSecret } = require('../config/token-config')
 const { Token } = require('../models')
 
 class TokenService {
-  generateTokens(payload) {
+  generateTokens (payload) {
     const accessToken = jwt.sign(payload, accessSecret, { expiresIn: '30m' })
     const refreshToken = jwt.sign(payload, refreshSecret, { expiresIn: '30d' })
     return {
@@ -12,25 +12,25 @@ class TokenService {
     }
   }
 
-  validateAccessToken(token) {
+  validateAccessToken (token) {
     try {
       const userData = jwt.verify(token, accessSecret)
       return userData
-    } catch(e) {
+    } catch (e) {
       return null
-    } 
+    }
   }
 
-  validateRefreshToken(token) {
+  validateRefreshToken (token) {
     try {
       const userData = jwt.verify(token, refreshSecret)
       return userData
-    } catch(e) {
+    } catch (e) {
       return null
-    } 
+    }
   }
 
-  async saveToken(userId, refreshToken) {
+  async saveToken (userId, refreshToken) {
     const tokenData = await Token.findOne({ where: { user: userId } })
     if (tokenData) {
       await tokenData.update({ refreshToken })
@@ -40,15 +40,15 @@ class TokenService {
     return token
   }
 
-  async removeToken(refreshToken) {
+  async removeToken (refreshToken) {
     const tokenData = await Token.destroy({ where: { refresh_token: refreshToken } })
     return tokenData
   }
 
-  async findToken(refreshToken) {
+  async findToken (refreshToken) {
     const tokenData = await Token.findOne({ where: { refresh_token: refreshToken } })
     return tokenData
   }
 }
 
-module.exports =  new TokenService()
+module.exports = new TokenService()

@@ -4,17 +4,17 @@ const tokenService = require('../service/token.service')
 const ApiError = require('../src/helpers/api-error')
 
 class AuthController {
-  async login(req, res, next) {
+  async login (req, res, next) {
     const { email, password } = req.body
     try {
       const user = await User.findOne({ where: { email } })
-      if(!user) {
+      if (!user) {
         throw ApiError.BadRequest(`user ${email} not found`)
       }
 
       const isValidPassword = password === user.password
-      if(!isValidPassword) {
-        throw ApiError.BadRequest('wrong password') 
+      if (!isValidPassword) {
+        throw ApiError.BadRequest('wrong password')
       }
 
       const tokens = tokenService.generateTokens({ id: user.id, email: user.email })
@@ -27,7 +27,7 @@ class AuthController {
     }
   }
 
-  async logout(req, res, next) {
+  async logout (req, res, next) {
     try {
       const { refreshToken } = req.cookies
       const token = await tokenService.removeToken(refreshToken)
@@ -39,18 +39,18 @@ class AuthController {
     }
   }
 
-  async refresh(req, res, next) {
+  async refresh (req, res, next) {
     try {
       const { refreshToken } = req.cookies
 
-      if(!refreshToken) {
+      if (!refreshToken) {
         throw ApiError.UnauthorizedError()
       }
 
       const userData = tokenService.validateRefreshToken(refreshToken)
       const tokenFromDb = await tokenService.findToken(refreshToken)
 
-      if(!userData || !tokenFromDb) {
+      if (!userData || !tokenFromDb) {
         throw ApiError.UnauthorizedError()
       }
 

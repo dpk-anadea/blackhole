@@ -20,7 +20,7 @@ describe('Users endpoints', () => {
     return sequelize.close()
   })
 
-  it('it should create user', async() => {
+  it('it should create user', async () => {
     const response = await request(app).post('/api/users').send(initUser)
 
     expect(response.statusCode).toBe(200)
@@ -36,7 +36,7 @@ describe('Users endpoints', () => {
     })
   })
 
-  it('it should get users', async() => {
+  it('it should get users', async () => {
     const response = await request(app).get('/api/users')
 
     expect(response.statusCode).toBe(200)
