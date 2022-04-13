@@ -75,6 +75,7 @@ describe('User authorization', () => {
             updatedAt: expect.any(String)
           }
         })
+
         expect(response.body.refreshToken).toEqual(token.refresh_token)
       })
     })

@@ -7,11 +7,12 @@ class UserService {
   async createUser (userData) {
     const { first_name: firstName, last_name: lastName, email, password, phone } = userData
     const candidate = await User.findOne({ where: { email } })
+    console.log('candidate', candidate)
     if (candidate) {
       throw ApiError.BadRequest(`user with email ${email} already exists`)
     }
-    const hashPassword = await bcrypt.hash(password, 3)
 
+    const hashPassword = await bcrypt.hash(password, 3)
     const user = await User.create({
       first_name: firstName,
       last_name: lastName,
