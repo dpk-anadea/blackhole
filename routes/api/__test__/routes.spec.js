@@ -3,7 +3,7 @@ import request from 'supertest'
 import app from '../../../app'
 import { sequelize } from '../../../models'
 
-describe('Space test suite', () => {
+describe('Users endpoints', () => {
   const initUser = {
     first_name: 'Itan',
     last_name: 'Pol',
@@ -20,7 +20,7 @@ describe('Space test suite', () => {
     return sequelize.close()
   })
 
-  it('tests post /users endpoints', async() => {
+  it('it should create user', async () => {
     const response = await request(app).post('/api/users').send(initUser)
 
     expect(response.statusCode).toBe(200)
@@ -30,13 +30,13 @@ describe('Space test suite', () => {
       user: {
         ...initUser,
         id: expect.any(Number),
-        createdAt:  expect.any(String),
-        updatedAt:  expect.any(String)
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String)
       }
     })
   })
 
-  it('tests get /users endpoints', async() => {
+  it('it should get users', async () => {
     const response = await request(app).get('/api/users')
 
     expect(response.statusCode).toBe(200)
@@ -44,8 +44,8 @@ describe('Space test suite', () => {
     expect(response.body).toEqual([{
       ...initUser,
       id: expect.any(Number),
-      createdAt:  expect.any(String),
-      updatedAt:  expect.any(String)
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String)
     }])
   })
 })
