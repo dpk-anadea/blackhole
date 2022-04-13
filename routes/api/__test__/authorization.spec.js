@@ -4,13 +4,13 @@ import { sequelize, Token } from '../../../models'
 import userFactory from '../../../database/factory/user.factory'
 
 describe('User authorization', () => {
-  let user, email, password, token
+  let user, email, token
+  const password = '123456'
 
   beforeAll(async () => {
     await sequelize.truncate({ cascade: true })
     user = await userFactory.create('user')
     email = user.email
-    password = user.password
   })
   beforeEach(async () => {
     token = await Token.findOne({ where: { user: user.id } })
@@ -75,7 +75,6 @@ describe('User authorization', () => {
             updatedAt: expect.any(String)
           }
         })
-        console.log(response.body.refreshToken)
         expect(response.body.refreshToken).toEqual(token.refresh_token)
       })
     })
