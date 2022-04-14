@@ -19,7 +19,6 @@ app.use(cookieParser())
 app.use('/api', apiRoutes)
 app.use(errorMiddleware)
 
-
 app.use(express.static(path.join(__dirname, './client/dist')))
 
 module.exports = app
