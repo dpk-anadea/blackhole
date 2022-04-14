@@ -24,6 +24,17 @@ class AuthController {
     }
   }
 
+  async activate (req, res, next) {
+    try {
+      const activationLink = req.params.link
+      await userService.activate(activationLink)
+
+      res.redirect(process.env.CLIENT_URL)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   async refresh (req, res, next) {
     try {
       const { refreshToken } = req.cookies
