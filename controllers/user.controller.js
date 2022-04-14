@@ -1,5 +1,5 @@
-import { User } from '../models'
-import userService from '../service/user.service'
+const { User } = require('../models')
+const userService = require('../service/user.service')
 
 class UsersController {
   async createUser (req, res, next) {

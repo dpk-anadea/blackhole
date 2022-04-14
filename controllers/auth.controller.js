@@ -1,4 +1,4 @@
-import userService from '../service/user.service'
+const userService = require('../service/user.service')
 
 class AuthController {
   async login (req, res, next) {
