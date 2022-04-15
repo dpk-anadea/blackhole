@@ -3,7 +3,7 @@ const uuid = require('uuid')
 const { User } = require('../models')
 const ApiError = require('../src/helpers/api-error')
 const tokenService = require('../service/token.service')
-const mailService = require('../service/mail.service')
+// const mailService = require('../service/mail.service')
 class UserService {
   async createUser (userData) {
     const { first_name: firstName, last_name: lastName, email, password, phone } = userData
@@ -22,7 +22,7 @@ class UserService {
       phone,
       activation_link: activationLink
     })
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
     const tokens = tokenService.generateTokens({ id: user.id, email: user.email })
     await tokenService.saveToken(user.id, tokens.refreshToken)

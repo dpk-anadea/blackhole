@@ -35,7 +35,7 @@ describe('User authorization', () => {
       })
     })
 
-    describe.skip('when the password is wrong', () => {
+    describe('when the password is wrong', () => {
       const wrongPassword = '1111111'
 
       it('rejects the query', async () => {
@@ -45,7 +45,7 @@ describe('User authorization', () => {
       })
     })
 
-    describe.skip('when email is not found', () => {
+    describe('when email is not found', () => {
       const wrongEmail = 'user15@example.com'
 
       it('returns user not found', async () => {
@@ -56,7 +56,7 @@ describe('User authorization', () => {
     })
   })
 
-  describe.skip('allows refreshing token', () => {
+  describe('allows refreshing token', () => {
     beforeEach(async () => {
       await login(email, password)
       token = await Token.findOne({ where: { user: user.id } })
@@ -97,7 +97,7 @@ describe('User authorization', () => {
     })
   })
 
-  describe.skip('when log out', () => {
+  describe('when log out', () => {
     beforeEach(async () => {
       await login(email, password)
       token = await Token.findOne({ where: { user: user.id } })
