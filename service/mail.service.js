@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer')
+const ejs = require('ejs')
+const path = require('path')
 
 class MailService {
   constructor () {
@@ -12,18 +14,13 @@ class MailService {
   }
 
   async sendActivationMail (to, link) {
+    const data = await ejs.renderFile(path.join(__dirname, '../src/views/mails/activate-link.ejs'), { link })
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
       subject: 'Activation account ' + process.env.API_URL,
       text: '',
-      html:
-        `
-          <div>
-            <h1>Click link fro activation</h1>
-            <a href="${link}">${link}</a>
-          </div>
-        `
+      html: data
     })
   }
 }
