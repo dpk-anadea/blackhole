@@ -7,8 +7,8 @@
     "start": "ts-node index",
     "dev": "nodemon",
     "build": "rimraf ./build && tsc",
-    "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch --detectOpenHandles",
+    "test": "NODE_ENV=test jest --runInBand",
+    "test:watch": "NODE_ENV=test jest --watch --runInBand --detectOpenHandles",
     "start:test": "NODE_ENV=test ts-node index",
     "sq": "sequelize",
     "sq:test": "NODE_ENV=test sequelize",
@@ -24,9 +24,11 @@
     "express": "^4.17.3",
     "factory-girl": "^5.0.4",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.3",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.17.0",
+    "uuid": "^8.3.2",
     "vue-router": "4"
   },
   "devDependencies": {

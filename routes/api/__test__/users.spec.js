@@ -37,6 +37,7 @@ describe('Users', () => {
             ...user,
             id: expect.any(Number),
             password: expect.any(String),
+            activation_link: expect.any(String),
             createdAt: expect.any(String),
             updatedAt: expect.any(String)
           }
@@ -44,7 +45,7 @@ describe('Users', () => {
       })
     })
 
-    describe.skip('when email already exists', () => {
+    describe('when email already exists', () => {
       it('return error: user with email already exists', async () => {
         await userFactory.create('user')
         const response = await subject(user)
@@ -55,7 +56,7 @@ describe('Users', () => {
     })
   })
 
-  describe.skip('allows get', () => {
+  describe('allows get', () => {
     beforeEach(async () => {
       user = await userFactory.create('user')
     })

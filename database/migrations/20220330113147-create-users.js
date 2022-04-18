@@ -27,6 +27,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      activation_link: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      activated: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false
