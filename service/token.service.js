@@ -4,7 +4,7 @@ const { Token } = require('../models')
 
 class TokenService {
   generateTokens (payload) {
-    const accessToken = jwt.sign(payload, accessSecret, { expiresIn: '30m' })
+    const accessToken = jwt.sign(payload, accessSecret, { expiresIn: '15s' })
     const refreshToken = jwt.sign(payload, refreshSecret, { expiresIn: '30d' })
     return {
       accessToken,
@@ -33,7 +33,7 @@ class TokenService {
   async saveToken (userId, refreshToken) {
     const tokenData = await Token.findOne({ where: { user: userId } })
     if (tokenData) {
-      await tokenData.update({ refreshToken })
+      await tokenData.update({ refresh_token: refreshToken })
       return tokenData.save()
     }
     const token = await Token.create({ user: userId, refresh_token: refreshToken })
