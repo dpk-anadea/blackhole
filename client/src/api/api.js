@@ -1,20 +1,34 @@
+import $api from '../http'
 import axios from 'axios'
 
 const endpoint = (resource) => `/api/${resource}`
 
 const fetch = async (action, resource, payload = null, config = null) => {
-  const response = await axios[action](resource, payload, config)
+  const response = await $api[action](endpoint(resource), payload, config)
   return response.data
 }
 
 export default {
-  async getUsers() {
-    return fetch('get', endpoint('users'))
+  async login(email, password) {
+    return fetch('post', endpoint('login'), { email, password })
   },
-  async createUser(user) {
-    return fetch('post', endpoint('users'), user)
+  async registration(user) {
+    return fetch('post', 'registration', user)
+  },
+  async logout() {
+    return fetch('post', 'logout')
+  },
+  async checkAuth() {
+    const response = await axios.get('refresh', {
+      withCredentials: true
+    })
+    return response.data
+  },
+
+  async getUsers() {
+    return fetch('get', 'users')
   },
   async getProducts() {
-    return fetch('get', endpoint('products'))
+    return fetch('get', 'products')
   }
 }

@@ -4,10 +4,6 @@ import app from '../../../app'
 import { sequelize } from '../../../models'
 import userFactory from '../../../database/factory/user.factory'
 
-// function timeout (ms) {
-//   return new Promise(resolve => setTimeout(resolve, ms))
-// }
-
 describe('Users', () => {
   let user
   beforeEach(async () => {
@@ -56,34 +52,61 @@ describe('Users', () => {
     })
   })
 
-  describe('allows get', () => {
+  describe('allows get users', () => {
     beforeEach(async () => {
       user = await userFactory.create('user')
     })
 
-    it('all users', async () => {
-      const response = await request(app).get('/api/users')
+    const login = async (email, password) => await request(app).post('/api/login').send({ email, password })
+    const password = '123456'
 
-      expect(response.statusCode).toBe(200)
-      expect(response.body).toHaveLength(1)
-      expect(response.body).toEqual([{
-        ...user.dataValues,
-        id: expect.any(Number),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String)
-      }])
+    describe('when user authorized', () => {
+      it('get all users', async () => {
+        const { body: authUser } = await login(user.email, password)
+        const response = await request(app).get('/api/users').set('Authorization', 'Bearer ' + authUser.accessToken)
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toHaveLength(1)
+        expect(response.body).toEqual([{
+          ...user.dataValues,
+          id: expect.any(Number),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String)
+        }])
+      })
     })
 
-    it.skip('user by id', async () => {
-      const currentUser = await userFactory.create('user')
-      const response = await request(app).get(`/api/users/${currentUser.id}`)
+    describe('when invalid access token', () => {
+      it('get all users', async () => {
+        const { body: authUser } = await login(user.email, password)
+        const response = await request(app).get('/api/users').set('Authorization', 'Bearer not' + authUser.accessToken)
 
-      expect(response.statusCode).toBe(200)
-      expect(response.body).toEqual({
-        ...currentUser,
-        id: expect.any(Number),
-        createdAt: expect.any(String),
-        updatedAt: expect.any(String)
+        expect(response.statusCode).toBe(401)
+        expect(response.body.message).toEqual('User is not authorized')
+      })
+    })
+
+    describe('when user unauthorized', () => {
+      it('get all users', async () => {
+        const response = await request(app).get('/api/users')
+
+        expect(response.statusCode).toBe(401)
+        expect(response.body.message).toEqual('User is not authorized')
+      })
+    })
+
+    describe.skip('when post user id', () => {
+      it('get user by id', async () => {
+        const currentUser = await userFactory.create('user')
+        const response = await request(app).get(`/api/users/${currentUser.id}`)
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toEqual({
+          ...currentUser,
+          id: expect.any(Number),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String)
+        })
       })
     })
   })
