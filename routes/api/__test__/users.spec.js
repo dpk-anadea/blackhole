@@ -4,6 +4,12 @@ import app from '../../../app'
 import { sequelize } from '../../../models'
 import userFactory from '../../../database/factory/user.factory'
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockReturnValue((mailOptions, callback) => {})
+  })
+}))
+
 describe('Users', () => {
   let user
   beforeEach(async () => {
@@ -19,7 +25,7 @@ describe('Users', () => {
       user = await userFactory.attrs('user')
     })
 
-    const subject = async (user) => await request(app).post('/api/users').send(user)
+    const subject = async (user) => await request(app).post('/api/registration').send(user)
 
     describe('when valid data', () => {
       it('return new user', async () => {

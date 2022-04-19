@@ -1,6 +1,6 @@
 import request from 'supertest'
 import app from '../../../app'
-import { sequelize, Token } from '../../../models'
+import { sequelize, Token, User } from '../../../models'
 import userFactory from '../../../database/factory/user.factory'
 
 describe('User authorization', () => {
@@ -93,6 +93,32 @@ describe('User authorization', () => {
         const response = await subject([`refreshToken=${token.refresh_token}not`])
         expect(response.statusCode).toBe(401)
         expect(response.body.message).toEqual('User is not authorized')
+      })
+    })
+  })
+
+  describe('allows activate account', () => {
+    beforeEach(async () => {
+      await login(email, password)
+    })
+    const subject = async (activationLink) => await request(app).get(`/api/activate/${activationLink}`)
+
+    describe('when activation link is valid', () => {
+      it('account activated', async () => {
+        const response = await subject(user.activation_link)
+        const currentUser = await User.findOne({ where: { id: user.id } })
+        expect(response.statusCode).toBe(302)
+        expect(currentUser.activated).toBe(true)
+      })
+    })
+
+    describe('when activation link is invalid', () => {
+      it('account activated', async () => {
+        const response = await subject(user.activation_link + 'not')
+        const currentUser = await User.findOne({ where: { id: user.id } })
+        expect(response.statusCode).toBe(400)
+        expect(response.body.message).toBe('invalid link')
+        expect(currentUser.activated).toBe(false)
       })
     })
   })

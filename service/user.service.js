@@ -52,7 +52,7 @@ class UserService {
 
   async activate (activationLink) {
     const user = await User.findOne({ where: { activation_link: activationLink } })
-    if (!user) throw new Error('invalid link')
+    if (!user) throw ApiError.BadRequest('invalid link')
 
     await user.update({ activated: true })
     await user.save()
