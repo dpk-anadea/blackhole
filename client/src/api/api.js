@@ -10,7 +10,7 @@ const fetch = async (action, resource, payload = null, config = null) => {
 
 export default {
   async login(email, password) {
-    return fetch('post', endpoint('login'), { email, password })
+    return fetch('post', 'login', { email, password })
   },
   async registration(user) {
     return fetch('post', 'registration', user)
@@ -19,7 +19,7 @@ export default {
     return fetch('post', 'logout')
   },
   async checkAuth() {
-    const response = await axios.get('refresh', {
+    const response = await axios.get(endpoint('refresh'), {
       withCredentials: true
     })
     return response.data
