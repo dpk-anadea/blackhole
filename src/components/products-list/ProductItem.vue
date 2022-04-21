@@ -31,7 +31,7 @@
     justify-content: center;
     align-items: center;
 
-    max-width: 22%;
+    width: 360px;
     height: 450px;
     max-height: 600px;
     padding: 20px;

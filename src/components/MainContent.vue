@@ -105,7 +105,6 @@
     flex-direction: column;
 
     width: 100vw;
-    height: 100vh;
 
     background-color: #1d1c1c;
   }
