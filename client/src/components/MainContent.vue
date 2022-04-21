@@ -14,13 +14,14 @@
     <h2 class="plugins-selection-title">
       Download our free plugins to level up your music production
     </h2>
-    <div class="products-list">
+    <div v-if="bestProducts?.length" class="products-list">
       <ProductItem
         v-for="item in bestProducts"
         :key="item"
         :title="item.name"
         :description="item.description" />
     </div>
+    <div v-else class="empty-products">Products are not available!</div>
 
     <div class="wrapper-packs">Download our most popular free sample packs</div>
   </section>
@@ -103,6 +104,9 @@
     display: flex;
     flex-direction: column;
 
+    width: 100vw;
+    height: 100vh;
+
     background-color: #1d1c1c;
   }
 
@@ -135,5 +139,17 @@
     color: white;
     background-color: black;
     font-size: 30px;
+  }
+
+  .empty-products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 50px 0;
+
+    color: white;
+    font-size: 40px;
+    font-weight: 600;
   }
 </style>

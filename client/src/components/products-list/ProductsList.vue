@@ -150,12 +150,10 @@
 <style lang="scss" scoped>
   .wrapper-type-products {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
 
-    padding: 45px 0;
-    width: 100%;
+    padding: 50px 0;
+    width: 100vw;
 
     background-color: black;
   }
@@ -178,7 +176,6 @@
     background-color: #111111;
 
     &:hover {
-      margin-bottom: 50px;
       background-color: #767676;
     }
   }

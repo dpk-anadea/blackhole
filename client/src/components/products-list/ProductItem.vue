@@ -25,12 +25,17 @@
 
 <style lang="scss" scoped>
   .product-wrapper {
+    overflow: hidden;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    max-width: 26%;
+    max-width: 22%;
+    height: 450px;
+    max-height: 600px;
+    padding: 20px;
   }
 
   .product-info {
@@ -38,6 +43,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    max-width: 100%;
   }
 
   .product-title {
@@ -76,7 +83,7 @@
   }
 
   .img {
-    width: 80%;
+    width: 200px;
   }
 
   .price {
