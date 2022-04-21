@@ -16,7 +16,8 @@ describe('User authorization', () => {
     return sequelize.close()
   })
 
-  const login = async (email, password) => await request(app).post('/api/login').send({ email, password })
+  const login = async (email, password) =>
+    await request(app).post('/api/login').send({ email, password })
 
   describe('logs the user in', () => {
     describe('when valid email and password', () => {
@@ -61,7 +62,8 @@ describe('User authorization', () => {
       await login(email, password)
       token = await Token.findOne({ where: { user: user.id } })
     })
-    const subject = async (cookies = []) => await request(app).get('/api/refresh').set('Cookie', cookies)
+    const subject = async (cookies = []) =>
+      await request(app).get('/api/refresh').set('Cookie', cookies)
 
     describe('when user have valid token', () => {
       it('return updated valid token', async () => {
@@ -80,7 +82,7 @@ describe('User authorization', () => {
       })
     })
 
-    describe('when user don\'t have valid token in cookie', () => {
+    describe("when user don't have valid token in cookie", () => {
       it('return error: User is not authorized', async () => {
         const response = await subject()
         expect(response.statusCode).toBe(401)
@@ -88,9 +90,11 @@ describe('User authorization', () => {
       })
     })
 
-    describe('when user don\'t have invalid token', () => {
+    describe("when user don't have invalid token", () => {
       it('return error: User is not authorized', async () => {
-        const response = await subject([`refreshToken=${token.refresh_token}not`])
+        const response = await subject([
+          `refreshToken=${token.refresh_token}not`
+        ])
         expect(response.statusCode).toBe(401)
         expect(response.body.message).toEqual('User is not authorized')
       })
@@ -101,7 +105,8 @@ describe('User authorization', () => {
     beforeEach(async () => {
       await login(email, password)
     })
-    const subject = async (activationLink) => await request(app).get(`/api/activate/${activationLink}`)
+    const subject = async (activationLink) =>
+      await request(app).get(`/api/activate/${activationLink}`)
 
     describe('when activation link is valid', () => {
       it('account activated', async () => {
@@ -128,7 +133,10 @@ describe('User authorization', () => {
       await login(email, password)
       token = await Token.findOne({ where: { user: user.id } })
     })
-    const subject = async (refreshToken) => await request(app).post('/api/logout').set('Cookie', [`refreshToken=${refreshToken}`])
+    const subject = async (refreshToken) =>
+      await request(app)
+        .post('/api/logout')
+        .set('Cookie', [`refreshToken=${refreshToken}`])
 
     it('unauthorized user', async () => {
       const response = await subject(token.refresh_token)

@@ -63,13 +63,16 @@ describe('Users', () => {
       user = await userFactory.create('user')
     })
 
-    const login = async (email, password) => await request(app).post('/api/login').send({ email, password })
+    const login = async (email, password) =>
+      await request(app).post('/api/login').send({ email, password })
     const password = '123456'
 
     describe('when user authorized', () => {
       it('get all users', async () => {
         const { body: authUser } = await login(user.email, password)
-        const response = await request(app).get('/api/users').set('Authorization', 'Bearer ' + authUser.accessToken)
+        const response = await request(app)
+          .get('/api/users')
+          .set('Authorization', 'Bearer ' + authUser.accessToken)
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(1)
@@ -85,7 +88,9 @@ describe('Users', () => {
     describe('when invalid access token', () => {
       it('get all users', async () => {
         const { body: authUser } = await login(user.email, password)
-        const response = await request(app).get('/api/users').set('Authorization', 'Bearer not' + authUser.accessToken)
+        const response = await request(app)
+          .get('/api/users')
+          .set('Authorization', 'Bearer not' + authUser.accessToken)
 
         expect(response.statusCode).toBe(401)
         expect(response.body.message).toEqual('User is not authorized')

@@ -1,18 +1,21 @@
 const userService = require('../service/user.service')
 
 class AuthController {
-  async login (req, res, next) {
+  async login(req, res, next) {
     try {
       const { email, password } = req.body
       const userData = await userService.login(email, password)
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie('refreshToken', userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+      })
       res.json(userData)
     } catch (err) {
       next(err)
     }
   }
 
-  async logout (req, res, next) {
+  async logout(req, res, next) {
     try {
       const { refreshToken } = req.cookies
       const token = await userService.logout(refreshToken)
@@ -24,7 +27,7 @@ class AuthController {
     }
   }
 
-  async activate (req, res, next) {
+  async activate(req, res, next) {
     try {
       const activationLink = req.params.link
       await userService.activate(activationLink)
@@ -35,12 +38,15 @@ class AuthController {
     }
   }
 
-  async refresh (req, res, next) {
+  async refresh(req, res, next) {
     try {
       const { refreshToken } = req.cookies
       const userData = await userService.refresh(refreshToken)
 
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie('refreshToken', userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+      })
       res.json(userData)
     } catch (err) {
       next(err)

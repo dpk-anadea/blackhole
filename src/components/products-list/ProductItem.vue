@@ -3,7 +3,6 @@
     <img class="img" src="../../images/productImg.png" alt="piano" />
     <div class="product-info">
       <h5 class="product-title">{{ title }}</h5>
-      <div class="product-description">{{ description }}</div>
       <div v-if="price" class="price">{{ price }}</div>
       <a href="#" download="" v-else class="product-button">Free Download</a>
     </div>
@@ -54,13 +53,6 @@
 
     color: white;
     font-size: 22px;
-  }
-
-  .product-description {
-    text-align: center;
-
-    color: white;
-    font-size: 18px;
   }
 
   .product-button {

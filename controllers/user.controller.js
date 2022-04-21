@@ -2,11 +2,14 @@ const { User } = require('../models')
 const userService = require('../service/user.service')
 
 class UsersController {
-  async createUser (req, res, next) {
+  async createUser(req, res, next) {
     try {
       const user = req.body
       const userData = await userService.createUser(user)
-      res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
+      res.cookie('refreshToken', userData.refreshToken, {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+      })
 
       res.json(userData)
     } catch (err) {
@@ -14,7 +17,7 @@ class UsersController {
     }
   }
 
-  async getUsers (req, res, next) {
+  async getUsers(req, res, next) {
     try {
       const users = await User.findAll()
       res.json(users)
