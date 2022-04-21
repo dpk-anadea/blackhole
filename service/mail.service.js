@@ -3,7 +3,7 @@ const ejs = require('ejs')
 const path = require('path')
 
 class MailService {
-  constructor () {
+  constructor() {
     this.transporter = nodemailer.createTransport({
       service: process.env.SMTP_SERVICE,
       auth: {
@@ -13,8 +13,11 @@ class MailService {
     })
   }
 
-  async sendActivationMail (to, link) {
-    const data = await ejs.renderFile(path.join(__dirname, '../src/views/mails/activate-link.ejs'), { link })
+  async sendActivationMail(to, link) {
+    const data = await ejs.renderFile(
+      path.join(__dirname, '../src/template-views/mails/activate-link.ejs'),
+      { link }
+    )
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
