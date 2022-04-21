@@ -2,7 +2,7 @@ const factory = require('factory-girl').factory
 const SequelizeAdapter = require('factory-girl').SequelizeAdapter
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
-const { User } = require('../../models')
+const { User } = require('../../app/models')
 
 factory.setAdapter(new SequelizeAdapter())
 

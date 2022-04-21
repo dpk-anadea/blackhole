@@ -31,6 +31,3 @@ CLIENT_URL=http://localhost:8080
 
 * yarn sq db:create
 * yarn sq db:migrate
-
-* yarn (in client folder)
-

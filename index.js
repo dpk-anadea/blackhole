@@ -1,5 +1,5 @@
-const devApp = require('./app')
-const { sequelize } = require('./models')
+const devApp = require('./app/app')
+const { sequelize } = require('./app/models')
 
 const PORT = process.env.APP_PORT || 3030
 
