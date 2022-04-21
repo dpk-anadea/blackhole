@@ -3,21 +3,18 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2021: true,
-    'jest/globals': true
+    'jest/globals': true,
+    node: true
   },
   extends: [
-    'plugin:vue/essential',
-    'standard'
+    'eslint:recommended',
+    'plugin:vue/vue3-essential',
+    'plugin:prettier/recommended'
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    parser: '@typescript-eslint/parser'
+    parser: '@babel/eslint-parser'
   },
-  plugins: [
-    'vue',
-    '@typescript-eslint',
-    'jest'
-  ],
-  rules: {
-  }
+  plugins: ['vue', '@typescript-eslint', 'jest'],
+  rules: {}
 }

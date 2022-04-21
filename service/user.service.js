@@ -5,8 +5,14 @@ const ApiError = require('../src/helpers/api-error')
 const tokenService = require('../service/token.service')
 const mailService = require('../service/mail.service')
 class UserService {
-  async createUser (userData) {
-    const { first_name: firstName, last_name: lastName, email, password, phone } = userData
+  async createUser(userData) {
+    const {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      password,
+      phone
+    } = userData
     const candidate = await User.findOne({ where: { email } })
     if (candidate) {
       throw ApiError.BadRequest(`user with email ${email} already exists`)
@@ -22,15 +28,21 @@ class UserService {
       phone,
       activation_link: activationLink
     })
-    await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
+    await mailService.sendActivationMail(
+      email,
+      `${process.env.API_URL}/api/activate/${activationLink}`
+    )
 
-    const tokens = tokenService.generateTokens({ id: user.id, email: user.email })
+    const tokens = tokenService.generateTokens({
+      id: user.id,
+      email: user.email
+    })
     await tokenService.saveToken(user.id, tokens.refreshToken)
 
     return { ...tokens, user }
   }
 
-  async login (email, password) {
+  async login(email, password) {
     const user = await User.findOne({ where: { email } })
     if (!user) {
       throw ApiError.BadRequest(`user ${email} not found`)
@@ -40,25 +52,30 @@ class UserService {
       throw ApiError.BadRequest('wrong password')
     }
 
-    const tokens = tokenService.generateTokens({ id: user.id, email: user.email })
+    const tokens = tokenService.generateTokens({
+      id: user.id,
+      email: user.email
+    })
     await tokenService.saveToken(user.id, tokens.refreshToken)
     return { ...tokens, user }
   }
 
-  async logout (refreshToken) {
+  async logout(refreshToken) {
     const token = await tokenService.removeToken(refreshToken)
     return token
   }
 
-  async activate (activationLink) {
-    const user = await User.findOne({ where: { activation_link: activationLink } })
+  async activate(activationLink) {
+    const user = await User.findOne({
+      where: { activation_link: activationLink }
+    })
     if (!user) throw ApiError.BadRequest('invalid link')
 
     await user.update({ activated: true })
     await user.save()
   }
 
-  async refresh (refreshToken) {
+  async refresh(refreshToken) {
     if (!refreshToken) {
       throw ApiError.UnauthorizedError()
     }
@@ -70,7 +87,10 @@ class UserService {
     }
 
     const user = await User.findOne({ where: { id: userData.id } })
-    const tokens = tokenService.generateTokens({ id: user.id, email: user.email })
+    const tokens = tokenService.generateTokens({
+      id: user.id,
+      email: user.email
+    })
 
     await tokenService.saveToken(user.id, tokens.refreshToken)
     return { ...tokens, user }
