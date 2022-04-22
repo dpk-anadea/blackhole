@@ -1,8 +1,8 @@
 import request from 'supertest'
 
-import app from '../../../app'
-import { sequelize } from '../../../models'
-import productFactory from '../../../database/factory/product.factory'
+import app from '@server/app'
+import { sequelize } from '@server/models'
+import productFactory from '@factory/product.factory'
 
 describe('Products', () => {
   let product

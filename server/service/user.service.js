@@ -44,6 +44,7 @@ class UserService {
 
   async login(email, password) {
     const user = await User.findOne({ where: { email } })
+    console.log(ApiError)
     if (!user) {
       throw ApiError.BadRequest(`user ${email} not found`)
     }
