@@ -1,7 +1,7 @@
 import request from 'supertest'
-import app from '../../../app'
-import { sequelize, Token, User } from '../../../models'
-import userFactory from '../../../../database/factory/user.factory'
+import app from '@server/app'
+import { sequelize, Token, User } from '@server/models'
+import userFactory from '@factory/user.factory'
 
 describe('User authorization', () => {
   let user, email, token

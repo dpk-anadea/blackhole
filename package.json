@@ -8,7 +8,7 @@
     "dev": "nodemon",
     "build": "rimraf ./build && tsc",
     "serve": "vue-cli-service serve",
-    "build client": "vue-cli-service build",
+    "build:client": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "NODE_ENV=test jest --runInBand",
     "test:watch": "NODE_ENV=test jest --watch --runInBand --detectOpenHandles",
@@ -25,6 +25,12 @@
     "not dead",
     "not ie 11"
   ],
+  "imports": {
+    "@config": "./config",
+    "@factory": "./database/factory",
+    "@server": "./server",
+    "@views": "./views"
+  },
   "dependencies": {
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",

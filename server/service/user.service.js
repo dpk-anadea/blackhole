@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const { User } = require('../models')
-const ApiError = require('../../src/helpers/api-error')
+const ApiError = require('../helpers/api-error')
 const tokenService = require('../service/token.service')
 const mailService = require('../service/mail.service')
 class UserService {

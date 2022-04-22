@@ -6,9 +6,11 @@
     "moduleResolution": "node",
     "paths": {
       "@/*": [
-        "client/src/*"
+        "client/*"
       ]
     },
+    "include": ["client/**/*.js"],
+    "exclude": ["node_modules", "**/node_modules"],
     "lib": [
       "esnext",
       "dom",
