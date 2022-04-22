@@ -1,12 +1,12 @@
 import request from 'supertest'
 
-import app from '../../../app'
-import { sequelize } from '../../../models'
-import userFactory from '../../../database/factory/user.factory'
+import app from '@server/app'
+import { sequelize } from '@server/models'
+import userFactory from '@factory/user.factory'
 
 jest.mock('nodemailer', () => ({
   createTransport: jest.fn().mockReturnValue({
-    sendMail: jest.fn().mockReturnValue((mailOptions, callback) => {})
+    sendMail: jest.fn().mockReturnValue(() => {})
   })
 }))
 
@@ -25,7 +25,8 @@ describe('Users', () => {
       user = await userFactory.attrs('user')
     })
 
-    const subject = async (user) => await request(app).post('/api/registration').send(user)
+    const subject = async (user) =>
+      await request(app).post('/api/registration').send(user)
 
     describe('when valid data', () => {
       it('return new user', async () => {
@@ -53,7 +54,9 @@ describe('Users', () => {
         const response = await subject(user)
 
         expect(response.statusCode).toBe(400)
-        expect(response.body.message).toEqual(`user with email ${user.email} already exists`)
+        expect(response.body.message).toEqual(
+          `user with email ${user.email} already exists`
+        )
       })
     })
   })
@@ -76,12 +79,14 @@ describe('Users', () => {
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(1)
-        expect(response.body).toEqual([{
-          ...user.dataValues,
-          id: expect.any(Number),
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String)
-        }])
+        expect(response.body).toEqual([
+          {
+            ...user.dataValues,
+            id: expect.any(Number),
+            createdAt: expect.any(String),
+            updatedAt: expect.any(String)
+          }
+        ])
       })
     })
 

@@ -11,7 +11,7 @@ dotenv.config()
 const app = express()
 
 app.set('view engine', 'ejs')
-app.set('views', './views')
+app.set('views', '.views')
 
 app.use(mainRoutes)
 app.use(express.json())
@@ -19,6 +19,6 @@ app.use(cookieParser())
 app.use('/api', apiRoutes)
 app.use(errorMiddleware)
 
-app.use(express.static(path.join(__dirname, './dist')))
+app.use(express.static(path.join(__dirname, '../dist')))
 
 module.exports = app

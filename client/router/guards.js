@@ -6,17 +6,17 @@ export default {
     const isAuth = store.getters[get.IS_AUTHENTICATED]
     const currentUser = store.getters[get.CURRENT_USER]
     const isActivated = currentUser?.activated
-
+    console.log(isAuth)
     if (isAuth && !isActivated && to.name !== 'EmailVerify') {
       return {
         name: 'EmailVerify'
       }
     }
 
-    if ((!isAuth || isActivated) && to.name === 'EmailVerify') {
-      return {
-        name: 'home'
-      }
-    }
+    // if ((!isAuth || isActivated) && to.name === 'EmailVerify') {
+    //   return {
+    //     name: 'home'
+    //   }
+    // }
   }
 }

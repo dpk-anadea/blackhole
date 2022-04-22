@@ -15,7 +15,7 @@ class MailService {
 
   async sendActivationMail(to, link) {
     const data = await ejs.renderFile(
-      path.join(__dirname, '../src/template-views/mails/activate-link.ejs'),
+      path.join(__dirname, '../../views/mails/activate-link.ejs'),
       { link }
     )
     await this.transporter.sendMail({
