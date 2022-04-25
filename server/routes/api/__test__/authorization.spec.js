@@ -41,7 +41,7 @@ describe('User authorization', () => {
 
       it('rejects the query', async () => {
         const response = await login(email, wrongPassword)
-        console.log(response.body)
+
         expect(response.statusCode).toBe(400)
         expect(response.body.message).toEqual('wrong password')
       })
