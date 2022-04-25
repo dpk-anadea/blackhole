@@ -14,6 +14,29 @@ describe('Products', () => {
     return sequelize.close()
   })
 
+  describe('allows create product', () => {
+    beforeEach(async () => {
+      product = await productFactory.attrs('product')
+    })
+
+    const subject = async (product) =>
+      await request(app).post('/api/products').send(product)
+
+    it('create new product', async () => {
+      const response = await subject(product)
+
+      expect(response.statusCode).toBe(200)
+      expect(response.body).toEqual({
+        product: {
+          ...product,
+          id: expect.any(Number),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String)
+        }
+      })
+    })
+  })
+
   describe('allows get products', () => {
     beforeEach(async () => {
       product = await productFactory.create('product')
@@ -40,6 +63,20 @@ describe('Products', () => {
       const response = await request(app).get('/')
 
       expect(response.error.text).toContain('unexpected error')
+    })
+  })
+
+  describe('allows delete product', () => {
+    beforeEach(async () => {
+      product = await productFactory.create('product')
+    })
+
+    it('delete product', async () => {
+      const products = await request(app).get('/api/products')
+      const response = await request(app).delete(
+        `/api/products/${products.body[0].id}`
+      )
+      expect(response.statusCode).toBe(200)
     })
   })
 })

@@ -16,5 +16,7 @@ router.get('/activate/:link', authController.activate)
 router.get('/refresh', authController.refresh)
 
 router.get('/products', productController.getProduct)
+router.post('/products', productController.createProduct)
+router.delete('/products/:id', productController.deleteProduct)
 
 module.exports = router
