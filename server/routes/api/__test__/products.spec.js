@@ -68,12 +68,12 @@ describe('Products', () => {
     })
   })
 
-  describe('when delete product', () => {
+  describe('allows delete product', () => {
     beforeEach(async () => {
       product = await productFactory.create('product')
     })
 
-    it('get all products', async () => {
+    it('delete product', async () => {
       const products = await request(app).get('/api/products')
       const response = await request(app).delete(
         `/api/products/${products.body[0].id}`
