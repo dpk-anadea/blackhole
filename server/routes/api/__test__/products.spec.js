@@ -22,19 +22,17 @@ describe('Products', () => {
     const subject = async (product) =>
       await request(app).post('/api/products').send(product)
 
-    describe('when valid data', () => {
-      it('return new user', async () => {
-        const response = await subject(product)
+    it('create new product', async () => {
+      const response = await subject(product)
 
-        expect(response.statusCode).toBe(200)
-        expect(response.body).toEqual({
-          product: {
-            ...product,
-            id: expect.any(Number),
-            createdAt: expect.any(String),
-            updatedAt: expect.any(String)
-          }
-        })
+      expect(response.statusCode).toBe(200)
+      expect(response.body).toEqual({
+        product: {
+          ...product,
+          id: expect.any(Number),
+          createdAt: expect.any(String),
+          updatedAt: expect.any(String)
+        }
       })
     })
   })
