@@ -2,7 +2,7 @@
   <footer class="footer">
     <a class="cymantics"> © 2022, Cymatics.fm. </a>
     <div v-for="(item, index) of stat" :key="'item' + index">
-      <a class="cymantics">{{ item.name }}</a>
+      <a class="cymantics cymantics-item">{{ item.name }}</a>
     </div>
     <div>
       <a class="cymantics social-network"><FacebookIcon class="icon" /></a>
