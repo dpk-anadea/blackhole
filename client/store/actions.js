@@ -1,16 +1,21 @@
 import api from '@/api/api'
 import { action, mutator } from '@/store/constants'
+import router from '@/router'
 
 export default {
   async [action.GET_USERS]({ commit }) {
+    commit(mutator.SET_LOADING, true)
     try {
       const users = await api.getUsers()
       commit(mutator.SET_USERS, users)
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   },
   async [action.CREATE_USER]({ commit }, userData) {
+    commit(mutator.SET_LOADING, true)
     try {
       const user = await api.registration({
         ...userData
@@ -20,29 +25,40 @@ export default {
       commit(mutator.SET_AUTH, true)
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   },
   async [action.LOGIN]({ commit }, { email, password }) {
+    commit(mutator.SET_LOADING, true)
     try {
       const user = await api.login(email, password)
       localStorage.setItem('token', user.accessToken)
       commit(mutator.SET_USER, user.user)
       commit(mutator.SET_AUTH, true)
+      router.push({ name: 'home' })
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   },
   async [action.LOGOUT]({ commit }) {
+    commit(mutator.SET_LOADING, true)
     try {
       await api.logout()
       localStorage.removeItem('token')
       commit(mutator.SET_USER, null)
       commit(mutator.SET_AUTH, false)
+      router.push({ name: 'home' })
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   },
   async [action.CHECK_AUTH]({ commit }) {
+    commit(mutator.SET_LOADING, true)
     try {
       const user = await api.checkAuth()
       localStorage.setItem('token', user.accessToken)
@@ -50,14 +66,19 @@ export default {
       commit(mutator.SET_AUTH, true)
     } catch (e) {
       console.log(e.response?.data?.message)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   },
   async [action.GET_PRODUCTS]({ commit }) {
+    commit(mutator.SET_LOADING, true)
     try {
       const products = await api.getProducts()
       commit(mutator.SET_PRODUCTS, products)
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
     }
   }
 }

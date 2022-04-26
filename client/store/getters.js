@@ -6,5 +6,8 @@ export default {
   },
   [get.IS_AUTHENTICATED](state) {
     return state.isAuth
+  },
+  [get.LOADING](state) {
+    return state.loading
   }
 }

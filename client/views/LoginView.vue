@@ -18,7 +18,6 @@
   const router = useRouter()
 
   const isAuth = computed(() => state.isAuth)
-  console.log(state)
   if (isAuth.value) {
     router.push({ name: 'home' })
   }

@@ -28,9 +28,6 @@
   import { reactive } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
-  import { useRouter } from 'vue-router'
-
-  const router = useRouter()
 
   const store = useStore()
 
@@ -44,7 +41,6 @@
       email: state.email,
       password: state.password
     })
-    router.push({ name: 'home' })
   }
 </script>
 
