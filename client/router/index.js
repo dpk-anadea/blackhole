@@ -7,6 +7,7 @@ import LoginView from '@/views/LoginView'
 import ProductsView from '@/views/ProductsView'
 import ProductView from '@/views/ProductView'
 import EmailVerifyView from '@/views/EmailVerifyView'
+import CartView from '@/views/CartView'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -41,6 +42,11 @@ const router = createRouter({
       name: 'EmailVerify',
       path: '/email-verify',
       component: EmailVerifyView
+    },
+    {
+      name: 'Cart',
+      path: '/cart',
+      component: CartView
     }
   ]
 })

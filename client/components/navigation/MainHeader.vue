@@ -19,6 +19,9 @@
         <router-link v-else :to="{ name: 'login' }" class="nav-item">
           Login
         </router-link>
+        <router-link :to="{ name: 'Cart' }" class="nav-item">
+          <ShoppingCartIcon class="cart-icon" />
+        </router-link>
       </div>
     </nav>
   </header>
@@ -28,6 +31,8 @@
   import { computed } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
+
+  import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
 
   const { state, dispatch } = useStore()
   const isAuth = computed(() => state.isAuth)
@@ -93,7 +98,8 @@
     }
   }
 
-  .shopping-cart-icon {
+  .cart-icon {
     width: 20px;
+    height: 20px;
   }
 </style>
