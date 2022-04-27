@@ -1,19 +1,12 @@
 <template>
-  <section class="cart-section">
-    <h2 class="title">Shopping CArt</h2>
-    <p class="hint">Review your order below and click checkout to continue!</p>
-    <div class="buttons-container">
-      <button class="continue-shopping">Continue Shopping</button>
-      <button class="check-out">Check Out</button>
-    </div>
-    <div class="products">
-      <div class="product"></div>
-    </div>
-  </section>
+  <MainLayout>
+    <template #main-content>
+      <ProductsCart />
+    </template>
+  </MainLayout>
 </template>
 
-<script>
-  export default {}
+<script setup>
+  import MainLayout from '@/components/layout/MainLayout'
+  import ProductsCart from '@/components/ProductsCart'
 </script>
-
-<style></style>

@@ -9,5 +9,8 @@ export default {
   },
   [get.LOADING](state) {
     return state.loading
+  },
+  [get.PRODUCTS](state) {
+    return state.products
   }
 }

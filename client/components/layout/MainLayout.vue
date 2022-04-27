@@ -21,5 +21,8 @@
     justify-content: center;
 
     min-height: 100vh;
+    padding-top: var(--header-width);
+
+    background-color: #000000;
   }
 </style>

@@ -44,10 +44,13 @@
 
 <style lang="scss" scoped>
   .header-wrapper {
+    position: absolute;
+    top: 0;
+
     display: flex;
 
     width: 100%;
-    height: 72px;
+    height: var(--header-width);
 
     background-color: #1d1c1c;
   }

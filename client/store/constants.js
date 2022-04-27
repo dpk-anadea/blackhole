@@ -18,5 +18,6 @@ export const mutator = {
 export const get = {
   CURRENT_USER: 'CURRENT_USER',
   IS_AUTHENTICATED: 'IS_AUTHENTICATED',
-  LOADING: 'LOADING'
+  LOADING: 'LOADING',
+  PRODUCTS: 'PRODUCTS'
 }

@@ -1,0 +1,129 @@
+<template>
+  <section v-if="products" class="cart-section">
+    <h1 class="title">Shopping Cart</h1>
+
+    <p class="hint">Review your order below and click checkout to continue!</p>
+
+    <BhCartButtons />
+
+    <div class="products">
+      <div v-for="product in filterProducts" :key="product.id" class="product">
+        <div class="product-image">image</div>
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-count">1</div>
+        <div class="product-cost">${{ product.cost }}</div>
+      </div>
+    </div>
+
+    <div class="total">${{ totalCost }}</div>
+
+    <BhCartButtons class="cart-buttons" />
+  </section>
+</template>
+
+<script>
+  import { mapActions, mapGetters } from 'vuex'
+  import { action, get } from '@/store/constants'
+  import BhCartButtons from '@/components/buttons/BhCartButtons'
+
+  export default {
+    name: 'ProductCart',
+    components: {
+      BhCartButtons
+    },
+    computed: {
+      ...mapGetters({ products: get.PRODUCTS }),
+      filterProducts() {
+        return this.products.filter((product) => product.cost !== 'free')
+      },
+      totalCost() {
+        return this.filterProducts.reduce((prev, curr) => prev + +curr.cost, 0)
+      }
+    },
+    async created() {
+      if (!this.products) {
+        await this[action.GET_PRODUCTS]()
+      }
+    },
+    methods: {
+      ...mapActions([action.GET_PRODUCTS])
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .cart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 1200px;
+    width: 100%;
+    padding: 30px 20px 50px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 38px;
+    font-weight: 500;
+  }
+
+  .hint {
+    margin: 10px 0 25px;
+
+    opacity: 0.7;
+
+    font-size: 22px;
+    font-weight: 300;
+  }
+
+  .products {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    margin: 20px 0 40px;
+  }
+
+  .product {
+    display: flex;
+
+    padding: 20px;
+
+    font-weight: 300;
+
+    & > :not(:last-child) {
+      margin-right: 40px;
+    }
+
+    &-image {
+      width: 100px;
+    }
+    &-name {
+      flex-grow: 1;
+    }
+    &-count {
+      width: 90px;
+    }
+    &-cost {
+      width: 160px;
+
+      font-size: 20px;
+      text-align: right;
+    }
+  }
+
+  .total {
+    width: 100%;
+    margin-bottom: 40px;
+
+    text-align: right;
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .cart-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+</style>
