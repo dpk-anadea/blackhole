@@ -5,7 +5,7 @@
 
       <div class="product-info">
         <h3 class="title">{{ currentProduct.name }}</h3>
-        <button class="add-to-card-btn">
+        <button class="add-to-card-btn" @click="">
           Add to cart - ${{ currentProduct.cost }}
         </button>
         <div class="description">{{ currentProduct.description }}</div>
@@ -66,6 +66,10 @@
   const currentProduct = computed(() =>
     getProducts.value?.find((el) => el.id === +queryId.value)
   )
+
+  const addToCart = () => {
+    sessionStorage.setItem('cart', 'value')
+  }
 </script>
 
 <style scoped>

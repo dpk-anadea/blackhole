@@ -1,6 +1,8 @@
 <template>
   <div class="buttons-container">
-    <BhBaseButton class="continue-shopping">Continue Shopping</BhBaseButton>
+    <BhBaseButton class="continue-shopping" @click="goToShopping">
+      Continue Shopping
+    </BhBaseButton>
     <BhBaseButton class="check-out">Check Out</BhBaseButton>
   </div>
 </template>
@@ -11,6 +13,11 @@
     name: 'BhCartButtons',
     components: {
       BhBaseButton
+    },
+    methods: {
+      goToShopping() {
+        this.$router.push({ name: 'products' })
+      }
     }
   }
 </script>

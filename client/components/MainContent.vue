@@ -31,7 +31,7 @@
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
   import { computed } from 'vue'
-  import ProductItem from '@/components/products-list/ProductItem'
+  import ProductItem from '@/components/products/ProductItem'
 
   const store = useStore()
   store.dispatch(action.GET_PRODUCTS)

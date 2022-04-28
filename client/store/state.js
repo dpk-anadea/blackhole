@@ -3,7 +3,8 @@ const state = {
   isAuth: false,
   user: null,
   users: null,
-  products: null
+  products: [],
+  cart: []
 }
 
 export default state

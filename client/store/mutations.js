@@ -15,5 +15,9 @@ export default {
   },
   [mutator.SET_PRODUCTS](state, products) {
     state.products = products
+  },
+  [mutator.SET_PRODUCT_TO_CART](state, product) {
+    const currentProduct = state.cart.find(({ id }) => id === product.id)
+    state.cart = [...state.cart, product]
   }
 }

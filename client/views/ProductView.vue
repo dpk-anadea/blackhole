@@ -8,5 +8,5 @@
 
 <script setup>
   import MainLayout from '@/components/layout/MainLayout'
-  import ProductInformation from '@/components/products-list/ProductInformation'
+  import ProductInformation from '@/components/products/ProductInformation'
 </script>

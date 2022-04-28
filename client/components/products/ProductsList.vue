@@ -111,7 +111,7 @@
   import { action } from '@/store/constants'
   import { computed, ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import ProductItem from '@/components/products-list/ProductItem'
+  import ProductItem from '@/components/products/ProductItem'
 
   const store = useStore()
   const router = useRouter()
