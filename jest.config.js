@@ -15,7 +15,7 @@ module.exports = {
         '^@server(.*)$': '<rootDir>/server$1'
       },
       testEnvironment: 'node',
-      testMatch: ['<rootDir>/server/routes/api/__tests__/**/*.spec.js?(x)']
+      testMatch: ['<rootDir>/server/routes/**']
     },
     {
       moduleNameMapper: {
@@ -28,9 +28,10 @@ module.exports = {
       transform: {
         '^.+\\.js$': 'babel-jest',
         '^.+\\.vue$': '@vue/vue3-jest',
-        '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|webp)$': 'jest-transform-stub'
+        '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|webp)$':
+          'jest-transform-stub'
       },
-      testMatch: ['<rootDir>/client/components/**/__tests__/**/*.spec.js?(x)'],
+      testMatch: ['<rootDir>/client/**'],
       passWithNoTests: true
     }
   ]
