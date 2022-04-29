@@ -30,7 +30,20 @@ describe('RegisterForm tests:', () => {
     }
   })
 
-  it('input fields', async () => {
+  it('number of fields', async () => {
     expect(wrapper.findAll('.input')).toHaveLength(6)
+  })
+
+  it('emits an event when clicked', async () => {
+    await wrapper.find('#first_name').setValue()
+    await wrapper.find('#last_name').setValue()
+    await wrapper.find('#phone').setValue()
+    await wrapper.find('#email').setValue()
+    await wrapper.find('#password').setValue()
+    await wrapper.find('#confirm_password').setValue()
+
+    await wrapper.find('.button').trigger('submit')
+
+    expect(wrapper.emitted()).toHaveProperty('submit')
   })
 })

@@ -23,11 +23,11 @@ const wrapper = mount(AccountLayout, {
 })
 
 describe('AccountLayout tests:', () => {
-  test('props', async () => {
+  it('props', async () => {
     expect(wrapper.text()).toMatch('Test')
   })
 
-  test('slot', async () => {
+  it('slot', async () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
   })
 })

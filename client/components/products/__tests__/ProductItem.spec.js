@@ -10,7 +10,7 @@ const wrapper = mount(ProductItem, {
 })
 
 describe('ProductItem tests:', () => {
-  test('props', async () => {
+  it('props', async () => {
     expect(wrapper.find('.product-title').text()).toBe('Test')
     expect(wrapper.find('.price').text()).toBe('$100')
   })

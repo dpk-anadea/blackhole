@@ -15,7 +15,7 @@ module.exports = {
         '^@server(.*)$': '<rootDir>/server$1'
       },
       testEnvironment: 'node',
-      testMatch: ['<rootDir>/server/routes/**']
+      testMatch: ['<rootDir>/server/**/?(*.)+(spec).[jt]s?(x)']
     },
     {
       moduleNameMapper: {
@@ -31,8 +31,8 @@ module.exports = {
         '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|webp)$':
           'jest-transform-stub'
       },
-      testMatch: ['<rootDir>/client/**'],
-      passWithNoTests: true
+      passWithNoTests: true,
+      testMatch: ['<rootDir>/client/**/?(*.)+(spec).[jt]s?(x)']
     }
   ]
 }
