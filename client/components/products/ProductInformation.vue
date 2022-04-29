@@ -5,7 +5,7 @@
 
       <div class="product-info">
         <h3 class="title">{{ currentProduct.name }}</h3>
-        <button class="add-to-card-btn" @click="">
+        <button class="add-to-card-btn" @click="addToCart">
           Add to cart - ${{ currentProduct.cost }}
         </button>
         <div class="description">{{ currentProduct.description }}</div>
@@ -68,7 +68,7 @@
   )
 
   const addToCart = () => {
-    sessionStorage.setItem('cart', 'value')
+    store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
   }
 </script>
 

@@ -18,6 +18,25 @@ export default {
   },
   [mutator.SET_PRODUCT_TO_CART](state, product) {
     const currentProduct = state.cart.find(({ id }) => id === product.id)
-    state.cart = [...state.cart, product]
+
+    if (currentProduct) {
+      currentProduct.count = product?.count
+        ? product.count
+        : currentProduct.count + 1
+      state.cart.map((stateProduct) =>
+        stateProduct.id === product.id ? product : stateProduct
+      )
+    } else {
+      state.cart.push({ ...product, count: 1 })
+    }
+
+    sessionStorage.setItem('cart', JSON.stringify([...state.cart]))
+  },
+  [mutator.SET_PRODUCTS_TO_CART](state, products) {
+    state.cart = [...state.cart, ...products]
+  },
+  [mutator.REMOVE_PRODUCT_FROM_CART](state, productId) {
+    state.cart = state.cart.filter((product) => product.id !== productId)
+    sessionStorage.setItem('cart', JSON.stringify([...state.cart]))
   }
 }

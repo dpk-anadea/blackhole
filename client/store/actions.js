@@ -80,5 +80,37 @@ export default {
     } finally {
       commit(mutator.SET_LOADING, false)
     }
+  },
+  //CART
+  async [action.ADD_PRODUCT_TO_CART]({ commit }, product) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      commit(mutator.SET_PRODUCT_TO_CART, product)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
+  async [action.GET_PRODUCTS_FROM_STORAGE]({ commit }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const products = JSON.parse(sessionStorage.getItem('cart')) || []
+      commit(mutator.SET_PRODUCTS_TO_CART, products)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
+  async [action.DELETE_PRODUCT_FROM_CART]({ commit }, productId) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      commit(mutator.REMOVE_PRODUCT_FROM_CART, productId)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
   }
 }

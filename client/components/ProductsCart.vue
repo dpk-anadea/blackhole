@@ -7,11 +7,16 @@
     <BhCartButtons />
 
     <div class="products">
-      <div v-for="product in filterProducts" :key="product.id" class="product">
+      <div v-for="product in products" :key="product.id" class="product">
         <div class="product-image">image</div>
         <div class="product-name">{{ product.name }}</div>
-        <div class="product-count">1</div>
-        <div class="product-cost">${{ product.cost }}</div>
+        <div class="product-count">
+          <BhCountControl
+            :count="product.count"
+            @remove-product="removeProduct(product.id)"
+            @update-count="(value) => updateCount(value, product)" />
+        </div>
+        <div class="product-cost">${{ getCost(product) }}</div>
       </div>
     </div>
 
@@ -25,19 +30,23 @@
   import { mapActions, mapGetters } from 'vuex'
   import { action, get } from '@/store/constants'
   import BhCartButtons from '@/components/buttons/BhCartButtons'
+  import BhCountControl from '@/components/buttons/BhCountControl'
 
   export default {
     name: 'ProductCart',
     components: {
-      BhCartButtons
+      BhCartButtons,
+      BhCountControl
     },
     computed: {
-      ...mapGetters({ products: get.PRODUCTS }),
-      filterProducts() {
-        return this.products.filter((product) => product.cost !== 'free')
-      },
+      ...mapGetters({ products: get.CART }),
       totalCost() {
-        return this.filterProducts.reduce((prev, curr) => prev + +curr.cost, 0)
+        return (
+          this.products.reduce(
+            (prev, curr) => prev + +curr.cost * curr.count,
+            0
+          ) || 0
+        )
       }
     },
     async created() {
@@ -46,7 +55,21 @@
       }
     },
     methods: {
-      ...mapActions([action.GET_PRODUCTS])
+      ...mapActions([
+        action.ADD_PRODUCT_TO_CART,
+        action.DELETE_PRODUCT_FROM_CART,
+        action.GET_PRODUCTS
+      ]),
+      getCost(product) {
+        return +product.cost * product.count
+      },
+      updateCount(value, product) {
+        product.count = value
+        this[action.ADD_PRODUCT_TO_CART](product)
+      },
+      removeProduct(productId) {
+        this[action.DELETE_PRODUCT_FROM_CART](productId)
+      }
     }
   }
 </script>

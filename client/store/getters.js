@@ -12,5 +12,8 @@ export default {
   },
   [get.PRODUCTS](state) {
     return state.products
+  },
+  [get.CART](state) {
+    return state.cart
   }
 }
