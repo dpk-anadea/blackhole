@@ -21,7 +21,9 @@ module.exports = {
       moduleNameMapper: {
         '@/(.*)$': '<rootDir>/client/$1',
         '@/components(.*)$': '<rootDir>/client/components/$1',
-        '@/api(.*)$': '<rootDir>/client/api/$1'
+        '@/api(.*)$': '<rootDir>/client/api/$1',
+        '^@factory(.*)$': '<rootDir>/database/factory$1',
+        '^@server(.*)$': '<rootDir>/server$1'
       },
       testEnvironment: 'jsdom',
       moduleFileExtensions: ['js', 'json', 'vue'],

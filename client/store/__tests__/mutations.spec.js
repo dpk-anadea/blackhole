@@ -1,5 +1,6 @@
 import { mutator } from '@/store/constants'
 import mutations from '@/store/mutations'
+import userFactory from '@factory/user.factory'
 
 describe('Mutations tests:', () => {
   it('allows to get users', () => {
@@ -34,15 +35,8 @@ describe('Mutations tests:', () => {
     })
   })
 
-  it('allows to get user', () => {
-    const user = {
-      email: 'gilbert@mail.ru',
-      id: 1,
-      first_name: 'Post',
-      last_name: 'Gilbert',
-      phone: '123456789',
-      password: 'secret'
-    }
+  it('allows to get user', async () => {
+    const user = await userFactory.attrs('user')
     const state = {
       user: null
     }
