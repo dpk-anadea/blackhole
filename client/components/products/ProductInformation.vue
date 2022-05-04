@@ -1,5 +1,9 @@
 <template>
   <div class="product-wrapper">
+    <BhFlashMessage>
+      <MessageProductAdded />
+    </BhFlashMessage>
+
     <section class="product-section">
       <img class="img" src="../../images/productImg.png" alt="piano" />
 
@@ -56,6 +60,8 @@
   import { action } from '@/store/constants'
 
   import BhBaseButton from '@/components/buttons/BhBaseButton'
+  import BhFlashMessage from '@/components/notification/BhFlashMessage'
+  import MessageProductAdded from '@/components/products/MessageProductAdded'
 
   const store = useStore()
   const route = useRoute()
