@@ -1,14 +1,12 @@
 <template>
   <MainLayout>
     <template #main-content>
-      <ProductsList />
+      <ProductsCart />
     </template>
   </MainLayout>
 </template>
 
 <script setup>
   import MainLayout from '@/components/layout/MainLayout'
-  import ProductsList from '@/components/products/ProductsList'
+  import ProductsCart from '@/components/ProductsCart'
 </script>
-
-<style scoped></style>

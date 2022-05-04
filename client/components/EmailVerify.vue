@@ -8,7 +8,7 @@
   export default {}
 </script>
 
-<style>
+<style scoped>
   .email-verify-section {
     display: flex;
     flex-direction: column;

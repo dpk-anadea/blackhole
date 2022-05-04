@@ -1,30 +1,16 @@
 <template>
   <div class="product-wrapper">
-    <div v-for="item in currentProduct" :key="item">
-      <h3 class="title">{{ item.name }}</h3>
-      <div class="price">{{ item.cost }}</div>
+    <section class="product-section">
+      <img class="img" src="../../images/productImg.png" alt="piano" />
 
-      <div class="product-block">
-        <img class="img" src="../../images/productImg.png" alt="piano" />
-        <div class="description">
-          {{ item.description }} LOTUS perfectly replicates a famous guitar
-          effect pedal that’s become very popular in Hip Hop and Lofi production
-          (can you guess what it is?)
-          <br />
-          The problem is, this hardware pedal is hard to get, hard to use, and
-          is extremely expensive.<br />
-          Plus you can’t even save presets easily or even use it in stereo...
-          However, LOTUS is very easy to use while keeping all the advanced
-          features found in the hardware version, plus it’s much more
-          affordable.<br />
-          This plugin is a game changer for making melodies more interesting.
-          Put it on any loop and it instantly gives you a unique sound The first
-          4000 people to get <br />
-          LOTUS get our other new plugin AURORA for free Scroll down to see
-          overview videos and to hear before and after demos.
-        </div>
+      <div class="product-info">
+        <h3 class="title">{{ currentProduct.name }}</h3>
+        <button class="add-to-card-btn" @click="addToCart">
+          Add to cart - ${{ currentProduct.cost }}
+        </button>
+        <div class="description">{{ currentProduct.description }}</div>
       </div>
-    </div>
+    </section>
 
     <iframe
       width="73%"
@@ -64,10 +50,10 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router'
-  import { action } from '@/store/constants'
   import { computed } from 'vue'
   import { useStore } from 'vuex'
+  import { useRoute } from 'vue-router'
+  import { action } from '@/store/constants'
 
   const store = useStore()
   const route = useRoute()
@@ -78,8 +64,12 @@
   const queryId = computed(() => route.query.id)
 
   const currentProduct = computed(() =>
-    getProducts.value?.filter((el) => el.id === +queryId.value)
+    getProducts.value?.find((el) => el.id === +queryId.value)
   )
+
+  const addToCart = () => {
+    store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
+  }
 </script>
 
 <style scoped>
@@ -90,53 +80,63 @@
     justify-content: center;
 
     width: 100%;
+    padding: 80px;
 
     background-color: black;
   }
 
+  .product-section {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 60px;
+  }
+
+  .img {
+    width: 45%;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 70px;
+  }
+
   .title {
-    display: flex;
-    justify-content: center;
+    margin-bottom: 20px;
 
-    padding-top: 50px;
-    margin-bottom: 10px;
-
+    font-size: 32px;
+    font-weight: 400;
     color: #ffffff;
-    font-size: 30px;
-    letter-spacing: 20px;
   }
 
-  .price {
+  .add-to-card-btn {
     display: flex;
     justify-content: center;
+    align-items: center;
 
-    padding-top: 30px;
-    margin-bottom: 10px;
+    width: 55%;
+    height: 54px;
 
+    background-color: #7cd380;
+    border: none;
+
+    font-size: 20px;
+    font-weight: 600;
     color: #ffffff;
-    font-size: 30px;
-    letter-spacing: 20px;
-  }
-
-  .product-block {
-    display: flex;
-
-    margin: 35px;
   }
 
   .description {
     display: flex;
     justify-content: center;
 
-    padding-top: 30px;
-    margin: 0 0 10px 80px;
+    margin-top: 30px;
 
-    color: #ffffff;
+    opacity: 0.7;
+
     font-size: 18px;
-  }
-
-  .img {
-    width: 45%;
+    color: #ffffff;
   }
 
   .lotus {
