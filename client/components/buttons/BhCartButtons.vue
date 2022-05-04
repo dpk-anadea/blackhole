@@ -9,6 +9,7 @@
 
 <script>
   import BhBaseButton from '@/components/buttons/BhBaseButton'
+
   export default {
     name: 'BhCartButtons',
     components: {
@@ -22,7 +23,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .buttons-container {
     display: flex;
   }
@@ -30,9 +31,9 @@
   .continue-shopping {
     background-color: #888888;
     margin-right: 10px;
-  }
 
-  .check-out {
-    background-color: #7cd380;
+    &:hover {
+      background-color: #636363;
+    }
   }
 </style>

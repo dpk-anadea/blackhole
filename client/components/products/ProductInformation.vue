@@ -5,9 +5,9 @@
 
       <div class="product-info">
         <h3 class="title">{{ currentProduct.name }}</h3>
-        <button class="add-to-card-btn" @click="addToCart">
+        <BhBaseButton class="add-to-card-btn" @click="addToCart">
           Add to cart - ${{ currentProduct.cost }}
-        </button>
+        </BhBaseButton>
         <div class="description">{{ currentProduct.description }}</div>
       </div>
     </section>
@@ -55,6 +55,8 @@
   import { useRoute } from 'vue-router'
   import { action } from '@/store/constants'
 
+  import BhBaseButton from '@/components/buttons/BhBaseButton'
+
   const store = useStore()
   const route = useRoute()
   store.dispatch(action.GET_PRODUCTS)
@@ -72,7 +74,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .product-wrapper {
     display: flex;
     flex-direction: column;
@@ -112,19 +114,8 @@
   }
 
   .add-to-card-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     width: 55%;
     height: 54px;
-
-    background-color: #7cd380;
-    border: none;
-
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
   }
 
   .description {

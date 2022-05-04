@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { mutator } from '@/store/constants'
 
 export default {
@@ -30,13 +31,20 @@ export default {
       state.cart.push({ ...product, count: 1 })
     }
 
-    sessionStorage.setItem('cart', JSON.stringify([...state.cart]))
+    Cookies.set('cart', JSON.stringify([...state.cart]))
   },
   [mutator.SET_PRODUCTS_TO_CART](state, products) {
     state.cart = [...state.cart, ...products]
   },
+  [mutator.SET_PRODUCTS_TO_CART_BY_ID](state, productIds) {
+    const productsInCart = state.products.filter((product) =>
+      productIds.includes(product.id)
+    )
+    state.cart = [...state.cart, ...productsInCart]
+  },
   [mutator.REMOVE_PRODUCT_FROM_CART](state, productId) {
     state.cart = state.cart.filter((product) => product.id !== productId)
-    sessionStorage.setItem('cart', JSON.stringify([...state.cart]))
+
+    Cookies.set('cart', JSON.stringify([...state.cart]))
   }
 }
