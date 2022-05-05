@@ -20,11 +20,18 @@ describe('LoginForm tests:', () => {
 
   const wrapper = mount(LoginView, {
     global: {
-      plugins: [router, store]
+      plugins: [store, router]
     }
   })
 
   it('check component', async () => {
     expect(wrapper.text()).toMatch('Sing In')
+  })
+
+  it('check route name', async () => {
+    await router.push('/')
+
+    await router.isReady()
+    expect(wrapper.vm.$route.name).toBe('home')
   })
 })
