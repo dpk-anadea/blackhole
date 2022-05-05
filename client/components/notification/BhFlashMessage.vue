@@ -1,21 +1,39 @@
 <template>
-  <div v-if="isShowMessage" class="flash-message-wrapper">
-    <slot></slot>
-    <IconCross class="cross-icon" />
+  <div v-if="isShow" class="flash-message-wrapper">
+    <slot>
+      <MessageProductAdded />
+    </slot>
+    <IconCross class="cross-icon" @click="closeMessage" />
   </div>
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex'
+  import { action, get } from '@/store/constants'
+
   import IconCross from '@/components/icons/IconCross'
+  import MessageProductAdded from '@/components/products/MessageProductAdded'
 
   export default {
     name: 'BhFlashMessage',
     components: {
-      IconCross
+      IconCross,
+      MessageProductAdded
     },
     computed: {
-      isShowMessage() {
-        return true
+      ...mapGetters({ isShow: get.IS_SHOW_FLASH_MESSAGE })
+    },
+    watch: {
+      isShow(newValue) {
+        if (newValue) {
+          setTimeout(this.closeMessage, 6000)
+        }
+      }
+    },
+    methods: {
+      ...mapActions([action.TOGGLE_FLASH_MESSAGE]),
+      closeMessage() {
+        this[action.TOGGLE_FLASH_MESSAGE](false)
       }
     }
   }
@@ -24,7 +42,7 @@
 <style lang="scss" scoped>
   .flash-message-wrapper {
     position: absolute;
-    top: var(--header-width);
+    top: 100%;
     z-index: 4;
 
     display: flex;
@@ -44,5 +62,11 @@
   .cross-icon {
     position: absolute;
     right: 80px;
+
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 </style>

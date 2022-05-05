@@ -1,9 +1,5 @@
 <template>
   <div class="product-wrapper">
-    <BhFlashMessage>
-      <MessageProductAdded />
-    </BhFlashMessage>
-
     <section class="product-section">
       <img class="img" src="../../images/productImg.png" alt="piano" />
 
@@ -56,15 +52,14 @@
 <script setup>
   import { computed } from 'vue'
   import { useStore } from 'vuex'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { action } from '@/store/constants'
 
   import BhBaseButton from '@/components/buttons/BhBaseButton'
-  import BhFlashMessage from '@/components/notification/BhFlashMessage'
-  import MessageProductAdded from '@/components/products/MessageProductAdded'
 
   const store = useStore()
   const route = useRoute()
+  const router = useRouter()
   store.dispatch(action.GET_PRODUCTS)
 
   const getProducts = computed(() => store.state.products)
@@ -75,8 +70,10 @@
     getProducts.value?.find((el) => el.id === +queryId.value)
   )
 
-  const addToCart = () => {
-    store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
+  const addToCart = async () => {
+    await store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
+    await store.dispatch(action.TOGGLE_FLASH_MESSAGE, true)
+    router.push({ name: 'products' })
   }
 </script>
 

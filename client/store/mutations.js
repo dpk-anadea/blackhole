@@ -46,5 +46,9 @@ export default {
     state.cart = state.cart.filter((product) => product.id !== productId)
 
     Cookies.set('cart', JSON.stringify([...state.cart]))
+  },
+
+  [mutator.SET_FLASH_MESSAGE](state, isShow) {
+    state.isShowFleshMessage = isShow
   }
 }

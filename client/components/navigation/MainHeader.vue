@@ -1,5 +1,7 @@
 <template>
   <header class="header-wrapper">
+    <BhFlashMessage />
+
     <div class="nav-bar-logo">
       <img class="logo-img" src="../../images/logo.png" alt="logo" />
     </div>
@@ -32,6 +34,7 @@
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
 
+  import BhFlashMessage from '@/components/notification/BhFlashMessage'
   import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
 
   const { state, dispatch } = useStore()

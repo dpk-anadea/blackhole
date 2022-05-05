@@ -15,5 +15,8 @@ export default {
   },
   [get.CART](state) {
     return state.cart
+  },
+  [get.IS_SHOW_FLASH_MESSAGE](state) {
+    return state.isShowFleshMessage
   }
 }
