@@ -1,23 +1,16 @@
 import getters from '@/store/getters'
 import { get } from '@/store/constants'
+import userFactory from '@factory/user.factory'
 
 describe('Getters tests:', () => {
-  it('current user', () => {
-    const user = [
-      {
-        email: 'gilbert@mail.ru',
-        id: 1,
-        first_name: 'Post',
-        last_name: 'Gilbert',
-        phone: '123456789',
-        password: 'secret'
-      }
-    ]
+  it('current user', async () => {
+    const user = await userFactory.create('user')
+
     const state = { user }
 
     const actual = getters[get.CURRENT_USER](state)
 
-    expect(actual).toEqual([user[0]])
+    expect(actual).toEqual(user)
   })
 
   it('is authenticated', () => {

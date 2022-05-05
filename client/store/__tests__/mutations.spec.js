@@ -1,27 +1,13 @@
 import { mutator } from '@/store/constants'
 import mutations from '@/store/mutations'
 import userFactory from '@factory/user.factory'
+import productFactory from '@factory/product.factory'
 
 describe('Mutations tests:', () => {
-  it('allows to get users', () => {
-    const users = [
-      {
-        email: 'gilbert@mail.ru',
-        id: 1,
-        first_name: 'Post',
-        last_name: 'Gilbert',
-        phone: '123456789',
-        password: 'secret'
-      },
-      {
-        email: 'gilbert@mail.ru',
-        id: 1,
-        first_name: 'Post',
-        last_name: 'Gilbert',
-        phone: '123456789',
-        password: 'secret'
-      }
-    ]
+  it('allows to get users', async () => {
+    const user1 = await userFactory.create('user')
+    const user2 = await userFactory.create('user')
+    const users = { user1, user2 }
 
     const state = {
       users: null
@@ -73,21 +59,11 @@ describe('Mutations tests:', () => {
     })
   })
 
-  it('adds products', () => {
-    const products = [
-      {
-        name: 'Test1',
-        type: 'Test1',
-        description: 'Test1',
-        cost: '100'
-      },
-      {
-        name: 'Test2',
-        type: 'Test2',
-        description: 'Test2',
-        cost: '200'
-      }
-    ]
+  it('adds products', async () => {
+    const product1 = await userFactory.create('product')
+    const product2 = await userFactory.create('product')
+    const products = { product1, product2 }
+
     const state = {
       products: null
     }
