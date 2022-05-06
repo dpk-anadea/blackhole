@@ -1,14 +1,8 @@
-import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from '@/router'
 import { h } from 'vue'
-import AccountLayout from '../AccountLayout'
+import { mount } from '@vue/test-utils'
+import { router } from '@/components/__mocks__/router'
 
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: routes
-})
+import AccountLayout from '@/components/layout/AccountLayout'
 
 const wrapper = mount(AccountLayout, {
   global: {
@@ -22,12 +16,12 @@ const wrapper = mount(AccountLayout, {
   }
 })
 
-describe('AccountLayout tests:', () => {
-  it('props', async () => {
+describe('AccountLayout component', () => {
+  it('should displayed the text given by the props', async () => {
     expect(wrapper.text()).toMatch('Test')
   })
 
-  it('slot', async () => {
+  it('should displayed the html tag which was passed in slot', async () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
   })
 })
