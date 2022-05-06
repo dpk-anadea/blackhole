@@ -18,8 +18,10 @@ describe('LoginForm component', () => {
 
   describe('should trigger the actions after pressing the button', () => {
     it('if all fields are filled in', async () => {
-      await wrapper.find('#email').setValue(store.state.email)
-      await wrapper.find('#password').setValue(store.state.password)
+      await wrapper.find('[data-test="email"]').setValue(store.state.email)
+      await wrapper
+        .find('[data-test="password"]')
+        .setValue(store.state.password)
       await wrapper.find('.button').trigger('submit')
 
       expect(actions[action.LOGIN]).toHaveBeenCalled()
