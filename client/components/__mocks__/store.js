@@ -24,8 +24,12 @@ export const emptyStore = createStore({
 
 export const store = createStore({
   state: {
+    firstName: 'Ivan',
+    lastName: 'Ivanov',
+    phoneNumber: '123456789',
     email: 'test@mail.ru',
     password: 'secret',
+    confirmPassword: 'secret',
     products: [
       {
         id: 1,

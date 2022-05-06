@@ -1,49 +1,34 @@
-import { routes } from '@/router'
-import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
+import { store } from '@/components/__mocks__/store'
+import { router } from '@/components/__mocks__/router'
 
-import RegisterForm from '../RegisterForm'
+import RegisterForm from '@/components/forms/RegisterForm'
 
-describe('RegisterForm tests:', () => {
-  const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-  })
-
-  const store = createStore({
-    useStore: () => ({
-      state: {
-        firstName: 'Ivan',
-        lastName: 'Ivanov',
-        phoneNumber: '123456789',
-        email: 'test@mail.ru',
-        password: 'secret',
-        confirmPassword: 'secret'
-      }
-    })
-  })
-
+describe('RegisterForm component', () => {
   const wrapper = mount(RegisterForm, {
     global: {
       plugins: [router, store]
     }
   })
 
-  it('number of fields', async () => {
+  it('should displayed six input fields', async () => {
     expect(wrapper.findAll('.input')).toHaveLength(6)
   })
 
-  it('emits an event when clicked', async () => {
-    await wrapper.find('#first_name').setValue()
-    await wrapper.find('#last_name').setValue()
-    await wrapper.find('#phone').setValue()
-    await wrapper.find('#email').setValue()
-    await wrapper.find('#password').setValue()
-    await wrapper.find('#confirm_password').setValue()
+  describe('when you click on the button', () => {
+    it('if all the input fields are filled in and correct, emit will work', async () => {
+      await wrapper.find('#first_name').setValue(store.state.firstName)
+      await wrapper.find('#last_name').setValue(store.state.lastName)
+      await wrapper.find('#phone').setValue(store.state.phoneNumber)
+      await wrapper.find('#email').setValue(store.state.email)
+      await wrapper.find('#password').setValue(store.state.password)
+      await wrapper
+        .find('#confirm_password')
+        .setValue(store.state.confirmPassword)
 
-    await wrapper.find('.button').trigger('submit')
+      await wrapper.find('.button').trigger('submit')
 
-    expect(wrapper.emitted()).toHaveProperty('submit')
+      expect(wrapper.emitted()).toHaveProperty('submit')
+    })
   })
 })
