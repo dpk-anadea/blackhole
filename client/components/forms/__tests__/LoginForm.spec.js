@@ -1,53 +1,28 @@
-import { routes } from '@/router/index'
-import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
 import { action } from '@/store/constants'
+import { router } from '@/components/__mocks__/router'
+import { store, actions } from '@/components/__mocks__/store'
 
-import LoginForm from '../LoginForm'
+import LoginForm from '@/components/forms/LoginForm'
 
-describe('LoginForm tests:', () => {
-  const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-  })
-
-  let actions = {
-    [action.LOGIN]: jest.fn()
+const wrapper = mount(LoginForm, {
+  global: {
+    plugins: [router, store]
   }
+})
 
-  const store = createStore({
-    useStore: () => ({
-      dispatch: jest.fn(),
-      state: {
-        email: 'test@mail.ru',
-        password: 'secret'
-      }
-    }),
-    actions
-  })
-
-  const wrapper = mount(LoginForm, {
-    global: {
-      plugins: [router, store]
-    }
-  })
-
-  it('number of fields', async () => {
+describe('LoginForm component', () => {
+  it('should displayed two input fields', async () => {
     expect(wrapper.findAll('.input')).toHaveLength(2)
   })
 
-  it('submit a login form', async () => {
-    const email = 'ivanov@mail.ru'
-    const password = 'secret'
+  describe('should trigger the actions after pressing the button', () => {
+    it('if all fields are filled in', async () => {
+      await wrapper.find('#email').setValue(store.state.email)
+      await wrapper.find('#password').setValue(store.state.password)
+      await wrapper.find('.button').trigger('submit')
 
-    await wrapper.find('#email').setValue(email)
-    await wrapper.find('#password').setValue(password)
-    await wrapper.find('.button').trigger('submit')
-
-    expect(actions[action.LOGIN]).toHaveBeenCalledWith(expect.anything(), {
-      email,
-      password
+      expect(actions[action.LOGIN]).toHaveBeenCalled()
     })
   })
 })

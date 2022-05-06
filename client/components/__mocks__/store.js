@@ -2,7 +2,12 @@ import { createStore } from 'vuex'
 import { action } from '@/store/constants'
 
 export const actions = {
-  [action.GET_PRODUCTS]: jest.fn()
+  [action.GET_PRODUCTS]: jest.fn(),
+  [action.CHECK_AUTH]: jest.fn(),
+  [action.LOGOUT]: jest.fn(),
+  [action.LOGIN]: jest.fn(),
+  [action.CREATE_USER]: jest.fn(),
+  [action.GET_USERS]: jest.fn()
 }
 
 export const emptyStore = createStore({
@@ -19,6 +24,8 @@ export const emptyStore = createStore({
 
 export const store = createStore({
   state: {
+    email: 'test@mail.ru',
+    password: 'secret',
     products: [
       {
         id: 1,
