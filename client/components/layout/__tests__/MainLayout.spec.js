@@ -1,24 +1,11 @@
-import { mount } from '@vue/test-utils'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from '@/router'
 import { h } from 'vue'
-import { createStore } from 'vuex'
+import { mount } from '@vue/test-utils'
+import { store } from '@/components/__mocks__/store'
+import { router } from '@/components/__mocks__/router'
 
-import MainLayout from '../MainLayout'
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: routes
-})
-
-const store = createStore({
-  useStore: () => ({
-    dispatch: jest.fn(),
-    state: {
-      isAuth: true
-    }
-  })
-})
+import MainLayout from '@/components/layout/MainLayout'
+import MainFooter from '@/components/navigation/MainFooter'
+import MainHeader from '@/components/navigation/MainHeader'
 
 const wrapper = mount(MainLayout, {
   global: {
@@ -26,11 +13,20 @@ const wrapper = mount(MainLayout, {
   },
   slots: {
     'main-content': h('h1', {}, 'Named Slot')
+  },
+  stubs: {
+    MainFooter,
+    MainHeader
   }
 })
 
-describe('MainLayout tests:', () => {
-  it('slot', async () => {
+describe('MainLayout component', () => {
+  it('should displayed the html tag which was passed in slot', async () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
+  })
+
+  it('should displayed the header and footer components', async () => {
+    expect(wrapper.findAllComponents({ name: 'MainFooter' }).length).toBe(1)
+    expect(wrapper.findAllComponents({ name: 'MainHeader' }).length).toBe(1)
   })
 })

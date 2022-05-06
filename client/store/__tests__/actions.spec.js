@@ -1,20 +1,18 @@
+import api from '@/api/api'
 import actions from '@/store/actions'
 import { action } from '@/store/constants'
 import userFactory from '@factory/user.factory'
 import productFactory from '@factory/product.factory'
-import api from '@/api/api'
+
+const commit = jest.fn()
 
 jest.mock('@/router', () => ({
   push: jest.fn()
 }))
 
-describe('Actions tests:', () => {
-  const commit = jest.fn()
-
-  it('get users', async () => {
-    const user1 = await userFactory.create('user')
-    const user2 = await userFactory.create('user')
-    const users = { user1, user2 }
+describe('Actions', () => {
+  it('allows to get all users', async () => {
+    const users = await userFactory.create('user')
 
     api.getUsers = jest.fn().mockReturnValue({ users })
 
@@ -27,7 +25,7 @@ describe('Actions tests:', () => {
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 
-  it('create user', async () => {
+  it('allows to create user', async () => {
     const user = await userFactory.create('user')
 
     api.registration = jest.fn().mockReturnValue({
@@ -42,11 +40,8 @@ describe('Actions tests:', () => {
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 
-  it('login', async () => {
-    const user = {
-      email: 'test@mail.ru',
-      password: 'secret'
-    }
+  it('allows to log in to account', async () => {
+    const user = await userFactory.create('user')
 
     api.login = jest.fn().mockReturnValue({ user })
 
@@ -58,7 +53,7 @@ describe('Actions tests:', () => {
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 
-  it('logout', async () => {
+  it('allows to logout to account', async () => {
     api.logout = jest.fn()
 
     await actions[action.LOGOUT]({ commit })
@@ -69,7 +64,7 @@ describe('Actions tests:', () => {
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 
-  it('check auth', async () => {
+  it('allows to check authorization', async () => {
     const user = await userFactory.create('user')
 
     api.checkAuth = jest.fn().mockReturnValue({ user })
@@ -82,17 +77,15 @@ describe('Actions tests:', () => {
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 
-  it('get products', async () => {
-    const product1 = await productFactory.create('product')
-    const product2 = await productFactory.create('product')
-    const products = { product1, product2 }
+  it('allows to get all products', async () => {
+    const product = await productFactory.create('product')
 
-    api.getProducts = jest.fn().mockReturnValue(products)
+    api.getProducts = jest.fn().mockReturnValue(product)
 
-    await actions[action.GET_PRODUCTS]({ commit }, products)
+    await actions[action.GET_PRODUCTS]({ commit }, product)
 
     expect(commit).toHaveBeenCalledWith('SET_LOADING', true)
-    expect(commit).toHaveBeenCalledWith('SET_PRODUCTS', products)
+    expect(commit).toHaveBeenCalledWith('SET_PRODUCTS', product)
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
 })

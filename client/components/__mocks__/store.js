@@ -24,6 +24,7 @@ export const emptyStore = createStore({
 
 export const store = createStore({
   state: {
+    isAuth: true,
     firstName: 'Ivan',
     lastName: 'Ivanov',
     phoneNumber: '123456789',

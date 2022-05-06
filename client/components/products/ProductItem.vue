@@ -13,8 +13,14 @@
   import { defineProps } from 'vue'
 
   defineProps({
-    title: String,
-    description: String,
+    title: {
+      type: String,
+      default: null
+    },
+    description: {
+      type: String,
+      default: null
+    },
     price: {
       type: String,
       default: null

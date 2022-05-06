@@ -9,7 +9,7 @@ import ProductView from '@/views/ProductView'
 import EmailVerifyView from '@/views/EmailVerifyView'
 import CartView from '@/views/CartView'
 
-const routes = [
+export const routes = [
   {
     name: 'home',
     path: '/',
@@ -47,7 +47,7 @@ const routes = [
     }
 ]
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
   mode: 'history',
   routes
@@ -56,7 +56,3 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   return await guards.redirection(to)
 })
-
-export { routes }
-
-export default router
