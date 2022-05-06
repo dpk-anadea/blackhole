@@ -1,29 +1,32 @@
-import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
 import { action } from '@/store/constants'
+import { store, emptyStore, actions } from '@/components/__mocks__/store'
 
-import MainContent from '../MainContent'
+import MainContent from '@/components/MainContent'
+import ProductItem from '@/components/products-list/ProductItem'
 
-describe('MainContent tests:', () => {
-  const actions = {
-    [action.GET_PRODUCTS]: jest.fn()
-  }
+describe('MainContent component', () => {
+  describe('should display that on the page', () => {
+    it('when the page gets an empty object', async () => {
+      const wrapper = mount(MainContent, {
+        global: {
+          plugins: [emptyStore]
+        }
+      })
+      expect(wrapper.text()).toMatch('Products are not available!')
+    })
 
-  const store = createStore({
-    useStore: () => ({
-      state: {}
-    }),
-    actions
-  })
-
-  const wrapper = mount(MainContent, {
-    global: {
-      plugins: [store]
-    }
-  })
-
-  it('get product', async () => {
-    expect(wrapper.text()).toMatch('1.1GB')
-    expect(actions[action.GET_PRODUCTS]).toHaveBeenCalled()
+    it('when the page receives an object with products', async () => {
+      const wrapper = mount(MainContent, {
+        global: {
+          plugins: [store]
+        },
+        stubs: {
+          ProductItem
+        }
+      })
+      expect(actions[action.GET_PRODUCTS]).toHaveBeenCalled()
+      expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(3)
+    })
   })
 })

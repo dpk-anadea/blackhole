@@ -60,8 +60,8 @@ describe('Mutations tests:', () => {
   })
 
   it('adds products', async () => {
-    const product1 = await userFactory.create('product')
-    const product2 = await userFactory.create('product')
+    const product1 = await productFactory.create('product')
+    const product2 = await productFactory.create('product')
     const products = { product1, product2 }
 
     const state = {
