@@ -1,6 +1,6 @@
 <template>
   <div class="count-wrapper">
-    <button class="count-control" @click="decrease">
+    <button class="count-control count-control-button" @click="decrease">
       <MinusIcon class="icon" />
     </button>
     <input
@@ -8,7 +8,7 @@
       type="text"
       class="count-control"
       @blur="checkInputValue" />
-    <button class="count-control" @click="increase">
+    <button class="count-control count-control-button" @click="increase">
       <PlusIcon class="icon" />
     </button>
   </div>
@@ -93,6 +93,14 @@
     text-align: center;
     font-size: 14px;
     color: #000000;
+  }
+
+  .count-control-button {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
   }
 
   .icon {

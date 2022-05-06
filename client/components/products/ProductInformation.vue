@@ -5,9 +5,9 @@
 
       <div class="product-info">
         <h3 class="title">{{ currentProduct.name }}</h3>
-        <button class="add-to-card-btn" @click="addToCart">
+        <BhBaseButton class="add-to-card-btn" @click="addToCart">
           Add to cart - ${{ currentProduct.cost }}
-        </button>
+        </BhBaseButton>
         <div class="description">{{ currentProduct.description }}</div>
       </div>
     </section>
@@ -52,11 +52,14 @@
 <script setup>
   import { computed } from 'vue'
   import { useStore } from 'vuex'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
   import { action } from '@/store/constants'
+
+  import BhBaseButton from '@/components/buttons/BhBaseButton'
 
   const store = useStore()
   const route = useRoute()
+  const router = useRouter()
   store.dispatch(action.GET_PRODUCTS)
 
   const getProducts = computed(() => store.state.products)
@@ -67,12 +70,14 @@
     getProducts.value?.find((el) => el.id === +queryId.value)
   )
 
-  const addToCart = () => {
-    store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
+  const addToCart = async () => {
+    await store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
+    await store.dispatch(action.TOGGLE_FLASH_MESSAGE, true)
+    router.push({ name: 'products' })
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .product-wrapper {
     display: flex;
     flex-direction: column;
@@ -112,19 +117,8 @@
   }
 
   .add-to-card-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     width: 55%;
     height: 54px;
-
-    background-color: #7cd380;
-    border: none;
-
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
   }
 
   .description {

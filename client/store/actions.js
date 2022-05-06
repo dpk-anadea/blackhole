@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import api from '@/api/api'
 import { action, mutator } from '@/store/constants'
 import router from '@/router'
@@ -95,7 +96,7 @@ export default {
   async [action.GET_PRODUCTS_FROM_STORAGE]({ commit }) {
     commit(mutator.SET_LOADING, true)
     try {
-      const products = JSON.parse(sessionStorage.getItem('cart')) || []
+      const products = JSON.parse(Cookies.get('cart') || '[]')
       commit(mutator.SET_PRODUCTS_TO_CART, products)
     } catch (e) {
       console.log(e)
@@ -112,5 +113,9 @@ export default {
     } finally {
       commit(mutator.SET_LOADING, false)
     }
+  },
+
+  async [action.TOGGLE_FLASH_MESSAGE]({ commit }, isShow) {
+    commit(mutator.SET_FLASH_MESSAGE, isShow)
   }
 }
