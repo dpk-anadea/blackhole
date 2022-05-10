@@ -117,5 +117,18 @@ export default {
 
   async [action.TOGGLE_FLASH_MESSAGE]({ commit }, isShow) {
     commit(mutator.SET_FLASH_MESSAGE, isShow)
+  },
+
+  async [action.POST_STRIPE]({ commit }, productId) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const response = await api.postStripe(productId)
+      console.log(response.stripe_url)
+      window.location.href = response.stripe_url
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
   }
 }

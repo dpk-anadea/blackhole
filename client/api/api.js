@@ -30,5 +30,9 @@ export default {
   },
   async getProducts() {
     return fetch('get', 'products')
+  },
+
+  async postStripe(product_id) {
+    return fetch('post', `stripe/${product_id}`)
   }
 }
