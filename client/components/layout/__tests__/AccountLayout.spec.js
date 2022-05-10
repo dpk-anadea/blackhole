@@ -8,19 +8,12 @@ const wrapper = mount(AccountLayout, {
   global: {
     plugins: [router]
   },
-  props: {
-    title: 'Test'
-  },
   slots: {
     form: h('h1', {}, 'Named Slot')
   }
 })
 
 describe('AccountLayout component', () => {
-  it('should displayed the text given by the props', async () => {
-    expect(wrapper.text()).toMatch('Test')
-  })
-
   it('should displayed the html tag which was passed in slot', async () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
   })

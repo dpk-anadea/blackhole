@@ -12,12 +12,10 @@ const wrapper = mount(LoginForm, {
 })
 
 describe('LoginForm component', () => {
-  it('should displayed two input fields', async () => {
-    expect(wrapper.findAll('.input')).toHaveLength(2)
-  })
+  describe('when all fields are filled in', () => {
+    it('should trigger the actions after pressing the button', async () => {
+      expect(wrapper.findAll('.input')).toHaveLength(2)
 
-  describe('should trigger the actions after pressing the button', () => {
-    it('if all fields are filled in', async () => {
       await wrapper.find('[data-test="email"]').setValue(store.state.email)
       await wrapper
         .find('[data-test="password"]')

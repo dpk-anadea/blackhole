@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { action } from '@/store/constants'
+import state from '@/store/state'
 import userFactory from '@factory/user.factory'
 
 const user = userFactory.create('user')
@@ -14,13 +15,7 @@ export const actions = {
 }
 
 export const emptyStore = createStore({
-  state: {
-    loading: false,
-    isAuth: false,
-    user: null,
-    users: null,
-    products: null
-  },
+  state,
   actions,
   dispatch: jest.fn()
 })

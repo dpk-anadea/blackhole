@@ -21,11 +21,8 @@ const wrapper = mount(MainLayout, {
 })
 
 describe('MainLayout component', () => {
-  it('should displayed the html tag which was passed in slot', async () => {
+  it('should displayed the html tag which was passed in slot and the header and footer components', async () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
-  })
-
-  it('should displayed the header and footer components', async () => {
     expect(wrapper.findAllComponents({ name: 'MainFooter' }).length).toBe(1)
     expect(wrapper.findAllComponents({ name: 'MainHeader' }).length).toBe(1)
   })

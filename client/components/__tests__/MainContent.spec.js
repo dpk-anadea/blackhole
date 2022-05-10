@@ -6,8 +6,8 @@ import MainContent from '@/components/MainContent'
 import ProductItem from '@/components/products-list/ProductItem'
 
 describe('MainContent component', () => {
-  describe('should display that on the page', () => {
-    it('when the page gets an empty object', async () => {
+  describe('when the page gets an empty object', () => {
+    it('should display text "Products are not available!" on the page', async () => {
       const wrapper = mount(MainContent, {
         global: {
           plugins: [emptyStore]
@@ -16,17 +16,21 @@ describe('MainContent component', () => {
       expect(wrapper.text()).toMatch('Products are not available!')
     })
 
-    it('when the page receives an object with products', async () => {
-      const wrapper = mount(MainContent, {
-        global: {
-          plugins: [store]
-        },
-        stubs: {
-          ProductItem
-        }
+    describe('when the page gets an object with products', () => {
+      it('should display "ProductItem" components on the page', async () => {
+        const wrapper = mount(MainContent, {
+          global: {
+            plugins: [store]
+          },
+          stubs: {
+            ProductItem
+          }
+        })
+        expect(actions[action.GET_PRODUCTS]).toHaveBeenCalled()
+        expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(
+          3
+        )
       })
-      expect(actions[action.GET_PRODUCTS]).toHaveBeenCalled()
-      expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(3)
     })
   })
 })
