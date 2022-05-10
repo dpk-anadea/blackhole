@@ -11,12 +11,10 @@ const wrapper = mount(RegisterForm, {
 })
 
 describe('RegisterForm component', () => {
-  it('should displayed six input fields', async () => {
-    expect(wrapper.findAll('.input')).toHaveLength(6)
-  })
-
   describe('when you click on the button', () => {
-    it('if all the input fields are filled in and correct, emit will work', async () => {
+    it('should six input fields and all the input fields are filled in and correct, emit will work', async () => {
+      expect(wrapper.findAll('.input')).toHaveLength(6)
+
       await wrapper
         .find('[data-test="first-name"]')
         .setValue(store.state.firstName)

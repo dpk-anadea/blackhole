@@ -3,7 +3,7 @@ import { action } from '@/store/constants'
 import { store, emptyStore, actions } from '@/components/__mocks__/store'
 
 import MainContent from '@/components/MainContent'
-import ProductItem from '@/components/products-list/ProductItem'
+import ProductItem from '@/components/products/ProductItem'
 
 describe('MainContent component', () => {
   describe('when the page gets an empty object', () => {

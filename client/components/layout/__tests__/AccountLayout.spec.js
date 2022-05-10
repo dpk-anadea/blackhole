@@ -14,7 +14,7 @@ const wrapper = mount(AccountLayout, {
 })
 
 describe('AccountLayout component', () => {
-  it('should displayed the html tag which was passed in slot', async () => {
+  it('should displayed the html tag which was passed in slot', () => {
     expect(wrapper.html()).toMatch('<h1>Named Slot</h1>')
   })
 })

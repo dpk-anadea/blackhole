@@ -2,8 +2,8 @@ import { mount } from '@vue/test-utils'
 import { router } from '@/components/__mocks__/router'
 import { store, emptyStore } from '@/components/__mocks__/store'
 
-import ProductItem from '@/components/products-list/ProductItem'
-import ProductsList from '@/components/products-list/ProductsList'
+import ProductItem from '@/components/products/ProductItem'
+import ProductsList from '@/components/products/ProductsList'
 
 describe('ProductsList component', () => {
   describe('when we have products in the database', () => {

@@ -73,7 +73,7 @@
   const addToCart = async () => {
     await store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
     await store.dispatch(action.TOGGLE_FLASH_MESSAGE, true)
-    router.push({ name: 'products' })
+    await router.push({ name: 'products' })
   }
 </script>
 
