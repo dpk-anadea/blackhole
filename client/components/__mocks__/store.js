@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 import { action } from '@/store/constants'
+import userFactory from '@factory/user.factory'
+
+const user = userFactory.create('user')
 
 export const actions = {
   [action.GET_PRODUCTS]: jest.fn(),
@@ -31,6 +34,27 @@ export const store = createStore({
     email: 'test@mail.ru',
     password: 'secret',
     confirmPassword: 'secret',
+    user: user,
+    users: [
+      {
+        id: 1,
+        name: 'John',
+        email: 'test@mail.ru',
+        password: 'secret'
+      },
+      {
+        id: 2,
+        name: 'Johny',
+        email: 'test2@mail.ru',
+        password: 'secret'
+      },
+      {
+        id: 3,
+        name: 'Ember',
+        email: 'test3@mail.ru',
+        password: 'secret'
+      }
+    ],
     products: [
       {
         id: 1,

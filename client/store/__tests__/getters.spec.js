@@ -1,33 +1,23 @@
 import getters from '@/store/getters'
 import { get } from '@/store/constants'
-import userFactory from '@factory/user.factory'
+import { store } from '@/components/__mocks__/store'
 
-describe('Getters tests:', () => {
-  it('current user', async () => {
-    const user = await userFactory.create('user')
+describe('Getters', () => {
+  it('allows to get the user', async () => {
+    const actual = getters[get.CURRENT_USER](store.state)
 
-    const state = { user }
-
-    const actual = getters[get.CURRENT_USER](state)
-
-    expect(actual).toEqual(user)
+    expect(actual).toEqual(store.state.user)
   })
 
-  it('is authenticated', () => {
-    const isAuth = true
-    const state = { isAuth }
+  it('allows to get the authentication status', () => {
+    const actual = getters[get.IS_AUTHENTICATED](store.state)
 
-    const actual = getters[get.IS_AUTHENTICATED](state)
-
-    expect(actual).toEqual(isAuth)
+    expect(actual).toEqual(store.state.isAuth)
   })
 
-  it('loading', () => {
-    const loading = true
-    const state = { loading }
+  it('allows to get the loading status', () => {
+    const actual = getters[get.LOADING](store.state)
 
-    const actual = getters[get.LOADING](state)
-
-    expect(actual).toEqual(loading)
+    expect(actual).toEqual(store.state.loading)
   })
 })

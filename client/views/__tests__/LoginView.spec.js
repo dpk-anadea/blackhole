@@ -1,37 +1,24 @@
-import { createStore } from 'vuex'
 import { mount } from '@vue/test-utils'
-import LoginView from '../LoginView'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from '@/router'
+import { store } from '@/components/__mocks__/store'
+import { router } from '@/components/__mocks__/router'
 
-describe('LoginForm tests:', () => {
-  const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-  })
+import LoginView from '@/views/LoginView'
+import LoginForm from '@/components/forms/LoginForm'
+import AccountLayout from '@/components/layout/AccountLayout'
 
-  const store = createStore({
-    useStore: () => ({
-      state: {
-        isAuth: true
-      }
-    })
-  })
+const wrapper = mount(LoginView, {
+  global: {
+    plugins: [store, router]
+  },
+  stubs: {
+    LoginForm,
+    AccountLayout
+  }
+})
 
-  const wrapper = mount(LoginView, {
-    global: {
-      plugins: [store, router]
-    }
-  })
-
-  it('check component', async () => {
-    expect(wrapper.text()).toMatch('Sing In')
-  })
-
-  it('check route name', async () => {
-    await router.push('/')
-
-    await router.isReady()
-    expect(wrapper.vm.$route.name).toBe('home')
+describe('LoginForm component', () => {
+  it('should displayed LoginForm and AccountLayout components', async () => {
+    expect(wrapper.findComponent(AccountLayout).exists()).toBe(true)
+    expect(wrapper.findComponent(LoginForm).exists()).toBe(true)
   })
 })
