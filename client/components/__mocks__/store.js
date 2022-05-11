@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { action } from '@/store/constants'
+import { action, get } from '@/store/constants'
 import state from '@/store/state'
 import userFactory from '@factory/user.factory'
 
