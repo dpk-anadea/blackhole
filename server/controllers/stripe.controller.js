@@ -3,8 +3,8 @@ const stripeService = require('../service/stripe.service')
 class StripeController {
   async pay(req, res, next) {
     try {
-      const productId = req.params.product_id
-      const session = await stripeService.pay(productId)
+      const paymentDetails = req.body
+      const session = await stripeService.pay(paymentDetails)
 
       res.json({ stripe_url: session.url })
     } catch (err) {

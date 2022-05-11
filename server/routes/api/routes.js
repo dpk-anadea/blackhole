@@ -20,6 +20,6 @@ router.get('/products', productController.getProduct)
 router.post('/products', productController.createProduct)
 router.delete('/products/:id', productController.deleteProduct)
 
-router.post('/stripe/:product_id', stripeController.pay)
+router.post('/stripe/pay', stripeController.pay)
 
 module.exports = router

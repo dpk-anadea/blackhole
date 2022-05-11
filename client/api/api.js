@@ -32,7 +32,7 @@ export default {
     return fetch('get', 'products')
   },
 
-  async postStripe(product_id) {
-    return fetch('post', `stripe/${product_id}`)
+  async postStripe(paymentDetails) {
+    return fetch('post', 'stripe/pay', paymentDetails)
   }
 }
