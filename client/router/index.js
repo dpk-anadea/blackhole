@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from './routes'
 import guards from './guards'
 
-export const router = createRouter({
+const router = createRouter({
   history: createWebHistory(),
   mode: 'history',
   routes
@@ -11,3 +11,5 @@ export const router = createRouter({
 router.beforeEach(async (to) => {
   return await guards.redirection(to)
 })
+
+export default router

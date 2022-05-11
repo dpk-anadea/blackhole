@@ -15,7 +15,11 @@
       class="input"
       data-test="phone"
       placeholder="Phone" />
-    <input v-model="state.email" class="input" data-test="email" placeholder="Email" />
+    <input
+      v-model="state.email"
+      class="input"
+      data-test="email"
+      placeholder="Email" />
     <input
       v-model="state.password"
       class="input"
