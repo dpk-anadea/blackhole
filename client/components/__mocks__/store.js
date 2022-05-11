@@ -14,8 +14,18 @@ export const actions = {
   [action.GET_USERS]: jest.fn()
 }
 
+export const getters = {
+  [get.LOADING]: jest.fn(),
+  [get.IS_AUTHENTICATED]: jest.fn(),
+  [get.CURRENT_USER]: jest.fn(),
+  [get.CART]: jest.fn(),
+  [get.IS_SHOW_FLASH_MESSAGE]: jest.fn(),
+  [get.PRODUCTS]: jest.fn()
+}
+
 export const emptyStore = createStore({
   state,
+  getters,
   actions,
   dispatch: jest.fn()
 })
@@ -74,6 +84,7 @@ export const store = createStore({
       }
     ]
   },
+  getters,
   actions,
   dispatch: jest.fn()
 })
