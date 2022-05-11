@@ -114,8 +114,30 @@ export default {
       commit(mutator.SET_LOADING, false)
     }
   },
+  async [action.CLEAR_CART]({ commit }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      commit(mutator.CLEAR_CART)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
 
   async [action.TOGGLE_FLASH_MESSAGE]({ commit }, isShow) {
     commit(mutator.SET_FLASH_MESSAGE, isShow)
+  },
+
+  async [action.POST_STRIPE]({ commit }, productsIds) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const response = await api.postStripe(productsIds)
+      window.location.href = response.stripe_url
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
   }
 }

@@ -17,6 +17,7 @@ export default {
   [mutator.SET_PRODUCTS](state, products) {
     state.products = products
   },
+
   [mutator.SET_PRODUCT_TO_CART](state, product) {
     const currentProduct = state.cart.find(({ id }) => id === product.id)
 
@@ -46,6 +47,10 @@ export default {
     state.cart = state.cart.filter((product) => product.id !== productId)
 
     Cookies.set('cart', JSON.stringify([...state.cart]))
+  },
+  [mutator.CLEAR_CART](state) {
+    state.cart = []
+    Cookies.set('cart', JSON.stringify([]))
   },
 
   [mutator.SET_FLASH_MESSAGE](state, isShow) {

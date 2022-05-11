@@ -5,6 +5,7 @@ import ProductsView from '@/views/ProductsView'
 import ProductView from '@/views/ProductView'
 import EmailVerifyView from '@/views/EmailVerifyView'
 import CartView from '@/views/CartView'
+import ThanksForBuyView from '@/views/ThanksForBuyView'
 
 export const routes = [
   {
@@ -41,5 +42,10 @@ export const routes = [
     name: 'Cart',
     path: '/cart',
     component: CartView
+  },
+  {
+    name: 'ThanksForBuy',
+    path: '/thanks-for-buy',
+    component: ThanksForBuyView
   }
 ]

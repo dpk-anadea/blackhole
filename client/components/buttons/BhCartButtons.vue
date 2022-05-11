@@ -3,7 +3,9 @@
     <BhBaseButton class="continue-shopping" @click="goToShopping">
       Continue Shopping
     </BhBaseButton>
-    <BhBaseButton class="check-out">Check Out</BhBaseButton>
+    <BhBaseButton class="check-out" @click="$emit('check-out')">
+      Check Out
+    </BhBaseButton>
   </div>
 </template>
 

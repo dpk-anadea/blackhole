@@ -30,5 +30,9 @@ export default {
   },
   async getProducts() {
     return fetch('get', 'products')
+  },
+
+  async postStripe(paymentDetails) {
+    return fetch('post', 'stripe/pay', paymentDetails)
   }
 }

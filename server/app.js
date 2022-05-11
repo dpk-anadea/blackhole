@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
@@ -9,6 +10,13 @@ const errorMiddleware = require('./middlewares/error.middleware')
 dotenv.config()
 
 const app = express()
+
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL
+  })
+)
 
 app.set('view engine', 'ejs')
 app.set('views', '.views')

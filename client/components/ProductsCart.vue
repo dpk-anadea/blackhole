@@ -4,7 +4,7 @@
 
     <p class="hint">Review your order below and click checkout to continue!</p>
 
-    <BhCartButtons />
+    <BhCartButtons @check-out="goToPay" />
 
     <div class="products">
       <div v-for="product in products" :key="product.id" class="product">
@@ -22,7 +22,7 @@
 
     <div class="total">${{ totalCost }}</div>
 
-    <BhCartButtons class="cart-buttons" />
+    <BhCartButtons class="cart-buttons" @check-out="goToPay" />
   </section>
 </template>
 
@@ -58,7 +58,8 @@
       ...mapActions([
         action.ADD_PRODUCT_TO_CART,
         action.DELETE_PRODUCT_FROM_CART,
-        action.GET_PRODUCTS
+        action.GET_PRODUCTS,
+        action.POST_STRIPE
       ]),
       getCost(product) {
         return +product.cost * product.count
@@ -69,6 +70,19 @@
       },
       removeProduct(productId) {
         this[action.DELETE_PRODUCT_FROM_CART](productId)
+      },
+      async goToPay() {
+        if (!this.products.length) return
+
+        const paymentName =
+          this.products.length > 1
+            ? this.products.reduce((prev, curr) => prev.name + ', ' + curr.name)
+            : this.products[0].name
+
+        await this[action.POST_STRIPE]({
+          name: paymentName,
+          cost: this.totalCost
+        })
       }
     }
   }
