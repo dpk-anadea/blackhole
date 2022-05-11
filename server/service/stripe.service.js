@@ -18,7 +18,7 @@ class StripeService {
         }
       ],
       mode: 'payment',
-      success_url: `http://localhost:8080/`,
+      success_url: `http://localhost:8080/thanks-for-buy`,
       cancel_url: `http://localhost:8080/cart`
     })
 

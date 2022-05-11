@@ -72,10 +72,13 @@
         this[action.DELETE_PRODUCT_FROM_CART](productId)
       },
       async goToPay() {
-        const paymentName = this.products.reduce(
-          (prev, curr) => prev.name + ', ' + curr.name
-        )
-        console.log('paymentName', paymentName)
+        if (!this.products.length) return
+
+        const paymentName =
+          this.products.length > 1
+            ? this.products.reduce((prev, curr) => prev.name + ', ' + curr.name)
+            : this.products[0].name
+
         await this[action.POST_STRIPE]({
           name: paymentName,
           cost: this.totalCost
