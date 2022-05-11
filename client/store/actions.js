@@ -37,7 +37,7 @@ export default {
       localStorage.setItem('token', user.accessToken)
       commit(mutator.SET_USER, user.user)
       commit(mutator.SET_AUTH, true)
-      router.push({ name: 'home' })
+      await router.push({ name: 'home' })
     } catch (e) {
       console.log(e)
     } finally {
@@ -51,7 +51,7 @@ export default {
       localStorage.removeItem('token')
       commit(mutator.SET_USER, null)
       commit(mutator.SET_AUTH, false)
-      router.push({ name: 'home' })
+      await router.push({ name: 'home' })
     } catch (e) {
       console.log(e)
     } finally {

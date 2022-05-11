@@ -3,30 +3,30 @@
     <input
       v-model="state.firstName"
       class="input"
-      id="first_name"
+      data-test="first-name"
       placeholder="First Name" />
     <input
       v-model="state.lastName"
       class="input"
-      id="last_name"
+      data-test="last-name"
       placeholder="Last Name" />
     <input
       v-model="state.phoneNumber"
       class="input"
-      id="phone"
+      data-test="phone"
       placeholder="Phone" />
-    <input v-model="state.email" class="input" id="email" placeholder="Email" />
+    <input v-model="state.email" class="input" data-test="email" placeholder="Email" />
     <input
       v-model="state.password"
       class="input"
       type="password"
-      id="password"
+      data-test="password"
       placeholder="Password" />
     <input
       v-model="state.confirmPassword"
       class="input"
       type="password"
-      id="confirm_password"
+      data-test="confirm-password"
       placeholder="Confirm password" />
     <button type="submit" class="button">CREATE ACCOUNT</button>
   </form>

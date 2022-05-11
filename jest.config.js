@@ -15,20 +15,27 @@ module.exports = {
         '^@server(.*)$': '<rootDir>/server$1'
       },
       testEnvironment: 'node',
-      testMatch: ['<rootDir>/server/routes/api/__test__/**/*.spec.js?(x)']
+      testMatch: ['<rootDir>/server/**/?(*.)+(spec).[jt]s?(x)']
     },
     {
       moduleNameMapper: {
-        '@/components(.*)$': '<rootDir>/client/components/$1'
+        '@/(.*)$': '<rootDir>/client/$1',
+        '@/components(.*)$': '<rootDir>/client/components/$1',
+        '@/views(.*)$': '<rootDir>/client/components/$1',
+        '@/api(.*)$': '<rootDir>/client/api/$1',
+        '^@factory(.*)$': '<rootDir>/database/factory$1',
+        '^@server(.*)$': '<rootDir>/server$1'
       },
       testEnvironment: 'jsdom',
       moduleFileExtensions: ['js', 'json', 'vue'],
       transform: {
         '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': '@vue/vue3-jest'
+        '^.+\\.vue$': '@vue/vue3-jest',
+        '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|webp)$':
+          'jest-transform-stub'
       },
-      testMatch: ['<rootDir>/client/components/**/__tests__/**/*.spec.js?(x)'],
-      passWithNoTests: true
+      passWithNoTests: true,
+      testMatch: ['<rootDir>/client/**/?(*.)+(spec).[jt]s?(x)']
     }
   ]
 }

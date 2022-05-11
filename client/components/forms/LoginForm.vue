@@ -1,11 +1,15 @@
 <template>
   <form class="register-form-wrapper" @submit.prevent="submit">
-    <input v-model="state.email" class="input" id="email" placeholder="Email" />
+    <input
+      v-model="state.email"
+      class="input"
+      data-test="email"
+      placeholder="Email" />
     <input
       v-model="state.password"
       class="input"
       type="password"
-      id="password"
+      data-test="password"
       placeholder="Password" />
     <button type="submit" class="button">LOGIN</button>
   </form>
