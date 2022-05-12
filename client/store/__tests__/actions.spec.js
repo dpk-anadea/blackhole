@@ -88,4 +88,40 @@ describe('Actions', () => {
     expect(commit).toHaveBeenCalledWith('SET_PRODUCTS', product)
     expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
   })
+
+  it('allows to add product to cart', async () => {
+    const product = await productFactory.create('product')
+
+    await actions[action.ADD_PRODUCT_TO_CART]({ commit }, product)
+
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', true)
+    expect(commit).toHaveBeenCalledWith('SET_PRODUCT_TO_CART', product)
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
+  })
+
+  it('allows to get products from storage', async () => {
+    await actions[action.GET_PRODUCTS_FROM_STORAGE]({ commit })
+
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', true)
+    expect(commit).toHaveBeenCalledWith('SET_PRODUCTS_TO_CART', [])
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
+  })
+
+  it('allows delete product from cart', async () => {
+    const product = await productFactory.create('product')
+
+    await actions[action.DELETE_PRODUCT_FROM_CART]({ commit }, product.id)
+
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', true)
+    expect(commit).toHaveBeenCalledWith('REMOVE_PRODUCT_FROM_CART', product.id)
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
+  })
+
+  it('allows toggle flash message', async () => {
+    const isShow = true
+
+    await actions[action.TOGGLE_FLASH_MESSAGE]({ commit }, isShow)
+
+    expect(commit).toHaveBeenCalledWith('SET_FLASH_MESSAGE', isShow)
+  })
 })
