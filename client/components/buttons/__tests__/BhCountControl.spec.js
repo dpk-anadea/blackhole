@@ -46,7 +46,7 @@ describe('BhCartButtons component', () => {
 
       await wrapper.find('[data-test="count"]').trigger('blur')
 
-      expect(wrapper.emitted()).not.toHaveProperty('update-count')
+      expect(wrapper.emitted()).not.toHaveProperty([[]])
     })
   })
 
