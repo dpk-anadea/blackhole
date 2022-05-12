@@ -21,12 +21,32 @@ const wrapper = mount(BhCountControl, {
 
 describe('BhCartButtons component', () => {
   describe('when adding a positive value from the keyboard', () => {
-    it('should be displayed the added value', async () => {
+    it('should work "update-count" emit function', async () => {
       await wrapper.find('[data-test="count"]').setValue('10')
 
-      await wrapper.find('.count-control').trigger('blur')
+      await wrapper.find('[data-test="count"]').trigger('blur')
 
-      expect(wrapper.find('input[type="text"]').element.value).toBe('10')
+      expect(wrapper.emitted()).toHaveProperty('update-count', [[10]])
+    })
+  })
+
+  describe('when adding 0 in the input field', () => {
+    it('should work "remove-product" emit function', async () => {
+      await wrapper.find('[data-test="count"]').setValue('0')
+
+      await wrapper.find('[data-test="count"]').trigger('blur')
+
+      expect(wrapper.emitted()).toHaveProperty('remove-product')
+    })
+  })
+
+  describe('when adding the negative value in input field', () => {
+    it('should not work emit function', async () => {
+      await wrapper.find('[data-test="count"]').setValue('-1')
+
+      await wrapper.find('[data-test="count"]').trigger('blur')
+
+      expect(wrapper.emitted()).not.toHaveProperty('update-count')
     })
   })
 
