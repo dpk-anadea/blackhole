@@ -7,6 +7,7 @@
       v-model="countProxy"
       type="text"
       class="count-control"
+      data-test="count"
       @blur="checkInputValue" />
     <button class="count-control count-control-button" @click="increase">
       <PlusIcon class="icon" />
