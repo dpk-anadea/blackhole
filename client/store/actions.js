@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 import api from '@/api/api'
 import { action, mutator } from '@/store/constants'
-import router from '@/router'
+import { router } from '@/router'
 
 export default {
   async [action.GET_USERS]({ commit }) {

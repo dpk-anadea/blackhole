@@ -17,7 +17,7 @@ describe('ProductsList component', () => {
         }
       })
 
-      expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(3)
+      expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(1)
     })
   })
 
