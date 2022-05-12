@@ -2,15 +2,19 @@ import { createStore } from 'vuex'
 import { action, get } from '@/store/constants'
 import state from '@/store/state'
 import userFactory from '@factory/user.factory'
+import productFactory from '@factory/product.factory'
 
-const user = userFactory.create('user')
+const user = userFactory.attrs('user')
+const product = productFactory.attrs('product')
 
 export const actions = {
   [action.LOGIN]: jest.fn(),
   [action.LOGOUT]: jest.fn(),
   [action.GET_USERS]: jest.fn(),
   [action.CREATE_USER]: jest.fn(),
-  [action.GET_PRODUCTS]: jest.fn(),
+  [action.GET_PRODUCTS]: jest.fn().mockReturnValue(() => {
+    return mockState.products
+  }),
   [action.CHECK_AUTH]: jest.fn(),
   [action.ADD_PRODUCT_TO_CART]: jest.fn(),
   [action.GET_PRODUCTS_FROM_STORAGE]: jest.fn(),
@@ -22,7 +26,9 @@ export const getters = {
   [get.LOADING]: jest.fn(),
   [get.IS_AUTHENTICATED]: jest.fn(),
   [get.CURRENT_USER]: jest.fn(),
-  [get.CART]: jest.fn(),
+  [get.CART]: () => {
+    return mockState.cart
+  },
   [get.IS_SHOW_FLASH_MESSAGE]: () => {
     return true
   },
@@ -63,11 +69,19 @@ export const mockState = {
   ],
   products: [
     {
-      id: 1,
-      name: 'Lotus - Analog Delay / Pitch Shifter',
+      ...product,
       type: 'One-Shots',
-      description: 'LOTUS is an analog delay',
-      cost: '120'
+      id: 1
+    },
+    {
+      ...product,
+      type: 'One-Shots',
+      id: 2
+    },
+    {
+      ...product,
+      type: 'One-Shots',
+      id: 3
     }
   ]
 }

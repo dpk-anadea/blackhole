@@ -26,9 +26,10 @@ describe('MainContent component', () => {
             ProductItem
           }
         })
+
         expect(actions[action.GET_PRODUCTS]).toHaveBeenCalled()
         expect(wrapper.findAllComponents({ name: 'ProductItem' }).length).toBe(
-          1
+          3
         )
       })
     })

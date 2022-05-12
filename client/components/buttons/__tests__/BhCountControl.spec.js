@@ -13,11 +13,6 @@ const wrapper = mount(BhCountControl, {
   props: {
     count: 1
   },
-  computed: {
-    countProxy() {
-      return 2
-    }
-  },
   stubs: {
     PlusIcon,
     MinusIcon
@@ -25,7 +20,7 @@ const wrapper = mount(BhCountControl, {
 })
 
 describe('BhCartButtons component', () => {
-  describe('when adding a value from the keyboard', () => {
+  describe('when adding a positive value from the keyboard', () => {
     it('should be displayed the added value', async () => {
       await wrapper.find('[data-test="count"]').setValue('10')
 
