@@ -31,3 +31,6 @@ CLIENT_URL=http://localhost:8080
 
 * yarn sq db:create
 * yarn sq db:migrate
+* yarn sq db:migrate:undo
+* yarn sq db:seed:undo:all 
+* yarn sq db:seed:all   

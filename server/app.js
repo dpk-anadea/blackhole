@@ -25,7 +25,7 @@ app.use(mainRoutes)
 app.use(express.json())
 app.use(cookieParser())
 app.use('/api', apiRoutes)
-app.use(errorMiddleware)
+// app.use(errorMiddleware)
 
 app.use(express.static(path.join(__dirname, '../dist')))
 

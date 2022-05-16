@@ -12,7 +12,7 @@ jest.mock('@/router', () => ({
 
 describe('Actions', () => {
   it('allows to get all users', async () => {
-    const users = await userFactory.create('user')
+    const users = await userFactory.attrs('user')
 
     api.getUsers = jest.fn().mockReturnValue({ users })
 
@@ -26,7 +26,7 @@ describe('Actions', () => {
   })
 
   it('allows to create user', async () => {
-    const user = await userFactory.create('user')
+    const user = await userFactory.attrs('user')
 
     api.registration = jest.fn().mockReturnValue({
       user
@@ -41,7 +41,7 @@ describe('Actions', () => {
   })
 
   it('allows to log in to account', async () => {
-    const user = await userFactory.create('user')
+    const user = await userFactory.attrs('user')
 
     api.login = jest.fn().mockReturnValue({ user })
 
@@ -65,7 +65,7 @@ describe('Actions', () => {
   })
 
   it('allows to check authorization', async () => {
-    const user = await userFactory.create('user')
+    const user = await userFactory.attrs('user')
 
     api.checkAuth = jest.fn().mockReturnValue({ user })
 
@@ -78,7 +78,7 @@ describe('Actions', () => {
   })
 
   it('allows to get all products', async () => {
-    const product = await productFactory.create('product')
+    const product = await productFactory.attrs('product')
 
     api.getProducts = jest.fn().mockReturnValue(product)
 
@@ -90,7 +90,7 @@ describe('Actions', () => {
   })
 
   it('allows to add product to cart', async () => {
-    const product = await productFactory.create('product')
+    const product = await productFactory.attrs('product')
 
     await actions[action.ADD_PRODUCT_TO_CART]({ commit }, product)
 
@@ -108,7 +108,7 @@ describe('Actions', () => {
   })
 
   it('allows delete product from cart', async () => {
-    const product = await productFactory.create('product')
+    const product = await productFactory.attrs('product')
 
     await actions[action.DELETE_PRODUCT_FROM_CART]({ commit }, product.id)
 
