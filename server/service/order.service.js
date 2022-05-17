@@ -2,12 +2,11 @@ const { OrderItem, Order } = require('../models')
 
 class OrderService {
   async createOrder(user, products) {
-    console.log(products)
-    const totalCost = products.reduce(
-      (prev, curr) => prev + curr.cost * curr.count,
-      0
-    )
-
+    const totalCost = products.reduce((prev, curr) => {
+      console.log(prev, curr)
+      return prev + curr.cost * curr.count
+    }, 0)
+    console.log(totalCost)
     const order = await Order.create({
       user_id: user.id,
       total_cost: totalCost

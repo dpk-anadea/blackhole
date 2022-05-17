@@ -25,7 +25,7 @@ router.post('/stripe/pay', stripeController.pay)
 router.post('/stripe/webhook', stripeController.webhook)
 
 router.post('/order', async (req, res, next) => {
-  const order = await OrderService.createOrder(req.body.user, req.body.product)
+  const order = await OrderService.createOrder(req.body.user, req.body.products)
   res.json(order)
 })
 
