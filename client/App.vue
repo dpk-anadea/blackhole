@@ -26,4 +26,8 @@
     font-family: 'Roboto', sans-serif;
     color: var(--primary-text-color);
   }
+
+  .overflow-hidden {
+    overflow: hidden;
+  }
 </style>

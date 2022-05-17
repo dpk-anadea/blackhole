@@ -1,10 +1,16 @@
 <template>
   <section v-if="products" class="cart-section">
+    <PayModal
+      v-if="isOpenPay"
+      :products="products"
+      :total-cost="totalCost"
+      @close="closePay" />
+
     <h1 class="title">Shopping Cart</h1>
 
     <p class="hint">Review your order below and click checkout to continue!</p>
 
-    <BhCartButtons @check-out="goToPay" />
+    <BhCartButtons @check-out="openPay" />
 
     <div class="products">
       <div v-for="product in products" :key="product.id" class="product">
@@ -12,9 +18,9 @@
         <div class="product-name">{{ product.name }}</div>
         <div class="product-count">
           <BhCountControl
-            :count="product.count"
+            :count="product.quantity"
             @remove-product="removeProduct(product.id)"
-            @update-count="(value) => updateCount(value, product)" />
+            @update-count="(value) => updateQuantity(value, product)" />
         </div>
         <div class="product-cost">${{ getCost(product) }}</div>
       </div>
@@ -22,7 +28,7 @@
 
     <div class="total">${{ totalCost }}</div>
 
-    <BhCartButtons class="cart-buttons" @check-out="goToPay" />
+    <BhCartButtons class="cart-buttons" @check-out="openPay" />
   </section>
 </template>
 
@@ -31,19 +37,24 @@
   import { action, get } from '@/store/constants'
   import BhCartButtons from '@/components/buttons/BhCartButtons'
   import BhCountControl from '@/components/buttons/BhCountControl'
+  import PayModal from '@/components/modals/PayModal'
 
   export default {
     name: 'ProductCart',
     components: {
       BhCartButtons,
-      BhCountControl
+      BhCountControl,
+      PayModal
     },
+    data: () => ({
+      isOpenPay: false
+    }),
     computed: {
-      ...mapGetters({ products: get.CART }),
+      ...mapGetters({ products: get.CART, user: get.CURRENT_USER }),
       totalCost() {
         return (
           this.products.reduce(
-            (prev, curr) => prev + +curr.cost * curr.count,
+            (prev, curr) => prev + +curr.cost * curr.quantity,
             0
           ) || 0
         )
@@ -58,31 +69,24 @@
       ...mapActions([
         action.ADD_PRODUCT_TO_CART,
         action.DELETE_PRODUCT_FROM_CART,
-        action.GET_PRODUCTS,
-        action.POST_STRIPE
+        action.GET_PRODUCTS
       ]),
       getCost(product) {
-        return +product.cost * product.count
+        return +product.cost * product.quantity
       },
-      updateCount(value, product) {
-        product.count = value
+      updateQuantity(value, product) {
+        product.quantity = value
         this[action.ADD_PRODUCT_TO_CART](product)
       },
       removeProduct(productId) {
         this[action.DELETE_PRODUCT_FROM_CART](productId)
       },
-      async goToPay() {
+      openPay() {
         if (!this.products.length) return
-
-        const paymentName =
-          this.products.length > 1
-            ? this.products.reduce((prev, curr) => prev.name + ', ' + curr.name)
-            : this.products[0].name
-
-        await this[action.POST_STRIPE]({
-          name: paymentName,
-          cost: this.totalCost
-        })
+        this.isOpenPay = true
+      },
+      closePay() {
+        this.isOpenPay = false
       }
     }
   }
@@ -162,5 +166,10 @@
   .cart-buttons {
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .stripe-wrapper {
+    background-color: azure;
+    width: 100%;
   }
 </style>
