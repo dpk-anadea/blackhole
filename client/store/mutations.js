@@ -22,14 +22,14 @@ export default {
     const currentProduct = state.cart.find(({ id }) => id === product.id)
 
     if (currentProduct) {
-      currentProduct.count = product?.count
-        ? product.count
-        : currentProduct.count + 1
+      currentProduct.quantity = product?.quantity
+        ? product.quantity
+        : currentProduct.quantity + 1
       state.cart.map((stateProduct) =>
         stateProduct.id === product.id ? product : stateProduct
       )
     } else {
-      state.cart.push({ ...product, count: 1 })
+      state.cart.push({ ...product, quantity: 1 })
     }
 
     Cookies.set('cart', JSON.stringify([...state.cart]))

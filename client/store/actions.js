@@ -129,11 +129,11 @@ export default {
     commit(mutator.SET_FLASH_MESSAGE, isShow)
   },
 
-  async [action.POST_STRIPE]({ commit }, productsIds) {
+  async [action.POST_STRIPE]({ commit }, payData) {
     commit(mutator.SET_LOADING, true)
     try {
-      const response = await api.postStripe(productsIds)
-      window.location.href = response.stripe_url
+      const response = await api.postStripe(payData)
+      console.log('response', response)
     } catch (e) {
       console.log(e)
     } finally {
