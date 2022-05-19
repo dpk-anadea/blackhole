@@ -55,5 +55,9 @@ export default {
 
   [mutator.SET_FLASH_MESSAGE](state, isShow) {
     state.isShowFleshMessage = isShow
+  },
+
+  [mutator.SET_ORDER](state, order) {
+    state.currentOrder = order
   }
 }

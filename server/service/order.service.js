@@ -1,27 +1,22 @@
 const { OrderItem, Order } = require('../models')
 
 class OrderService {
-  async createOrder(user, products) {
-    const totalCost = products.reduce((prev, curr) => {
-      console.log(prev, curr)
-      return prev + curr.cost * curr.count
-    }, 0)
-    console.log(totalCost)
+  async createOrder(userId, products, totalCost) {
     const order = await Order.create({
-      user_id: user.id,
+      user_id: userId,
       total_cost: totalCost
     })
 
     const productData = products.map((product) => ({
       product_id: product.id,
       cost: product.cost,
-      quantity: product.count,
+      quantity: product.quantity,
       order_id: order.id
     }))
 
-    const orderItem = await OrderItem.bulkCreate(productData)
+    const orderItems = await OrderItem.bulkCreate(productData)
 
-    return { order, orderItem }
+    return { order, orderItems }
   }
 }
 

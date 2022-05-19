@@ -133,7 +133,8 @@ export default {
     commit(mutator.SET_LOADING, true)
     try {
       const response = await api.postStripe(payData)
-      console.log('response', response)
+      commit(mutator.SET_ORDER, response)
+      return response
     } catch (e) {
       console.log(e)
     } finally {
