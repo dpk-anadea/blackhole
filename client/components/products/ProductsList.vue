@@ -2,12 +2,6 @@
   <div class="wrapper-type-products">
     <div class="name-product-types">
       <button
-        @click="openAllProducts"
-        :class="['type-button', typeName === 'All Products' && 'active-type']"
-        class="type-button">
-        All Products
-      </button>
-      <button
         @click="openProductType"
         :class="['type-button', typeName === item && 'active-type']"
         v-for="item in uniqueProductsTypes"
@@ -19,7 +13,7 @@
     <div class="products-list" v-if="typeName === 'All Products'">
       <ProductItem
         class="products"
-        v-for="product in getProducts"
+        v-for="product in products"
         :key="product"
         :title="product.name"
         :description="product.description"
@@ -108,7 +102,7 @@
 
 <script setup>
   import { useStore } from 'vuex'
-  import { action } from '@/store/constants'
+  import { get, action } from '@/store/constants'
   import { computed, ref } from 'vue'
   import { useRouter } from 'vue-router'
 
@@ -119,9 +113,12 @@
   const typeName = ref('All Products')
   store.dispatch(action.GET_PRODUCTS)
 
-  const getProducts = computed(() => store.state.products)
+  const products = computed(() => store.getters[get.PRODUCTS])
 
-  const productsType = computed(() => getProducts.value?.map((el) => el.type))
+  const productsType = computed(() => [
+    'All Products',
+    ...products.value.map((el) => el.type)
+  ])
 
   const uniqueProductsTypes = computed(() =>
     productsType.value?.filter(
@@ -130,17 +127,10 @@
   )
 
   const productsByType = computed(() =>
-    getProducts.value?.filter((el) => el.type === typeName.value)
+    products.value?.filter((el) => el.type === typeName.value)
   )
 
   function openProductType(e) {
-    typeName.value =
-      typeName.value === e.target.innerText
-        ? typeName.value
-        : e.target.innerText
-  }
-
-  function openAllProducts(e) {
     typeName.value =
       typeName.value === e.target.innerText
         ? typeName.value
