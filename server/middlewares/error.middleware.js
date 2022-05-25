@@ -12,6 +12,6 @@ module.exports = function (err, _req, res, next) {
   if (err.raw?.message) {
     return res.status(err.statusCode).json({ message: err.raw?.message })
   }
-
-  return res.json({ message: err.message, err })
+  console.error(err)
+  return res.status(400).json({ message: err.message, err })
 }

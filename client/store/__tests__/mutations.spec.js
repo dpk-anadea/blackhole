@@ -1,7 +1,7 @@
 import state from '@/store/state'
 import mutations from '@/store/mutations'
 import { mutator } from '@/store/constants'
-import { mockState } from '@/components/__mocks__/store'
+import mockState from '@/store/__mocks__/state'
 
 describe('Mutations', () => {
   it('allows to add all users to an empty state', async () => {
@@ -31,22 +31,22 @@ describe('Mutations', () => {
 
   describe('when to adding products to the shopping cart', () => {
     describe('when the current product is not in the shopping cart', () => {
-      it('the product must be added to the basket array and add "count: 1" th the product object', async () => {
+      it('the product must be added to the basket array and add "quantity: 1" th the product object', async () => {
         mutations[mutator.SET_PRODUCT_TO_CART](state, mockState.product)
         expect(state.cart).toEqual(mockState.cart)
       })
     })
 
-    describe('when the current product is in the shopping cart and adding the product without count', () => {
-      it('the count should be increased by 1 "count: 2"', async () => {
+    describe('when the current product is in the shopping cart and adding the product without quantity', () => {
+      it('the quantity should be increased by 1 "quantity: 2"', async () => {
         mutations[mutator.SET_PRODUCT_TO_CART](mockState, mockState.product)
-        expect(mockState.cart[0].count).toEqual(2)
+        expect(mockState.cart[0].quantity).toEqual(2)
       })
     })
 
-    describe('when the current product is in the shopping cart and adding the product with count', () => {
-      it('the count should be increased by 1 "count: 2"', async () => {
-        const product = { ...mockState.product, count: 4 }
+    describe('when the current product is in the shopping cart and adding the product with quantity', () => {
+      it('the quantity should be increased by 1 "quantity: 2"', async () => {
+        const product = { ...mockState.product, quantity: 4 }
 
         mutations[mutator.SET_PRODUCT_TO_CART](mockState, product)
         expect(mockState.cart[0]).toEqual(product)
@@ -76,8 +76,19 @@ describe('Mutations', () => {
     jest.mock('js-cookie', () => jest.fn())
   })
 
+  it('allows to remove all product from cart', () => {
+    mutations[mutator.CLEAR_CART](mockState)
+
+    jest.mock('js-cookie', () => jest.fn())
+  })
+
   it('allows to adding flash message on the display', () => {
     mutations[mutator.SET_FLASH_MESSAGE](state, mockState.isShowFleshMessage)
     expect(state.isShowFleshMessage).toEqual(mockState.isShowFleshMessage)
+  })
+
+  it('allows to add current order', () => {
+    mutations[mutator.SET_ORDER](state, mockState.currentOrder)
+    expect(state.currentOrder).toEqual(mockState.currentOrder)
   })
 })

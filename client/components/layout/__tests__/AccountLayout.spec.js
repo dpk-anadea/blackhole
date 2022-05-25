@@ -1,6 +1,6 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { router } from '@/components/__mocks__/router'
+import { router } from '@/router/__mocks__/router'
 
 import AccountLayout from '@/components/layout/AccountLayout'
 

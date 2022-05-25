@@ -124,4 +124,24 @@ describe('Actions', () => {
 
     expect(commit).toHaveBeenCalledWith('SET_FLASH_MESSAGE', isShow)
   })
+
+  it('allows pay on stripe', async () => {
+    const payData = {
+      user_id: 1,
+      products: {
+        ids: [1, 2],
+        quantities: { 1: 2, 2: 1 }
+      },
+      token: { id: 't1' }
+    }
+    const response = { receipt_url: 'url', status: 'succeeded' }
+
+    api.postStripe = jest.fn().mockReturnValue(response)
+
+    await actions[action.POST_STRIPE]({ commit }, payData)
+
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', true)
+    expect(commit).toHaveBeenCalledWith('SET_ORDER', response)
+    expect(commit).toHaveBeenCalledWith('SET_LOADING', false)
+  })
 })

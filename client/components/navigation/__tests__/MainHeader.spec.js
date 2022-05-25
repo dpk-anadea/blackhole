@@ -1,17 +1,22 @@
 import { mount } from '@vue/test-utils'
-import { store, emptyStore } from '@/components/__mocks__/store'
-import { router } from '@/components/__mocks__/router'
+import state from '@/store/state'
+import { router } from '@/router/__mocks__/router'
+import { createNewStore } from '@/lib/test-helpers'
 
 import MainHeader from '@/components/navigation/MainHeader'
+
+const createWrapper = (store) =>
+  mount(MainHeader, {
+    global: {
+      plugins: [router, store]
+    }
+  })
 
 describe('MainHeader component', () => {
   describe('when user are not logged in', () => {
     it('should be the text "Login" and "Create Account"', () => {
-      const wrapper = mount(MainHeader, {
-        global: {
-          plugins: [router, emptyStore]
-        }
-      })
+      const store = createNewStore(state)
+      const wrapper = createWrapper(store)
 
       expect(wrapper.text()).toMatch('Home')
       expect(wrapper.text()).toMatch('Products')
@@ -22,11 +27,8 @@ describe('MainHeader component', () => {
 
   describe('when user are logged in', () => {
     it('should be the text "Logout"', () => {
-      const wrapper = mount(MainHeader, {
-        global: {
-          plugins: [router, store]
-        }
-      })
+      const store = createNewStore()
+      const wrapper = createWrapper(store)
 
       expect(wrapper.text()).toMatch('Home')
       expect(wrapper.text()).toMatch('Products')

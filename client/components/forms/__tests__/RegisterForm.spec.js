@@ -1,16 +1,16 @@
 import { mount } from '@vue/test-utils'
-import { mockState } from '@/components/__mocks__/store'
-import { router } from '@/components/__mocks__/router'
+import mockState from '@/store/__mocks__/state'
+import { router } from '@/router/__mocks__/router'
 
 import RegisterForm from '@/components/forms/RegisterForm'
 
-const wrapper = mount(RegisterForm, {
-  global: {
-    plugins: [router]
-  }
-})
-
 describe('RegisterForm component', () => {
+  const wrapper = mount(RegisterForm, {
+    global: {
+      plugins: [router]
+    }
+  })
+
   describe('when you click on the button', () => {
     it('should six input fields and all the input fields are filled in and correct, emit will work', async () => {
       expect(wrapper.findAll('.input')).toHaveLength(6)

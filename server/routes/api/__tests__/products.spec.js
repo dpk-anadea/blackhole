@@ -58,14 +58,6 @@ describe('Products', () => {
     })
   })
 
-  describe('allows get error', () => {
-    it('get an empty products array', async () => {
-      const response = await request(app).get('/')
-
-      expect(response.error.text).toContain('unexpected error')
-    })
-  })
-
   describe('allows delete product', () => {
     beforeEach(async () => {
       product = await productFactory.create('product')
