@@ -1,6 +1,6 @@
 <template>
   <div class="product-wrapper">
-    <section class="product-section">
+    <section v-if="currentProduct" class="product-section">
       <img class="img" src="../../images/productImg.png" alt="piano" />
 
       <div class="product-info">
