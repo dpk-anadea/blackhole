@@ -8,8 +8,12 @@
 
     <nav class="nav-bar">
       <div class="nav-items">
+        <span class="nav-item"> Latest Product </span>
+        <span class="nav-item"> Sample Packs </span>
+        <span class="nav-item"> Plugins </span>
+        <span class="nav-item"> Free Downloads </span>
         <router-link :to="{ name: 'home' }" class="nav-item">
-          Home
+          Home Page
         </router-link>
         <router-link :to="{ name: 'products' }" class="nav-item">
           Products
@@ -17,6 +21,7 @@
         <router-link v-if="!isAuth" :to="{ name: 'register' }" class="nav-item">
           Create account
         </router-link>
+        <span v-if="isAuth" class="nav-item"> My Account </span>
         <button v-if="isAuth" @click="logout" class="nav-item">Logout</button>
         <router-link v-else :to="{ name: 'login' }" class="nav-item">
           Login

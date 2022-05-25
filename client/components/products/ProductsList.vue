@@ -16,7 +16,7 @@
       </button>
     </div>
 
-    <div class="products-list" v-if="typeName === 'All Products' || !typeName">
+    <div class="products-list" v-if="typeName === 'All Products'">
       <ProductItem
         class="products"
         v-for="product in getProducts"
@@ -135,12 +135,16 @@
 
   function openProductType(e) {
     typeName.value =
-      typeName.value === e.target.innerText ? null : e.target.innerText
+      typeName.value === e.target.innerText
+        ? typeName.value
+        : e.target.innerText
   }
 
   function openAllProducts(e) {
     typeName.value =
-      typeName.value === e.target.innerText ? null : e.target.innerText
+      typeName.value === e.target.innerText
+        ? typeName.value
+        : e.target.innerText
   }
 
   function navigateToProduct(id) {
