@@ -26,6 +26,9 @@
     --link-hover-color: var(--primary-button-hover-color);
 
     --spinner-color: var(--primary-button-color);
+
+    --primary-bg-color: #000000;
+    --secondary-bg-color: #1d1c1c;
   }
 
   * {
