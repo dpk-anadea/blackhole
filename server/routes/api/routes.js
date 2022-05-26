@@ -23,6 +23,6 @@ router.delete('/products/:id', productController.deleteProduct)
 
 router.post('/stripe/pay', stripeController.pay)
 
-// router.get('/users/:user_id/orders', orderController.getOrders)
+router.get('/users/:user_id/orders', orderController.getOrders)
 
 module.exports = router

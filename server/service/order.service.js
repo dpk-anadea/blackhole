@@ -18,6 +18,20 @@ class OrderService {
 
     return { order, orderItems }
   }
+
+  async getOrders(userId) {
+    let orders = await Order.findAll({
+      where: { user_id: userId },
+      include: [
+        {
+          model: OrderItem,
+          as: 'orderItems'
+        }
+      ]
+    })
+
+    return orders
+  }
 }
 
 module.exports = new OrderService()
