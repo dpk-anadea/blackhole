@@ -5,7 +5,6 @@ import { createNewStore } from '@/lib/test-helpers'
 
 import MainHeader from '@/components/navigation/MainHeader'
 import MyAccount from '@/components/navigation/MyAccount'
-import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
 
 const createWrapper = (store) =>
   mount(MainHeader, {
