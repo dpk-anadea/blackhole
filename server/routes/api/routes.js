@@ -7,6 +7,7 @@ const userController = require('../../controllers/user.controller')
 const authController = require('../../controllers/auth.controller')
 const productController = require('../../controllers/product.controller')
 const stripeController = require('../../controllers/stripe.controller')
+const orderController = require('../../controllers/order.controller')
 
 router.get('/users', authMiddleware, userController.getUsers)
 
@@ -21,5 +22,7 @@ router.post('/products', productController.createProduct)
 router.delete('/products/:id', productController.deleteProduct)
 
 router.post('/stripe/pay', stripeController.pay)
+
+// router.get('/users/:user_id/orders', orderController.getOrders)
 
 module.exports = router
