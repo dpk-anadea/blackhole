@@ -21,8 +21,7 @@
         <router-link v-if="!isAuth" :to="{ name: 'register' }" class="nav-item">
           Create account
         </router-link>
-        <span v-if="isAuth" class="nav-item"> My Account </span>
-        <button v-if="isAuth" @click="logout" class="nav-item">Logout</button>
+        <MyAccount data-test="my-account" v-if="isAuth" class="nav-item" />
         <router-link v-else :to="{ name: 'login' }" class="nav-item">
           Login
         </router-link>
@@ -37,17 +36,13 @@
 <script setup>
   import { computed } from 'vue'
   import { useStore } from 'vuex'
-  import { action } from '@/store/constants'
 
   import BhFlashMessage from '@/components/notification/BhFlashMessage'
   import ShoppingCartIcon from '@/components/icons/ShoppingCartIcon'
+  import MyAccount from '@/components/navigation/MyAccount'
 
-  const { state, dispatch } = useStore()
+  const { state } = useStore()
   const isAuth = computed(() => state.isAuth)
-
-  const logout = () => {
-    dispatch(action.LOGOUT)
-  }
 </script>
 
 <style lang="scss" scoped>
