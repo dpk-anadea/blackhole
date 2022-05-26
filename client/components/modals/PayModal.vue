@@ -1,7 +1,5 @@
 <template>
-  <BaseModal
-    modal-frame-style="width: 700px; min-height: 200px;"
-    @close="$emit('close')">
+  <BaseModal modal-frame-style="width: 700px;" @close="$emit('close')">
     <div class="pay-modal-wrapper">
       <h2 class="title">Pay with card</h2>
       <div class="pay-content">
@@ -40,19 +38,40 @@
       products: { type: Array, required: true },
       totalCost: { type: Number, required: true }
     },
+    data: () => ({
+      errors: []
+    }),
     computed: {
       ...mapGetters({ user: get.CURRENT_USER }),
       payData() {
+        const ids = this.products.map(({ id }) => id)
+        const quantities = {}
+        this.products.forEach(({ id, quantity }) => (quantities[id] = quantity))
         return {
           user_id: this.user.id,
-          products: this.products.map(({ id, quantity }) => ({ id, quantity }))
+          products: {
+            ids,
+            quantities
+          }
         }
       }
     },
     methods: {
-      ...mapActions([action.POST_STRIPE]),
-      pay(token) {
-        console.log({ ...this.payData, token })
+      ...mapActions([action.CLEAR_CART, action.POST_STRIPE]),
+      async pay(token) {
+        try {
+          const order = await this[action.POST_STRIPE]({
+            ...this.payData,
+            token
+          })
+
+          if (order.status === 'succeeded') {
+            this.$emit('change-modal')
+          }
+          await this[action.CLEAR_CART]()
+        } catch (error) {
+          this.errors.push(error)
+        }
       }
     }
   }

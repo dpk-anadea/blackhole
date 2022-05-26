@@ -2,28 +2,21 @@
 const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Order extends Model {}
+  class Order extends Model {
+    static associate(models) {
+      Order.belongsTo(models.User, { foreignKey: 'user_id' })
+    }
+  }
   Order.init(
     {
-      product_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'products',
-          key: 'id'
-        }
-      },
-      user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'users',
-          key: 'id'
-        }
-      }
+      total_cost: DataTypes.INTEGER
     },
     {
       sequelize,
+      tableName: 'orders',
       modelName: 'Order'
     }
   )
+
   return Order
 }

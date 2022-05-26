@@ -18,6 +18,14 @@
     --header-width: 62px;
 
     --primary-text-color: #ffffff;
+
+    --primary-button-color: #7cd380;
+    --primary-button-hover-color: #54d15a;
+
+    --link-color: var(--primary-button-color);
+    --link-hover-color: var(--primary-button-hover-color);
+
+    --spinner-color: var(--primary-button-color);
   }
 
   * {

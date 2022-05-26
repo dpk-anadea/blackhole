@@ -81,6 +81,7 @@
 
     width: 100%;
     height: 100%;
+    min-height: 200px;
 
     outline: 0;
     transition: opacity 0.15s linear;

@@ -37,5 +37,13 @@
     &:hover {
       background-color: #636363;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #888888;
+      }
+    }
   }
 </style>

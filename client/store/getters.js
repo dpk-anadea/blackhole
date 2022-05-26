@@ -18,5 +18,9 @@ export default {
   },
   [get.IS_SHOW_FLASH_MESSAGE](state) {
     return state.isShowFleshMessage
+  },
+
+  [get.ORDER](state) {
+    return state.currentOrder
   }
 }

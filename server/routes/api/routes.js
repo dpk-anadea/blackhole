@@ -21,6 +21,5 @@ router.post('/products', productController.createProduct)
 router.delete('/products/:id', productController.deleteProduct)
 
 router.post('/stripe/pay', stripeController.pay)
-router.post('/stripe/webhook', stripeController.webhook)
 
 module.exports = router

@@ -5,7 +5,8 @@ const state = {
   users: null,
   products: [],
   cart: [],
-  isShowFleshMessage: false
+  isShowFleshMessage: false,
+  currentOrder: null
 }
 
 export default state

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import MainFooter from '../MainFooter'
+import MainFooter from '@/components/navigation/MainFooter'
 
 const wrapper = mount(MainFooter)
 

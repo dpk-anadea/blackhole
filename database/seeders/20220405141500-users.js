@@ -10,6 +10,8 @@ module.exports = {
         email: 'Ivanova@gmail.com',
         phone: '12451221',
         password: 'secret',
+        activation_link: '7dcb7a4e-f320-4f24-b025-189f172d9c27',
+        activated: false,
         created_at: new Date(),
         updated_at: new Date()
       }

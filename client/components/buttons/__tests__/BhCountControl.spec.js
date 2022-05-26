@@ -1,25 +1,22 @@
 import { mount } from '@vue/test-utils'
-import { store } from '@/components/__mocks__/store'
-import { router } from '@/components/__mocks__/router'
+import { router } from '@/router/__mocks__/router'
+import { createNewStore } from '@/lib/test-helpers'
 
 import PlusIcon from '@/components/icons/PlusIcon'
 import MinusIcon from '@/components/icons/MinusIcon'
 import BhCountControl from '@/components/buttons/BhCountControl'
 
-const wrapper = mount(BhCountControl, {
-  global: {
-    plugins: [store, router]
-  },
-  props: {
-    count: 1
-  },
-  stubs: {
-    PlusIcon,
-    MinusIcon
-  }
-})
-
 describe('BhCartButtons component', () => {
+  let store, wrapper
+  beforeEach(() => {
+    store = createNewStore()
+    wrapper = mount(BhCountControl, {
+      global: { plugins: [store, router] },
+      props: { count: 2 },
+      stubs: { PlusIcon, MinusIcon }
+    })
+  })
+
   describe('when adding a positive value from the keyboard', () => {
     it('should work "update-count" emit function', async () => {
       await wrapper.find('[data-test="count"]').setValue('10')
@@ -65,7 +62,6 @@ describe('BhCartButtons component', () => {
       expect(wrapper.findComponent(MinusIcon).exists()).toBe(true)
 
       await wrapper.findComponent(MinusIcon).trigger('click')
-
       expect(wrapper.emitted()).toHaveProperty('update-count')
     })
   })

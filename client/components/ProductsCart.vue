@@ -1,16 +1,18 @@
 <template>
   <section v-if="products" class="cart-section">
-    <PayModal
-      v-if="isOpenPay"
+    <component
+      :is="modalComponent"
+      v-if="isOpen"
       :products="products"
       :total-cost="totalCost"
-      @close="closePay" />
+      @close="closeModal"
+      @change-modal="openModal(modalName.THANKS)" />
 
     <h1 class="title">Shopping Cart</h1>
 
     <p class="hint">Review your order below and click checkout to continue!</p>
 
-    <BhCartButtons @check-out="openPay" />
+    <BhCartButtons @check-out="openModal(modalName.PAY)" />
 
     <div class="products">
       <div v-for="product in products" :key="product.id" class="product">
@@ -28,7 +30,7 @@
 
     <div class="total">${{ totalCost }}</div>
 
-    <BhCartButtons class="cart-buttons" @check-out="openPay" />
+    <BhCartButtons class="cart-buttons" @check-out="openModal(modalName.PAY)" />
   </section>
 </template>
 
@@ -38,19 +40,30 @@
   import BhCartButtons from '@/components/buttons/BhCartButtons'
   import BhCountControl from '@/components/buttons/BhCountControl'
   import PayModal from '@/components/modals/PayModal'
+  import ThanksForBuyModal from '@/components/modals/ThanksForBuyModal'
 
   export default {
     name: 'ProductCart',
     components: {
       BhCartButtons,
       BhCountControl,
-      PayModal
+      PayModal,
+      ThanksForBuyModal
     },
     data: () => ({
-      isOpenPay: false
+      isOpen: ''
     }),
     computed: {
       ...mapGetters({ products: get.CART, user: get.CURRENT_USER }),
+      modalName() {
+        return {
+          PAY: 'Pay',
+          THANKS: 'ThanksForBuy'
+        }
+      },
+      modalComponent() {
+        return this.isOpen + 'Modal'
+      },
       totalCost() {
         return (
           this.products.reduce(
@@ -81,12 +94,12 @@
       removeProduct(productId) {
         this[action.DELETE_PRODUCT_FROM_CART](productId)
       },
-      openPay() {
+      openModal(name) {
         if (!this.products.length) return
-        this.isOpenPay = true
+        this.isOpen = name
       },
-      closePay() {
-        this.isOpenPay = false
+      closeModal() {
+        this.isOpen = ''
       }
     }
   }
