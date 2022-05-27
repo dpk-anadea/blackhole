@@ -36,7 +36,7 @@ describe('MainHeader component', () => {
   describe('when user are logged in', () => {
     describe('should be the component and the text "My Account"', () => {
       describe('when hovering the mouse cursor', () => {
-        it('should be the text "Orders", "Downloads", "Logout"', async () => {
+        it('should be the text "orders", "Downloads", "Logout"', async () => {
           const store = createNewStore()
           const wrapper = createWrapper(store)
 

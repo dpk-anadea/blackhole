@@ -2,9 +2,13 @@
   <div class="my-account">
     <span>My Account</span>
     <div class="account-drop-down">
-      <span v-for="link in links" :key="link.name" class="account-link">
+      <router-link
+        v-for="link in links"
+        :key="link.name"
+        class="account-link"
+        :to="{ name: link.name }">
         {{ link.name }}
-      </span>
+      </router-link>
 
       <button @click="logout" class="button account-link">Logout</button>
     </div>
@@ -72,6 +76,8 @@
 
   .account-link {
     cursor: pointer;
+    text-decoration: none;
+
     margin-left: 60px;
 
     color: var(--primary-color);
