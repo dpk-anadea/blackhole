@@ -36,25 +36,43 @@ describe('Orders', () => {
   })
 
   describe('allows get orders', () => {
-    it('get all orders', async () => {
-      const response = await request(app).get(`/api/users/${user.id}/orders`)
+    describe('when user unauthorized', () => {
+      it('get error: User Unauthorized', async () => {
+        const response = await request(app).get(`/api/users/${user.id}/orders`)
 
-      expect(response.statusCode).toBe(200)
-      expect(response.body).toHaveLength(2)
-      expect(response.body).toEqual([
-        {
-          ...orders[0].dataValues,
-          orderItems: expect.any(Array),
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String)
-        },
-        {
-          ...orders[1].dataValues,
-          orderItems: expect.any(Array),
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String)
-        }
-      ])
+        expect(response.statusCode).toBe(401)
+        expect(response.body.message).toEqual('User is not authorized')
+      })
+    })
+
+    describe('when user authorized', () => {
+      const login = async (email, password) =>
+        await request(app).post('/api/login').send({ email, password })
+
+      it('get all orders', async () => {
+        const { body: authUser } = await login(user.email, '123456')
+
+        const response = await request(app)
+          .get(`/api/users/${user.id}/orders`)
+          .set('Authorization', 'Bearer ' + authUser.accessToken)
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toHaveLength(2)
+        expect(response.body).toEqual([
+          {
+            ...orders[0].dataValues,
+            orderItems: expect.any(Array),
+            createdAt: expect.any(String),
+            updatedAt: expect.any(String)
+          },
+          {
+            ...orders[1].dataValues,
+            orderItems: expect.any(Array),
+            createdAt: expect.any(String),
+            updatedAt: expect.any(String)
+          }
+        ])
+      })
     })
   })
 })
