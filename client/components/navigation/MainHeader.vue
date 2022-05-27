@@ -3,7 +3,7 @@
     <BhFlashMessage />
 
     <div class="nav-bar-logo">
-      <img class="logo-img" src="../../images/logo.png" alt="logo" />
+      <img class="logo-img" src="../../images/logo.webp" alt="logo" />
     </div>
 
     <nav class="nav-bar">
@@ -93,7 +93,7 @@
     cursor: pointer;
 
     color: white;
-    font-size: 18px;
+    font-size: 14px;
 
     &:not(:last-child) {
       margin-right: 20px;

@@ -7,6 +7,7 @@ import EmailVerifyView from '@/views/EmailVerifyView'
 import CartView from '@/views/CartView'
 import ThanksForBuyView from '@/views/ThanksForBuyView'
 import OrdersView from '@/views/OrdersView'
+import OrderView from '@/views/OrderView'
 
 export const routes = [
   {
@@ -53,6 +54,11 @@ export const routes = [
     name: 'Orders',
     path: '/orders',
     component: OrdersView
+  },
+  {
+    name: 'Order',
+    path: '/order',
+    component: OrderView
   },
   {
     name: 'Downloads',

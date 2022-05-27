@@ -1,7 +1,7 @@
 <template>
   <div class="account-layout-wrapper">
     <router-link class="logo" :to="{ name: 'home' }">
-      <img class="logo-img" src="../../images/logo.png" alt="logo" />
+      <img class="logo-img" src="../../images/logo.webp" alt="logo" />
     </router-link>
 
     <div class="form-wrapper">

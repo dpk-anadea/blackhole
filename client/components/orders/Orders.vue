@@ -1,8 +1,9 @@
 <template>
   <section class="orders-wrapper">
-    <h1 class="title">Orders</h1>
+    <h1 class="title">My Account</h1>
+    <h1 class="title order-title">Order History</h1>
 
-    <table class="table">
+    <table v-if="orders.length" class="table">
       <thead>
         <tr>
           <th>Id link</th>
@@ -11,13 +12,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in orderTest" :key="item.id">
-          <td class="active-id-link">{{ item.id }}</td>
+        <tr v-for="item in orders" :key="item.id">
+          <td class="active-id-link" @click="navigateToOrder(item.id)">
+            {{ item.id }}
+          </td>
           <td>{{ item.created_at }}</td>
           <td>{{ item.total_cost }}</td>
         </tr>
       </tbody>
     </table>
+
+    <div v-else class="hint">You haven't placed any orders yet.</div>
   </section>
 </template>
 
@@ -29,13 +34,16 @@
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Orders',
     computed: {
-      ...mapGetters({ user: get.CURRENT_USER })
+      ...mapGetters({ user: get.CURRENT_USER, orders: get.ORDERS })
     },
     async created() {
       await this[action.GET_ORDERS](this.user.id)
     },
     methods: {
-      ...mapActions([action.GET_ORDERS])
+      ...mapActions([action.GET_ORDERS]),
+      navigateToOrder(id) {
+        this.$router.push({ name: 'Order', query: { id } })
+      }
     }
   }
 </script>
@@ -48,6 +56,8 @@
 
     width: 100%;
     padding: 50px;
+
+    background-color: #222222;
   }
 
   .title {
@@ -57,7 +67,21 @@
     font-weight: 500;
   }
 
+  .order-title {
+    opacity: 0.7;
+
+    align-self: flex-start;
+  }
+
+  .hint {
+    align-self: flex-start;
+
+    color: #dddddd;
+  }
+
   .active-id-link {
+    cursor: pointer;
+
     color: var(--link-color);
   }
 
