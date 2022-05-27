@@ -100,7 +100,7 @@
     }
 
     &:hover {
-      color: #282828;
+      text-decoration: underline;
     }
   }
 

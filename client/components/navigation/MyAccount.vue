@@ -3,11 +3,11 @@
     <span>My Account</span>
     <div class="account-drop-down">
       <router-link
-        v-for="link in links"
-        :key="link.name"
+        v-for="(link, index) in links"
+        :key="link.name + index"
         class="account-link"
         :to="{ name: link.name }">
-        {{ link.name }}
+        My {{ link.name }}
       </router-link>
 
       <button @click="logout" class="button account-link">Logout</button>
@@ -60,7 +60,7 @@
     flex-direction: column;
 
     width: 135px;
-    padding: 25px 20px 24px;
+    padding: 15px 0 0;
 
     background-color: var(--secondary-bg-color);
     .account-link {
@@ -69,6 +69,10 @@
 
       &:last-child {
         margin-bottom: 0;
+      }
+
+      &:hover {
+        background-color: #000000;
       }
     }
     display: none;
@@ -79,6 +83,7 @@
     text-decoration: none;
 
     margin-left: 60px;
+    padding: 10px 20px 10px;
 
     color: var(--primary-color);
     &:first-child {
@@ -93,15 +98,15 @@
   .button {
     cursor: pointer;
     text-decoration: none;
+    text-align: start;
 
-    align-self: flex-start;
-
-    padding: 0;
+    width: 100%;
+    padding: 10px 20px 15px;
 
     border: none;
 
     color: var(--primary-text-color);
     background-color: transparent;
-    font-size: 18px;
+    font-size: 14px;
   }
 </style>
