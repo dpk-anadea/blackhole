@@ -140,5 +140,17 @@ export default {
     } finally {
       commit(mutator.SET_LOADING, false)
     }
+  },
+
+  async [action.GET_ORDERS]({ commit, rootState: token }, userID) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const orders = await api.getOrders(userID, token)
+      commit(mutator.SET_ORDERS, orders)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
   }
 }

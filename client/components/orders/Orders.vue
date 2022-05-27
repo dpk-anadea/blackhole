@@ -22,43 +22,20 @@
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex'
+  import { action, get } from '@/store/constants'
+
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Orders',
-
-    data() {
-      return {
-        orderTest: [
-          {
-            id: 1,
-            user_id: 2,
-            total_cost: 100,
-            created_at: '15.02.12',
-            order_items: [
-              {
-                product_id: 1,
-                order_id: 1,
-                cost: 100,
-                quantity: 2
-              }
-            ]
-          },
-          {
-            id: 5,
-            user_id: 2,
-            total_cost: 200,
-            created_at: '16.03.22',
-            order_items: [
-              {
-                product_id: 1,
-                order_id: 5,
-                cost: 200,
-                quantity: 3
-              }
-            ]
-          }
-        ]
-      }
+    computed: {
+      ...mapGetters({ user: get.CURRENT_USER })
+    },
+    async created() {
+      await this[action.GET_ORDERS](this.user.id)
+    },
+    methods: {
+      ...mapActions([action.GET_ORDERS])
     }
   }
 </script>

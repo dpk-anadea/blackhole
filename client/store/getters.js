@@ -22,5 +22,9 @@ export default {
 
   [get.ORDER](state) {
     return state.currentOrder
+  },
+
+  [get.ORDERS](state) {
+    return state.orders
   }
 }

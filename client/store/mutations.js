@@ -59,5 +59,9 @@ export default {
 
   [mutator.SET_ORDER](state, order) {
     state.currentOrder = order
+  },
+
+  [mutator.SET_ORDERS](state, orders) {
+    state.orders = orders
   }
 }
