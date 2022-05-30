@@ -10,5 +10,6 @@ export default {
   [action.ADD_PRODUCT_TO_CART]: jest.fn(),
   [action.GET_PRODUCTS_FROM_STORAGE]: jest.fn(),
   [action.DELETE_PRODUCT_FROM_CART]: jest.fn(),
-  [action.TOGGLE_FLASH_MESSAGE]: jest.fn()
+  [action.TOGGLE_FLASH_MESSAGE]: jest.fn(),
+  [action.GET_ORDERS]: jest.fn()
 }

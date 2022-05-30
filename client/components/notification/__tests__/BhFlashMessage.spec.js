@@ -21,13 +21,14 @@ describe('BhCartButtons component', () => {
     }
   })
 
-  describe('when displayed component and clicking on the IconCross', () => {})
-  it('should displayed MessageProductAdded and IconCross components and the BhCartButtons component should close', async () => {
-    expect(wrapper.findComponent(MessageProductAdded).exists()).toBe(true)
-    expect(wrapper.findComponent(IconCross).exists()).toBe(true)
+  describe('when displayed component and clicking on the IconCross', () => {
+    it('should displayed MessageProductAdded and IconCross components and the BhCartButtons component should close', async () => {
+      expect(wrapper.findComponent(MessageProductAdded).exists()).toBe(true)
+      expect(wrapper.findComponent(IconCross).exists()).toBe(true)
 
-    await wrapper.findComponent(IconCross).trigger('click')
+      await wrapper.findComponent(IconCross).trigger('click')
 
-    expect(actions[action.TOGGLE_FLASH_MESSAGE]).toHaveBeenCalled()
+      expect(actions[action.TOGGLE_FLASH_MESSAGE]).toHaveBeenCalled()
+    })
   })
 })

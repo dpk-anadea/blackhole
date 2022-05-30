@@ -53,5 +53,12 @@ export default {
       id: 3
     }
   ],
+  orders: [
+    {
+      id: 1,
+      user_id: 1,
+      total_cost: 100
+    }
+  ],
   currentOrder: { receipt_url: 'url', status: 'succeeded' }
 }

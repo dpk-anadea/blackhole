@@ -16,7 +16,7 @@
           <td class="active-id-link" @click="navigateToOrder(item.id)">
             {{ item.id }}
           </td>
-          <td>{{ item.created_at }}</td>
+          <td>{{ new Date(item.createdAt).toLocaleString() }}</td>
           <td>{{ item.total_cost }}</td>
         </tr>
       </tbody>
@@ -31,8 +31,7 @@
   import { action, get } from '@/store/constants'
 
   export default {
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: 'Orders',
+    name: 'MyOrders',
     computed: {
       ...mapGetters({ user: get.CURRENT_USER, orders: get.ORDERS })
     },
