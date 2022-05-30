@@ -23,16 +23,14 @@ describe('Products', () => {
       await request(app).post('/api/products').send(product)
 
     it('create new product', async () => {
-      const response = await subject(product)
+      const response = await subject({ ...product })
 
       expect(response.statusCode).toBe(200)
       expect(response.body).toEqual({
-        product: {
-          ...product,
-          id: expect.any(Number),
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String)
-        }
+        ...product,
+        id: expect.any(Number),
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String)
       })
     })
   })
@@ -44,6 +42,8 @@ describe('Products', () => {
 
     it('get all products', async () => {
       const response = await request(app).get('/api/products')
+
+      delete product.dataValues.download_link
 
       expect(response.statusCode).toBe(200)
       expect(response.body).toHaveLength(1)

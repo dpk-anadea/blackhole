@@ -1,15 +1,16 @@
-const { Product } = require('../models')
 const productService = require('../service/product.service')
 
 class ProductsController {
   async getProduct(req, res, next) {
     try {
-      const products = await Product.findAll()
+      const products = await productService.getProducts()
+
       res.json(products)
     } catch (err) {
       next(err)
     }
   }
+
   async createProduct(req, res, next) {
     try {
       const product = req.body
@@ -20,9 +21,10 @@ class ProductsController {
       next(err)
     }
   }
+
   async deleteProduct(req, res, next) {
     try {
-      const id = req.params.id
+      const id = req.params.product_id
       const productDetails = await productService.deleteProduct(id)
       res.status(200).json({
         status: true,

@@ -27,8 +27,12 @@
       password: password
     }
 
-    store.dispatch(action.CREATE_USER, registerFormData)
-    router.push({ name: 'home' })
+    try {
+      store.dispatch(action.CREATE_USER, registerFormData)
+      router.push({ name: 'home' })
+    } catch (error) {
+      console.log(error)
+    }
   }
 </script>
 

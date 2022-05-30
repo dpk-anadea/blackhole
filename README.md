@@ -27,10 +27,17 @@ SMTP_PASSWORD=iL9VN9k05bPhUrQ8PCsk
 
 API_URL=http://localhost:3030
 CLIENT_URL=http://localhost:8080
+
+VUE_APP_STRIPE_PK=pk_test_51Kw01FFiR2H5b1l1HbYrnLgJRAtBKdvRKNSvADz8woWBGG7JZnkf8aEOEkKhO4kYLrIdBbccdh7jspGXzngmPn1v00ST3WsmYA
 ```
 
 * yarn sq db:create
 * yarn sq db:migrate
 * yarn sq db:migrate:undo
-* yarn sq db:seed:undo:all 
-* yarn sq db:seed:all   
+* yarn sq db:seed:undo:all
+* yarn sq db:seed:all
+
+
+Any
+* yarn sq migration:create --name name
+* yarn sq seed:generate --name name

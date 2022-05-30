@@ -1,4 +1,4 @@
-const { OrderItem, Order } = require('../models')
+const { OrderItem, Order, Product } = require('../models')
 
 class OrderService {
   async createOrder(userId, products, totalCost) {
@@ -25,7 +25,11 @@ class OrderService {
       include: [
         {
           model: OrderItem,
-          as: 'orderItems'
+          as: 'orderItems',
+          include: {
+            model: Product,
+            as: 'product'
+          }
         }
       ]
     })

@@ -10,6 +10,7 @@ const stripeController = require('../../controllers/stripe.controller')
 const orderController = require('../../controllers/order.controller')
 
 router.get('/users', authMiddleware, userController.getUsers)
+router.get('/users/:user_id/orders', authMiddleware, orderController.getOrders)
 
 router.post('/registration', userController.createUser)
 router.post('/login', authController.login)
@@ -19,10 +20,8 @@ router.get('/refresh', authController.refresh)
 
 router.get('/products', productController.getProduct)
 router.post('/products', productController.createProduct)
-router.delete('/products/:id', productController.deleteProduct)
+router.delete('/products/:product_id', productController.deleteProduct)
 
 router.post('/stripe/pay', stripeController.pay)
-
-router.get('/users/:user_id/orders', authMiddleware, orderController.getOrders)
 
 module.exports = router
