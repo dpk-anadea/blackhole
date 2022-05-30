@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       type: DataTypes.STRING,
       description: DataTypes.STRING,
-      cost: DataTypes.STRING
+      cost: DataTypes.STRING,
+      download_link: DataTypes.STRING
     },
     {
       sequelize,

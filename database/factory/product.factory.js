@@ -1,15 +1,16 @@
 const factory = require('factory-girl').factory
 const SequelizeAdapter = require('factory-girl').SequelizeAdapter
 const { Product } = require('../../server/models')
+const { faker } = require('@faker-js/faker')
 
 factory.setAdapter(new SequelizeAdapter())
 
 factory.define('product', Product, {
-  name: 'Aurora - Instrument Plugin',
+  name: faker.lorem.words(2),
   type: 'Plugins',
-  description:
-    'Our goal was NO filler sounds - we only included sounds that we personally would want to use every day.',
-  cost: '100'
+  description: faker.lorem.sentence(),
+  cost: '100',
+  download_link: faker.internet.url()
 })
 
 module.exports = factory
