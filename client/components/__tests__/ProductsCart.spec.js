@@ -9,17 +9,14 @@ import BhCountControl from '@/components/buttons/BhCountControl'
 
 describe('ProductsList component', () => {
   describe('when the cart is empty', () => {
-    it('should not be displayed "Check Out" button and cost equals to 0 and "BhCountControl" component', async () => {
+    it('should be dis played "Continue Shopping" button and not be displayed "Check Out" button', async () => {
       const store = createNewStore(state)
       const wrapper = mount(ProductsCart, {
-        global: {
-          plugins: [store, router]
-        },
-        stubs: {
-          BhCountControl
-        }
+        global: { plugins: [store, router] },
+        stubs: { BhCountControl }
       })
 
+      expect(wrapper.text()).toMatch('Continue Shopping')
       expect(wrapper.findComponent({ name: 'BhCountControl' }).exists()).toBe(
         false
       )
@@ -32,9 +29,7 @@ describe('ProductsList component', () => {
     it('should be displayed "BhCartButtons" and "BhCountControl" components and "Check out" button', async () => {
       const store = createNewStore()
       const wrapper = mount(ProductsCart, {
-        global: {
-          plugins: [store, router]
-        },
+        global: { plugins: [store, router] },
         stubs: { BhCartButtons, BhCountControl }
       })
 

@@ -34,7 +34,9 @@
       }
     },
     async created() {
-      await this[action.GET_ORDERS](this.user.id)
+      if (!this.orders.length) {
+        await this[action.GET_ORDERS](this.user.id)
+      }
     },
     methods: {
       ...mapActions([action.GET_ORDERS])

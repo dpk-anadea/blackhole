@@ -111,7 +111,10 @@
   const store = useStore()
   const router = useRouter()
   const typeName = ref('All Products')
-  store.dispatch(action.GET_PRODUCTS)
+
+  if (!store.getters[get.PRODUCTS].length) {
+    store.dispatch(action.GET_PRODUCTS)
+  }
 
   const products = computed(() => store.getters[get.PRODUCTS])
 

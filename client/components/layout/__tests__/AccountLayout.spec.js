@@ -5,12 +5,8 @@ import { router } from '@/router/__mocks__/router'
 import AccountLayout from '@/components/layout/AccountLayout'
 
 const wrapper = mount(AccountLayout, {
-  global: {
-    plugins: [router]
-  },
-  slots: {
-    form: h('h1', {}, 'Named Slot')
-  }
+  global: { plugins: [router] },
+  slots: { form: h('h1', {}, 'Named Slot') }
 })
 
 describe('AccountLayout component', () => {

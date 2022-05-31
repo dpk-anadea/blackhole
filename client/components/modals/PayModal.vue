@@ -9,7 +9,7 @@
             :key="`product-${product.id}`"
             class="product-row">
             <span>{{ product.name }}</span>
-            <span>&nbsp; {{ product.quantity }}</span>
+            <span>&nbsp; x{{ product.quantity }}</span>
           </div>
         </div>
         <div class="stripe-wrapper">

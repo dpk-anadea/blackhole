@@ -8,6 +8,8 @@
         <a href="#" class="order-content" download=""><IconDownload /></a>
       </section>
     </div>
+
+    <div v-else class="hint">You haven't placed any downloads yet.</div>
   </section>
 </template>
 
@@ -33,7 +35,9 @@
       }
     },
     async created() {
-      await this[action.GET_ORDERS](this.user.id)
+      if (!this.orders.length) {
+        await this[action.GET_ORDERS](this.user.id)
+      }
     },
     methods: {
       ...mapActions([action.GET_ORDERS])
@@ -78,5 +82,11 @@
     box-shadow: 3px -1px 6px black;
 
     background-color: #1d1c1c;
+  }
+
+  .hint {
+    align-self: flex-start;
+
+    color: #dddddd;
   }
 </style>

@@ -33,7 +33,7 @@
     <div class="total">${{ totalCost }}</div>
 
     <BhCartButtons
-      :isDisplayedCheckOutButton="!!products.length"
+      v-if="products.length"
       class="cart-buttons"
       @check-out="openModal(modalName.PAY)" />
   </section>

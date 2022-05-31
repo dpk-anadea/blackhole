@@ -3,8 +3,8 @@
     <span>My Account</span>
     <div class="account-drop-down">
       <router-link
-        v-for="(link, index) in links"
-        :key="link.name + index"
+        v-for="link in links"
+        :key="link.name"
         class="account-link"
         :to="{ name: link.name }">
         My {{ link.name }}
