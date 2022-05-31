@@ -2,40 +2,42 @@
   <section class="order-wrapper">
     <h1 class="title">Order</h1>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Ordered product</th>
-          <th>Product price</th>
-          <th>Subtotal price</th>
-          <th>Total price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in orders" :key="item.id">
-          <td>
-            {{ item.id }}
-          </td>
-          <td>{{ item.created_at }}</td>
-          <td>{{ item.total_cost }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="order-wrapper" v-if="currentOrder.length">
+      <section
+        class="order-section"
+        v-for="item in currentOrder"
+        :key="item.id">
+        <div class="order-content product-name">{{ item.product.name }}</div>
+        <div class="order-content">Cost: ${{ item.product.cost }}</div>
+        <div class="order-content">Quantity: {{ item.quantity }}</div>
+      </section>
+    </div>
   </section>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
   import { action, get } from '@/store/constants'
 
   export default {
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: 'Order',
+    name: 'MyOrder',
     computed: {
-      ...mapGetters({ user: get.CURRENT_USER, orders: get.ORDERS })
+      ...mapGetters({
+        user: get.CURRENT_USER,
+        orders: get.ORDERS
+      }),
+      queryId() {
+        return this.$route.query.id
+      },
+      currentOrder() {
+        return this.orders.find((el) => el.id === +this.queryId)?.orderItems
+      }
     },
     async created() {
       await this[action.GET_ORDERS](this.user.id)
+    },
+    methods: {
+      ...mapActions([action.GET_ORDERS])
     }
   }
 </script>
@@ -48,6 +50,8 @@
 
     width: 100%;
     padding: 50px;
+
+    background-color: #222222;
   }
 
   .title {
@@ -57,25 +61,27 @@
     font-weight: 500;
   }
 
-  .table {
+  .order-wrapper {
     width: 100%;
-    margin-bottom: 20px;
-
-    border: 1px solid #dddddd;
-    border-collapse: collapse;
   }
-  .table th {
-    padding: 5px;
 
-    border: 1px solid #dddddd;
+  .order-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    color: #000000;
-    background: var(--primary-button-color);
-    font-size: 18px;
+    height: 60px;
+    width: 100%;
+    padding: 0 60px;
+    margin-bottom: 15px;
+
+    border-radius: 15px;
+    box-shadow: 3px -1px 6px black;
+
+    background-color: #1d1c1c;
   }
-  .table td {
-    padding: 5px;
 
-    border: 1px solid #dddddd;
+  .product-name {
+    width: 50%;
   }
 </style>
