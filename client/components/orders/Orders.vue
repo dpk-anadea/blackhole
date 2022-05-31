@@ -80,6 +80,7 @@
     height: 100px;
     width: 100%;
     padding: 0 60px;
+    margin-bottom: 15px;
 
     border-radius: 15px;
     box-shadow: 3px -1px 6px black;

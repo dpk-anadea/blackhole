@@ -1,15 +1,11 @@
 <template>
-  <section class="order-wrapper">
-    <h1 class="title">Order</h1>
+  <section class="downloads-wrapper">
+    <h1 class="title">My Downloads</h1>
 
-    <div class="order-wrapper" v-if="currentOrder?.length">
-      <section
-        class="order-section"
-        v-for="item in currentOrder"
-        :key="item.id">
-        <div class="order-content product-name">{{ item.product.name }}</div>
-        <div class="order-content">Cost: ${{ item.product.cost }}</div>
-        <div class="order-content">Quantity: {{ item.quantity }}</div>
+    <div v-if="orders.length" class="order-wrapper">
+      <section class="order-section" v-for="item in downloads" :key="item.id">
+        <div class="order-content">{{ item.product.name }}</div>
+        <a href="#" class="order-content" download=""><IconDownload /></a>
       </section>
     </div>
   </section>
@@ -18,19 +14,22 @@
 <script>
   import { mapActions, mapGetters } from 'vuex'
   import { action, get } from '@/store/constants'
+  import IconDownload from '@/components/icons/IconDownload'
 
   export default {
-    name: 'MyOrder',
+    name: 'MyDownloads',
+    components: {
+      IconDownload
+    },
     computed: {
       ...mapGetters({
         user: get.CURRENT_USER,
         orders: get.ORDERS
       }),
-      queryId() {
-        return this.$route.query.id
-      },
-      currentOrder() {
-        return this.orders.find((el) => el.id === +this.queryId)?.orderItems
+      downloads() {
+        const itemsForDownload = []
+        this.orders.filter((el) => itemsForDownload.push(el.orderItems))
+        return itemsForDownload.flat()
       }
     },
     async created() {
@@ -43,7 +42,7 @@
 </script>
 
 <style scoped>
-  .order-wrapper {
+  .downloads-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,18 +69,14 @@
     align-items: center;
     justify-content: space-between;
 
-    height: 60px;
+    height: 70px;
     width: 100%;
-    padding: 0 60px;
+    padding: 0 40px;
     margin-bottom: 15px;
 
     border-radius: 15px;
     box-shadow: 3px -1px 6px black;
 
     background-color: #1d1c1c;
-  }
-
-  .product-name {
-    width: 50%;
   }
 </style>
