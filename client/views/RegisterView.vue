@@ -17,7 +17,7 @@
   const store = useStore()
   const router = useRouter()
 
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
     const { firstName, lastName, phoneNumber, email, password } = formData
     const registerFormData = {
       first_name: firstName,
@@ -28,7 +28,7 @@
     }
 
     try {
-      store.dispatch(action.CREATE_USER, registerFormData)
+      await store.dispatch(action.CREATE_USER, registerFormData)
       router.push({ name: 'home' })
     } catch (error) {
       console.log(error)
