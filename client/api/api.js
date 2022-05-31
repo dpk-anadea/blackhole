@@ -34,5 +34,15 @@ export default {
 
   async postStripe(paymentDetails) {
     return fetch('post', 'stripe/pay', paymentDetails)
+  },
+
+  async getOrders(userId, token) {
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+
+    return fetch('get', `users/${userId}/orders`, config)
   }
 }

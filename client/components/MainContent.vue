@@ -34,7 +34,10 @@
   import ProductItem from '@/components/products/ProductItem'
 
   const store = useStore()
-  store.dispatch(action.GET_PRODUCTS)
+
+  if (!store.state.products.length) {
+    store.dispatch(action.GET_PRODUCTS)
+  }
 
   const getProducts = computed(() => store.state.products)
 

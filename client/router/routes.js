@@ -6,6 +6,9 @@ import ProductView from '@/views/ProductView'
 import EmailVerifyView from '@/views/EmailVerifyView'
 import CartView from '@/views/CartView'
 import ThanksForBuyView from '@/views/ThanksForBuyView'
+import OrdersView from '@/views/OrdersView'
+import OrderView from '@/views/OrderView'
+import DownloadsView from '@/views/DownloadsView'
 
 export const routes = [
   {
@@ -47,5 +50,20 @@ export const routes = [
     name: 'ThanksForBuy',
     path: '/thanks-for-buy',
     component: ThanksForBuyView
+  },
+  {
+    name: 'Orders',
+    path: '/orders',
+    component: OrdersView
+  },
+  {
+    name: 'Order',
+    path: '/order',
+    component: OrderView
+  },
+  {
+    name: 'Downloads',
+    path: '/downloads',
+    component: DownloadsView
   }
 ]

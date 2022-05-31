@@ -10,12 +10,8 @@ import MainHeader from '@/components/navigation/MainHeader'
 describe('MainLayout component', () => {
   const store = createNewStore()
   const wrapper = mount(MainLayout, {
-    global: {
-      plugins: [router, store]
-    },
-    slots: {
-      'main-content': h('h1', {}, 'Named Slot')
-    },
+    global: { plugins: [router, store] },
+    slots: { 'main-content': h('h1', {}, 'Named Slot') },
     stubs: {
       MainFooter,
       MainHeader

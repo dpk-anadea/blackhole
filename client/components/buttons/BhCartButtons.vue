@@ -3,7 +3,10 @@
     <BhBaseButton class="continue-shopping" @click="goToShopping">
       Continue Shopping
     </BhBaseButton>
-    <BhBaseButton class="check-out" @click="$emit('check-out')">
+    <BhBaseButton
+      v-if="isDisplayedCheckOutButton"
+      class="check-out"
+      @click="$emit('check-out')">
       Check Out
     </BhBaseButton>
   </div>
@@ -16,6 +19,12 @@
     name: 'BhCartButtons',
     components: {
       BhBaseButton
+    },
+    props: {
+      isDisplayedCheckOutButton: {
+        type: Boolean,
+        default: true
+      }
     },
     methods: {
       goToShopping() {

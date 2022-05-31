@@ -60,7 +60,10 @@
   const store = useStore()
   const route = useRoute()
   const router = useRouter()
-  store.dispatch(action.GET_PRODUCTS)
+
+  if (!store.state.products.length) {
+    store.dispatch(action.GET_PRODUCTS)
+  }
 
   const getProducts = computed(() => store.state.products)
 

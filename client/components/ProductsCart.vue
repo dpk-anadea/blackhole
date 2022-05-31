@@ -12,7 +12,9 @@
 
     <p class="hint">Review your order below and click checkout to continue!</p>
 
-    <BhCartButtons @check-out="openModal(modalName.PAY)" />
+    <BhCartButtons
+      :isDisplayedCheckOutButton="!!products.length"
+      @check-out="openModal(modalName.PAY)" />
 
     <div class="products">
       <div v-for="product in products" :key="product.id" class="product">
@@ -30,7 +32,10 @@
 
     <div class="total">${{ totalCost }}</div>
 
-    <BhCartButtons class="cart-buttons" @check-out="openModal(modalName.PAY)" />
+    <BhCartButtons
+      v-if="products.length"
+      class="cart-buttons"
+      @check-out="openModal(modalName.PAY)" />
   </section>
 </template>
 
