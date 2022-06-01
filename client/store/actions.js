@@ -129,11 +129,12 @@ export default {
     commit(mutator.SET_FLASH_MESSAGE, isShow)
   },
 
-  async [action.POST_STRIPE]({ commit }, payData) {
+  async [action.POST_STRIPE]({ commit, dispatch }, payData) {
     commit(mutator.SET_LOADING, true)
     try {
       const response = await api.postStripe(payData)
       commit(mutator.SET_ORDER, response)
+      dispatch(action.GET_ORDERS, payData.user_id)
       return response
     } catch (e) {
       console.log(e)

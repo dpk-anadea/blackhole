@@ -2,10 +2,10 @@
   <section class="order-wrapper">
     <h1 class="title">Order</h1>
 
-    <div class="order-wrapper" v-if="currentOrder?.length">
+    <div class="order-wrapper" v-if="currentOrderItems?.length">
       <section
         class="order-section"
-        v-for="item in currentOrder"
+        v-for="item in currentOrderItems"
         :key="item.id">
         <div class="order-content product-name">{{ item.product.name }}</div>
         <div class="order-content">Cost: ${{ item.product.cost }}</div>
@@ -26,14 +26,15 @@
         user: get.CURRENT_USER,
         orders: get.ORDERS
       }),
-      queryId() {
-        return this.$route.query.id
+      orderId() {
+        return this.$route.query.orderId
       },
-      currentOrder() {
-        return this.orders.find((el) => el.id === +this.queryId)?.orderItems
+      currentOrderItems() {
+        return this.orders.find((el) => el.id === +this.orderId)?.orderItems
       }
     },
     async created() {
+      console.log(this.orders)
       if (!this.orders.length) {
         await this[action.GET_ORDERS](this.user.id)
       }

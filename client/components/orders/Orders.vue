@@ -10,7 +10,7 @@
         :key="item.id"
         @click="navigateToOrder(item.id)">
         <div class="order-content">
-          Date: {{ new Date(item.createdAt).toLocaleString() }}
+          Date: {{ formattedDate(item.createdAt) }}
         </div>
         <div class="order-content">Payment amount: ${{ item.total_cost }}</div>
       </section>
@@ -31,13 +31,16 @@
     },
     async created() {
       if (!this.orders.length) {
-        await this[action.GET_ORDERS](this.user.id)
+        await this[action.GET_ORDERS](this.user?.id)
       }
     },
     methods: {
       ...mapActions([action.GET_ORDERS]),
-      navigateToOrder(id) {
-        this.$router.push({ name: 'Order', query: { id } })
+      navigateToOrder(orderId) {
+        this.$router.push({ name: 'Order', query: { orderId } })
+      },
+      formattedDate(date) {
+        return new Date(date).toLocaleString()
       }
     }
   }

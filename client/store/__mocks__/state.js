@@ -53,5 +53,13 @@ export default {
       id: 3
     }
   ],
+  orders: [
+    {
+      id: 1
+    },
+    {
+      id: 2
+    }
+  ],
   currentOrder: { receipt_url: 'url', status: 'succeeded' }
 }
