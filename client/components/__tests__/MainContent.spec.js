@@ -1,6 +1,6 @@
+import state from '@/store/state'
 import { mount } from '@vue/test-utils'
 import { action } from '@/store/constants'
-import state from '@/store/state'
 import actions from '@/store/__mocks__/actions'
 import { createNewStore } from '@/lib/test-helpers'
 
