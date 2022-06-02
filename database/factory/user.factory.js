@@ -13,6 +13,7 @@ const user = {
 }
 
 const hashPassword = bcrypt.hash('123456', 3)
+const resetPasswordToken = bcrypt.hash('123456', 3)
 const activationLink = uuid.v4()
 
 factory.define('user', User, {
@@ -20,6 +21,7 @@ factory.define('user', User, {
   phone: faker.phone.phoneNumber(),
   email: faker.internet.email(user.first_name, user.last_name),
   password: hashPassword,
+  reset_password_link: resetPasswordToken,
   activated: false,
   activation_link: activationLink
 })
