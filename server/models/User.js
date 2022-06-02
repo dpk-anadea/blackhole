@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       phone: DataTypes.STRING,
       password: DataTypes.STRING,
+      resetPassword: DataTypes.STRING,
       activation_link: DataTypes.STRING,
       activated: DataTypes.BOOLEAN
     },
