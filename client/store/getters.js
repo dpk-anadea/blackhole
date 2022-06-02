@@ -25,7 +25,6 @@ export default {
   },
 
   [get.ORDERS](state) {
-    console.log(state.orders)
     return state.orders
   }
 }
