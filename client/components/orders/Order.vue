@@ -2,11 +2,11 @@
   <section class="order-wrapper">
     <h1 class="title">Order</h1>
 
-    <div class="order-wrapper" v-if="currentOrderItems?.length">
+    <div v-if="currentOrderItems?.length" class="order-wrapper">
       <section
-        class="order-section"
         v-for="item in currentOrderItems"
-        :key="item.id">
+        :key="item.id"
+        class="order-section">
         <div class="order-content product-name">{{ item.product.name }}</div>
         <div class="order-content">Cost: ${{ item.product.cost }}</div>
         <div class="order-content">Quantity: {{ item.quantity }}</div>
@@ -34,7 +34,6 @@
       }
     },
     async created() {
-      console.log(this.orders)
       if (!this.orders.length) {
         await this[action.GET_ORDERS](this.user.id)
       }
