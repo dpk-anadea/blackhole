@@ -153,5 +153,17 @@ export default {
     } finally {
       commit(mutator.SET_LOADING, false)
     }
+  },
+
+  async [action.RESET_PASSWORD]({ commit }, { email }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const user = await api.postResetPassword(email)
+      commit(mutator.SET_USER, user.user)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
   }
 }

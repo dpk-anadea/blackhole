@@ -17,6 +17,8 @@ router.post('/login', authController.login)
 router.post('/logout', authController.logout)
 router.get('/activate/:link', authController.activate)
 router.get('/refresh', authController.refresh)
+router.post('/reset-password', authController.resetPassword)
+router.post('/reset-password/:reset_link', userController.resetPasswordChange)
 
 router.get('/products', productController.getProduct)
 router.post('/products', productController.createProduct)

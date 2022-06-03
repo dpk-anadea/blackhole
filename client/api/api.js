@@ -36,6 +36,10 @@ export default {
     return fetch('post', 'stripe/pay', paymentDetails)
   },
 
+  async postResetPassword(email) {
+    return fetch('post', 'reset-password', { email })
+  },
+
   async getOrders(userId, token) {
     const config = {
       headers: {

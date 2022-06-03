@@ -95,6 +95,32 @@ class UserService {
     await tokenService.saveToken(user.id, tokens.refreshToken)
     return { ...tokens, user }
   }
+
+  async resetPassword(email) {
+    const user = await User.findOne({
+      where: { email }
+    })
+    if (!user) throw ApiError.BadRequest('invalid link')
+
+    const reset_link = uuid.v4()
+
+    await mailService.sendResetPasswordMail(email, process.env.CLIENT_URL)
+
+    await user.update({ reset_password_link: reset_link })
+    await user.save()
+  }
+
+  async resetPasswordChange(resetPasswordLink, password) {
+    const user = await User.findOne({
+      where: { reset_password_link: resetPasswordLink }
+    })
+    if (!user) throw ApiError.BadRequest('invalid link')
+
+    const hashPassword = await bcrypt.hash(password, 3)
+
+    await user.update({ password: hashPassword })
+    await user.save()
+  }
 }
 
 module.exports = new UserService()

@@ -52,6 +52,17 @@ class AuthController {
       next(err)
     }
   }
+
+  async resetPassword(req, res, next) {
+    try {
+      const email = req.body.email
+      const userData = await userService.resetPassword(email)
+
+      res.json(userData)
+    } catch (err) {
+      next(err)
+    }
+  }
 }
 
 module.exports = new AuthController()
