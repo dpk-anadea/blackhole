@@ -34,9 +34,7 @@ export default {
   product: product,
   cart: [
     {
-      id: 1,
-      name: 'Product-1',
-      description: 'test@mail.ru',
+      ...product,
       quantity: 1
     }
   ],

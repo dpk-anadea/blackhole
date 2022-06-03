@@ -18,13 +18,12 @@ class UserService {
       throw ApiError.BadRequest(`user with email ${email} already exists`)
     }
 
-    const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
     const user = await User.create({
       first_name: firstName,
       last_name: lastName,
       email,
-      password: hashPassword,
+      password,
       phone,
       activation_link: activationLink
     })

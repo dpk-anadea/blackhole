@@ -34,6 +34,7 @@ describe('Mutations', () => {
       it('the product must be added to the basket array and add "quantity: 1" th the product object', async () => {
         mutations[mutator.SET_PRODUCT_TO_CART](state, mockState.product)
         expect(state.cart).toEqual(mockState.cart)
+        expect(state.cart[0].quantity).toEqual(1)
       })
     })
 
@@ -45,11 +46,11 @@ describe('Mutations', () => {
     })
 
     describe('when the current product is in the shopping cart and adding the product with quantity', () => {
-      it('the quantity should be increased by 1 "quantity: 2"', async () => {
+      it('the quantity should be increased by 4 "quantity: 4"', async () => {
         const product = { ...mockState.product, quantity: 4 }
 
         mutations[mutator.SET_PRODUCT_TO_CART](mockState, product)
-        expect(mockState.cart[0]).toEqual(product)
+        expect(mockState.cart[0].quantity).toEqual(4)
       })
     })
   })
