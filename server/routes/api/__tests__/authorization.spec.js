@@ -148,4 +148,15 @@ describe('User authorization', () => {
       expect(response.cookies).not.toBe(expect.anything())
     })
   })
+
+  describe('when reset password', () => {
+    const subject = async (email) =>
+      await request(app).post('/api/reset-password/').send({ email })
+
+    it('send email', async () => {
+      const response = await subject(email)
+
+      expect(response.statusCode).toBe(200)
+    })
+  })
 })

@@ -1,7 +1,7 @@
 import request from 'supertest'
 
 import app from '@server/app'
-import { sequelize } from '@server/models'
+import { sequelize, User } from '@server/models'
 import userFactory from '@factory/user.factory'
 
 jest.mock('nodemailer', () => ({
@@ -123,6 +123,24 @@ describe('Users', () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String)
         })
+      })
+    })
+
+    describe('when post reset password link', () => {
+      beforeEach(async () => {
+        user = await userFactory.create('user')
+      })
+
+      const subject = async (password) =>
+        await request(app)
+          .post(`/api/reset-password/${user.reset_password_link}`)
+          .send({ password })
+
+      it('update password', async () => {
+        const response = await subject(password)
+
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toMatch('Password changed!')
       })
     })
   })
