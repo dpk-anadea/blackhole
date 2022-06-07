@@ -106,7 +106,7 @@ class UserService {
 
     await mailService.sendResetPasswordMail(
       email,
-      `${process.env.API_URL}/change-password/${reset_link}`
+      `${process.env.CLIENT_URL}/change-password/${reset_link}`
     )
 
     await user.update({ reset_password_link: reset_link })

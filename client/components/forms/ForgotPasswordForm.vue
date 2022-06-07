@@ -2,14 +2,11 @@
   <div v-if="!resetSuccess">
     <form @submit.prevent="submit" class="register-form-wrapper">
       <span class="reset-message">{{ errorResetMessage }}</span>
-      <input
-        v-model="email"
-        class="input"
-        data-test="email"
-        placeholder="Email" />
+
+      <BaseInput v-model="email" data-test="email" placeholder="Email" />
 
       <div class="login-buttons">
-        <button type="submit" class="button">Send</button>
+        <BhBaseButton type="submit" class="button">Send</BhBaseButton>
       </div>
     </form>
 
@@ -23,7 +20,7 @@
 
   <div v-else class="reset-password-success">
     We have sent you the email on
-    <span class="email">{{ state.email }}</span> to reset your password.
+    <span class="email">{{ email }}</span> to reset your password.
   </div>
 </template>
 
@@ -31,6 +28,9 @@
   import { ref } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
+
+  import BaseInput from '@/components/BaseInput'
+  import BhBaseButton from '@/components/buttons/BhBaseButton'
 
   const store = useStore()
 
@@ -40,13 +40,13 @@
 
   const submit = async () => {
     const resetPassword = await store.dispatch(action.POST_REQUEST_PASSWORD, {
-      email: email
+      email: email.value
     })
 
     if (resetPassword.message) {
       errorResetMessage.value = 'The user with this email was not found!'
     } else {
-      resetSuccess.value = true
+      resetSuccess.value = !resetSuccess.value
     }
   }
 </script>
@@ -57,44 +57,10 @@
     flex-direction: column;
   }
 
-  .input {
-    outline: none;
-
-    width: 320px;
-    max-width: 100%;
-    height: 38px;
-    margin: 0 0 40px;
-
-    border: 0;
-    border-bottom: 1px solid #ffffff;
-
-    background-color: transparent;
-    color: white;
-    font-size: 18px;
-
-    &::placeholder {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 400;
-      font-family: 'Montserrat', sans-serif;
-    }
-  }
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s, color 600000s 0s;
-  }
-
   .button {
-    cursor: pointer;
-    outline: none;
-
-    padding: 10px 15px;
-
     border: none;
     border-radius: 10px;
 
-    letter-spacing: 1px;
     font-size: 15px;
     color: #fff;
     background: #767676;

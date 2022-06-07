@@ -10,5 +10,3 @@
   import AccountLayout from '@/components/layout/AccountLayout'
   import ResetPasswordForm from '@/components/forms/ResetPasswordForm'
 </script>
-
-<style scoped></style>

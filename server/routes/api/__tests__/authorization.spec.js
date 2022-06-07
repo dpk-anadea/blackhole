@@ -3,6 +3,12 @@ import app from '@server/app'
 import { sequelize, Token, User } from '@server/models'
 import userFactory from '@factory/user.factory'
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockReturnValue(() => {})
+  })
+}))
+
 describe('User authorization', () => {
   let user, email, token
   const password = '123456'

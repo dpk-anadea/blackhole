@@ -1,18 +1,18 @@
 <template>
   <form class="change-form-wrapper" @submit.prevent="submit">
-    <input
+    <BaseInput
       v-model="password"
-      class="input"
-      type="password"
       data-test="password"
-      placeholder="Password" />
-    <input
-      v-model="confirmPassword"
-      class="input"
       type="password"
-      data-test="confirm-password"
+      placeholder="Password" />
+
+    <BaseInput
+      v-model="confirmPassword"
+      data-test="password"
+      type="password"
       placeholder="Confirm password" />
-    <button type="submit" class="button">CHANGE PASSWORD</button>
+
+    <BhBaseButton type="submit" class="button">CHANGE PASSWORD</BhBaseButton>
   </form>
 </template>
 
@@ -21,6 +21,9 @@
   import { action } from '@/store/constants'
   import { useStore } from 'vuex'
   import { useRoute } from 'vue-router'
+
+  import BaseInput from '@/components/BaseInput'
+  import BhBaseButton from '@/components/buttons/BhBaseButton'
 
   const store = useStore()
   const route = useRoute()
@@ -33,7 +36,7 @@
   const submit = async () => {
     await store.dispatch(action.POST_RESET_PASSWORD, {
       resetLink: token.value,
-      password: password
+      password: password.value
     })
   }
 </script>
@@ -45,48 +48,10 @@
     min-height: 100vh;
   }
 
-  .input {
-    outline: none;
-
-    width: 320px;
-    max-width: 100%;
-    height: 38px;
-    margin: 0 0 40px;
-
-    border: 0;
-    border-bottom: 1px solid #ffffff;
-
-    background-color: transparent;
-    color: white;
-    font-size: 18px;
-
-    &::placeholder {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 400;
-      font-family: 'Montserrat', sans-serif;
-    }
-  }
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s, color 600000s 0s;
-  }
-
-  input:focus {
-    background-color: transparent;
-  }
-
   .button {
-    cursor: pointer;
-    outline: none;
-
-    padding: 10px 15px;
-
     border: none;
     border-radius: 10px;
 
-    letter-spacing: 1px;
     font-size: 15px;
     color: #fff;
     background: #767676;

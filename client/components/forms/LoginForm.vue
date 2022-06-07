@@ -1,20 +1,18 @@
 <template>
   <form class="register-form-wrapper" @submit.prevent="submit">
-    <input
-      v-model="state.email"
-      class="input"
-      data-test="email"
-      placeholder="Email" />
-    <input
-      v-model="state.password"
-      class="input"
+    <BaseInput v-model="email" data-test="email" placeholder="Email" />
+
+    <BaseInput
+      v-model="password"
       type="password"
       data-test="password"
       placeholder="Password" />
 
     <div class="login-buttons">
-      <button @click="goToResetPassword" class="button">FORGOT PASSWORD</button>
-      <button type="submit" class="button">LOGIN</button>
+      <BhBaseButton @click="goToResetPassword" class="button">
+        FORGOT PASSWORD
+      </BhBaseButton>
+      <BhBaseButton type="submit" class="button">LOGIN</BhBaseButton>
     </div>
   </form>
 
@@ -33,23 +31,28 @@
 </template>
 
 <script setup>
-  import { reactive } from 'vue'
+  import { ref, watch } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
   import { useRouter } from 'vue-router'
 
+  import BaseInput from '@/components/BaseInput'
+  import BhBaseButton from '@/components/buttons/BhBaseButton'
+
   const store = useStore()
   const router = useRouter()
 
-  const state = reactive({
-    email: '',
-    password: ''
+  let email = ref('')
+  let password = ref('')
+
+  watch(email, () => {
+    console.log(email)
   })
 
-  const submit = () => {
-    store.dispatch(action.LOGIN, {
-      email: state.email,
-      password: state.password
+  const submit = async () => {
+    await store.dispatch(action.LOGIN, {
+      email: email.value,
+      password: password.value
     })
   }
 
@@ -64,44 +67,10 @@
     flex-direction: column;
   }
 
-  .input {
-    outline: none;
-
-    width: 320px;
-    max-width: 100%;
-    height: 38px;
-    margin: 0 0 40px;
-
-    border: 0;
-    border-bottom: 1px solid #ffffff;
-
-    background-color: transparent;
-    color: white;
-    font-size: 18px;
-
-    &::placeholder {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 400;
-      font-family: 'Montserrat', sans-serif;
-    }
-  }
-
-  input:-webkit-autofill,
-  input:-webkit-autofill:focus {
-    transition: background-color 600000s 0s, color 600000s 0s;
-  }
-
   .button {
-    cursor: pointer;
-    outline: none;
-
-    padding: 10px 15px;
-
     border: none;
     border-radius: 10px;
 
-    letter-spacing: 1px;
     font-size: 15px;
     color: #fff;
     background: #767676;
