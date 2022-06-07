@@ -1,7 +1,7 @@
 import request from 'supertest'
 
 import app from '@server/app'
-import { sequelize, User } from '@server/models'
+import { sequelize } from '@server/models'
 import userFactory from '@factory/user.factory'
 
 jest.mock('nodemailer', () => ({
@@ -68,15 +68,15 @@ describe('Users', () => {
     })
 
     const login = async (email, password) =>
-      await request(app).post('/api/login').send({ email, password })
+        await request(app).post('/api/login').send({email, password})
     const password = '123456'
 
     describe('when user authorized', () => {
       it('get all users', async () => {
-        const { body: authUser } = await login(user.email, password)
+        const {body: authUser} = await login(user.email, password)
         const response = await request(app)
-          .get('/api/users')
-          .set('Authorization', 'Bearer ' + authUser.accessToken)
+            .get('/api/users')
+            .set('Authorization', 'Bearer ' + authUser.accessToken)
 
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(1)
@@ -93,10 +93,10 @@ describe('Users', () => {
 
     describe('when invalid access token', () => {
       it('get all users', async () => {
-        const { body: authUser } = await login(user.email, password)
+        const {body: authUser} = await login(user.email, password)
         const response = await request(app)
-          .get('/api/users')
-          .set('Authorization', 'Bearer not' + authUser.accessToken)
+            .get('/api/users')
+            .set('Authorization', 'Bearer not' + authUser.accessToken)
 
         expect(response.statusCode).toBe(401)
         expect(response.body.message).toEqual('User is not authorized')
@@ -124,24 +124,6 @@ describe('Users', () => {
           createdAt: expect.any(String),
           updatedAt: expect.any(String)
         })
-      })
-    })
-
-    describe('when post reset password link', () => {
-      beforeEach(async () => {
-        user = await userFactory.create('user')
-      })
-
-      const subject = async (password) =>
-        await request(app)
-          .post(`/api/reset-password/${user.reset_password_link}`)
-          .send({ password })
-
-      it('update password', async () => {
-        const response = await subject(password)
-
-        expect(response.statusCode).toBe(200)
-        expect(response.body).toMatch('Password changed!')
       })
     })
   })

@@ -11,14 +11,14 @@ const user = {
   last_name: faker.name.lastName()
 }
 const activationLink = uuid.v4()
-const reset_link = uuid.v4()
+const resetLink = uuid.v4()
 
 factory.define('user', User, {
   ...user,
   phone: faker.phone.phoneNumber(),
   email: faker.internet.email(user.first_name, user.last_name),
   password: hashPassword,
-  reset_password_link: reset_link,
+  reset_password_link: resetLink,
   activated: false,
   activation_link: activationLink
 })

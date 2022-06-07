@@ -35,7 +35,7 @@ export const routes = [
   },
   {
     name: 'Product',
-    path: '/products/:product_id',
+    path: '/products/:productId',
     component: ProductView
   },
   {
@@ -75,7 +75,7 @@ export const routes = [
   },
   {
     name: 'ChangePassword',
-    path: '/change-password/:reset_link',
+    path: '/change-password/:resetLink',
     component: ChangePasswordView
   }
 ]

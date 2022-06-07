@@ -36,7 +36,7 @@ export default {
     return fetch('post', 'stripe/pay', paymentDetails)
   },
 
-  async postResetPassword(email) {
+  async postRequestPassword(email) {
     return fetch('post', 'reset-password', { email })
   },
 
@@ -50,7 +50,7 @@ export default {
     return fetch('get', `users/${userId}/orders`, config)
   },
 
-  async postChangePassword(reset_link, password) {
+  async postResetPassword(reset_link, password) {
     return fetch('post', `reset-password/${reset_link}`, { password })
   }
 }

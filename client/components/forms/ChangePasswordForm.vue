@@ -1,13 +1,13 @@
 <template>
   <form class="change-form-wrapper" @submit.prevent="submit">
     <input
-      v-model="state.password"
+      v-model="password"
       class="input"
       type="password"
       data-test="password"
       placeholder="Password" />
     <input
-      v-model="state.confirmPassword"
+      v-model="confirmPassword"
       class="input"
       type="password"
       data-test="confirm-password"
@@ -25,17 +25,17 @@
   const store = useStore()
   const route = useRoute()
 
-  const state = reactive({
+  const { password, confirmPassword } = reactive({
     password: '',
     confirmPassword: ''
   })
 
-  const token = computed(() => route.params.reset_link)
+  const token = computed(() => route.params.resetLink)
 
   const submit = async () => {
-    await store.dispatch(action.CHANGE_PASSWORD, {
-      reset_link: token.value,
-      password: state.password
+    await store.dispatch(action.POST_RESET_PASSWORD, {
+      resetLink: token.value,
+      password: password
     })
   }
 </script>

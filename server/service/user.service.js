@@ -96,7 +96,7 @@ class UserService {
     return { ...tokens, user }
   }
 
-  async resetPassword(email) {
+  async sendResetPassword(email) {
     const user = await User.findOne({
       where: { email }
     })
@@ -106,14 +106,14 @@ class UserService {
 
     await mailService.sendResetPasswordMail(
       email,
-      `http://localhost:8080/change-password/${reset_link}`
+      `${process.env.API_URL}/change-password/${reset_link}`
     )
 
     await user.update({ reset_password_link: reset_link })
     await user.save()
   }
 
-  async resetPasswordChange(resetPasswordLink, password) {
+  async resetPassword(resetPasswordLink, password) {
     const user = await User.findOne({
       where: { reset_password_link: resetPasswordLink }
     })

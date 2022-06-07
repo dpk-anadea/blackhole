@@ -53,12 +53,24 @@ class AuthController {
     }
   }
 
-  async resetPassword(req, res, next) {
+  async sendResetPasswordResponse(req, res, next) {
     try {
       const email = req.body.email
-      const userData = await userService.resetPassword(email)
+      const userData = await userService.sendResetPassword(email)
 
       res.json(userData)
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  async resetPassword(req, res, next) {
+    try {
+      const resetPasswordLink = req.params.reset_link
+      const newPassword = req.body.password
+      await userService.resetPassword(resetPasswordLink, newPassword)
+
+      res.json('Password changed!')
     } catch (err) {
       next(err)
     }

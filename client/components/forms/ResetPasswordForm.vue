@@ -1,57 +1,50 @@
 <template>
-  <form
-    v-if="!resetSuccess"
-    @submit.prevent="submit"
-    class="register-form-wrapper">
-    <span class="reset-message">{{ errorResetMessage }}</span>
-    <input
-      v-model="state.email"
-      class="input"
-      data-test="email"
-      placeholder="Email" />
+  <div v-if="!resetSuccess">
+    <form @submit.prevent="submit" class="register-form-wrapper">
+      <span class="reset-message">{{ errorResetMessage }}</span>
+      <input
+        v-model="email"
+        class="input"
+        data-test="email"
+        placeholder="Email" />
 
-    <div class="login-buttons">
-      <button type="submit" class="button">Send</button>
-    </div>
-  </form>
+      <div class="login-buttons">
+        <button type="submit" class="button">Send</button>
+      </div>
+    </form>
 
-  <div v-if="!resetSuccess" class="hint">
     <div class="hint-text">
       *Don't have an account?
-      <router-link :to="{ name: 'register' }" class="active-link">
+      <router-link :to="{ name: 'Register' }" class="active-link">
         Click here to create one.
       </router-link>
     </div>
   </div>
 
-  <div class="reset-password-success" v-else>
+  <div v-else class="reset-password-success">
     We have sent you the email on
     <span class="email">{{ state.email }}</span> to reset your password.
   </div>
 </template>
 
 <script setup>
-  import { reactive, ref } from 'vue'
+  import { ref } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
 
   const store = useStore()
 
-  const state = reactive({
-    email: '',
-    password: ''
-  })
-
+  let email = ref('')
   let resetSuccess = ref(false)
   let errorResetMessage = ref('')
 
   const submit = async () => {
-    const resetPassword = await store.dispatch(action.RESET_PASSWORD, {
-      email: state.email
+    const resetPassword = await store.dispatch(action.POST_REQUEST_PASSWORD, {
+      email: email
     })
 
     if (resetPassword.message) {
-      errorResetMessage.value = 'This email was not registered'
+      errorResetMessage.value = 'The user with this email was not found!'
     } else {
       resetSuccess.value = true
     }
@@ -147,11 +140,6 @@
 
   .email {
     color: #007bff;
-  }
-
-  .login-buttons {
-    display: flex;
-    justify-content: space-between;
   }
 
   .reset-password-success {

@@ -155,10 +155,10 @@ export default {
     }
   },
 
-  async [action.RESET_PASSWORD]({ commit }, { email }) {
+  async [action.POST_REQUEST_PASSWORD]({ commit }, { email }) {
     commit(mutator.SET_LOADING, true)
     try {
-      const response = await api.postResetPassword(email)
+      const response = await api.postRequestPassword(email)
       return response
     } catch (e) {
       console.log(e)
@@ -168,10 +168,10 @@ export default {
     }
   },
 
-  async [action.CHANGE_PASSWORD]({ commit }, { reset_link, password }) {
+  async [action.POST_RESET_PASSWORD]({ commit }, { reset_link, password }) {
     commit(mutator.SET_LOADING, true)
     try {
-      const response = await api.postChangePassword(reset_link, password)
+      const response = await api.postResetPassword(reset_link, password)
       return response
     } catch (e) {
       console.log(e)

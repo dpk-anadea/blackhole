@@ -67,7 +67,7 @@
 
   const getProducts = computed(() => store.state.products)
 
-  const productId = computed(() => route.params.product_id)
+  const productId = computed(() => route.params.productId)
 
   const currentProduct = computed(() =>
     getProducts.value?.find((el) => el.id === +productId.value)

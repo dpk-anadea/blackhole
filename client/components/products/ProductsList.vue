@@ -141,7 +141,7 @@
   }
 
   function navigateToProduct(id) {
-    router.push({ name: 'Product', params: { product_id: id } })
+    router.push({ name: 'Product', params: { productId: id } })
   }
 </script>
 
