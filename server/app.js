@@ -4,7 +4,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
 const mainRoutes = require('./routes/web/main.router')
-const apiRoutes = require('./routes/api/routes')
+const apiRoutes = require('./routes/api')
 const errorMiddleware = require('./middlewares/error.middleware')
 
 dotenv.config()
