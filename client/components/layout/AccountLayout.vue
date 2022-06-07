@@ -1,6 +1,6 @@
 <template>
   <div class="account-layout-wrapper">
-    <router-link class="logo" :to="{ name: 'home' }">
+    <router-link class="logo" :to="{ name: 'Home' }">
       <img class="logo-img" src="../../images/logo.webp" alt="logo" />
     </router-link>
 

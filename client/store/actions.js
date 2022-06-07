@@ -37,7 +37,7 @@ export default {
       localStorage.setItem('token', user.accessToken)
       commit(mutator.SET_USER, user.user)
       commit(mutator.SET_AUTH, true)
-      await router.push({ name: 'home' })
+      await router.push({ name: 'Home' })
     } catch (e) {
       console.log(e)
     } finally {
@@ -51,7 +51,7 @@ export default {
       localStorage.removeItem('token')
       commit(mutator.SET_USER, null)
       commit(mutator.SET_AUTH, false)
-      await router.push({ name: 'home' })
+      await router.push({ name: 'Home' })
     } catch (e) {
       console.log(e)
     } finally {
@@ -159,6 +159,19 @@ export default {
     commit(mutator.SET_LOADING, true)
     try {
       const response = await api.postResetPassword(email)
+      return response
+    } catch (e) {
+      console.log(e)
+      return { message: e.response.data.message }
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
+
+  async [action.CHANGE_PASSWORD]({ commit }, { reset_link, password }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const response = await api.postChangePassword(reset_link, password)
       return response
     } catch (e) {
       console.log(e)

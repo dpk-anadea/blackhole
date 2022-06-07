@@ -26,7 +26,7 @@ class UsersController {
     }
   }
 
-  async resetPasswordChange(req, res, next) {
+  async resetPassword(req, res, next) {
     try {
       const resetPasswordLink = req.params.reset_link
       const newPassword = req.body.password

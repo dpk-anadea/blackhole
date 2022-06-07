@@ -20,7 +20,7 @@ export default {
 
     if (to.name === 'EmailVerify' && (!isAuth || isActivated)) {
       return {
-        name: 'home'
+        name: 'Home'
       }
     }
   }

@@ -67,16 +67,16 @@
 
   const getProducts = computed(() => store.state.products)
 
-  const queryId = computed(() => route.query.id)
+  const productId = computed(() => route.params.product_id)
 
   const currentProduct = computed(() =>
-    getProducts.value?.find((el) => el.id === +queryId.value)
+    getProducts.value?.find((el) => el.id === +productId.value)
   )
 
   const addToCart = async () => {
     await store.dispatch(action.ADD_PRODUCT_TO_CART, currentProduct.value)
     await store.dispatch(action.TOGGLE_FLASH_MESSAGE, true)
-    await router.push({ name: 'products' })
+    await router.push({ name: 'Products' })
   }
 </script>
 

@@ -19,6 +19,6 @@
 
   const isAuth = computed(() => state.isAuth)
   if (isAuth.value) {
-    router.push({ name: 'home' })
+    router.push({ name: 'Home' })
   }
 </script>

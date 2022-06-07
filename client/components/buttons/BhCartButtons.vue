@@ -28,7 +28,7 @@
     },
     methods: {
       goToShopping() {
-        this.$router.push({ name: 'products' })
+        this.$router.push({ name: 'Products' })
       }
     }
   }

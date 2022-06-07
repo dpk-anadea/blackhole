@@ -104,7 +104,10 @@ class UserService {
 
     const reset_link = uuid.v4()
 
-    await mailService.sendResetPasswordMail(email, process.env.CLIENT_URL)
+    await mailService.sendResetPasswordMail(
+      email,
+      `http://localhost:8080/change-password/${reset_link}`
+    )
 
     await user.update({ reset_password_link: reset_link })
     await user.save()

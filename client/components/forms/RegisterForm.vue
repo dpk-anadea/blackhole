@@ -38,7 +38,7 @@
   <div class="hint">
     <div class="hint-text">
       Already have an account?
-      <router-link :to="{ name: 'login' }" class="active-link">
+      <router-link :to="{ name: 'Login' }" class="active-link">
         Click here to login.
       </router-link>
     </div>

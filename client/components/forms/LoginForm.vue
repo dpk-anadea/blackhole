@@ -25,7 +25,7 @@
     </div>
     <div class="hint-text">
       *Don't have an account?
-      <router-link :to="{ name: 'register' }" class="active-link">
+      <router-link :to="{ name: 'Register' }" class="active-link">
         Click here to create one.
       </router-link>
     </div>

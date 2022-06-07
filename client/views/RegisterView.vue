@@ -29,7 +29,7 @@
 
     try {
       await store.dispatch(action.CREATE_USER, registerFormData)
-      router.push({ name: 'home' })
+      router.push({ name: 'Home' })
     } catch (error) {
       console.log(error)
     }
