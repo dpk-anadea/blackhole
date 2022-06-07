@@ -3,6 +3,12 @@ import app from '@server/app'
 import { sequelize, Token, User } from '@server/models'
 import userFactory from '@factory/user.factory'
 
+jest.mock('nodemailer', () => ({
+  createTransport: jest.fn().mockReturnValue({
+    sendMail: jest.fn().mockReturnValue(() => {})
+  })
+}))
+
 describe('User authorization', () => {
   let user, email, token
   const password = '123456'
@@ -146,6 +152,31 @@ describe('User authorization', () => {
 
       token = await Token.findOne({ where: { user: user.id } })
       expect(response.cookies).not.toBe(expect.anything())
+    })
+  })
+
+  describe('when reset password', () => {
+    it('send email', async () => {
+      const response = await request(app)
+        .post('/api/reset-password/')
+        .send({ email })
+
+      expect(response.statusCode).toBe(200)
+    })
+  })
+
+  describe('when post reset password link', () => {
+    beforeEach(async () => {
+      user = await userFactory.create('user')
+    })
+
+    it('update password', async () => {
+      const response = await request(app)
+        .post(`/api/reset-password/${user.reset_password_link}`)
+        .send({ password })
+
+      expect(response.statusCode).toBe(200)
+      expect(response.body).toMatch('Password changed!')
     })
   })
 })

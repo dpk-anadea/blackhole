@@ -9,31 +9,33 @@ import ThanksForBuyView from '@/views/ThanksForBuyView'
 import OrdersView from '@/views/OrdersView'
 import OrderView from '@/views/OrderView'
 import DownloadsView from '@/views/DownloadsView'
+import ForgotPasswordView from '@/views/ForgotPasswordView'
+import ResetPasswordView from '@/views/ResetPasswordView'
 
 export const routes = [
   {
-    name: 'home',
+    name: 'Home',
     path: '/',
     component: HomePage
   },
   {
-    name: 'register',
+    name: 'Register',
     path: '/register',
     component: RegisterView
   },
   {
-    name: 'login',
+    name: 'Login',
     path: '/login',
     component: LoginView
   },
   {
-    name: 'products',
+    name: 'Products',
     path: '/products',
     component: ProductsView
   },
   {
-    name: 'product',
-    path: '/product',
+    name: 'Product',
+    path: '/products/:productId',
     component: ProductView
   },
   {
@@ -65,5 +67,15 @@ export const routes = [
     name: 'Downloads',
     path: '/downloads',
     component: DownloadsView
+  },
+  {
+    name: 'ResetPassword',
+    path: '/reset',
+    component: ForgotPasswordView
+  },
+  {
+    name: 'ChangePassword',
+    path: '/change-password/:resetLink',
+    component: ResetPasswordView
   }
 ]

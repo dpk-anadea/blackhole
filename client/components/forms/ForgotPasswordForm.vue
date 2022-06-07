@@ -1,26 +1,15 @@
 <template>
-  <form class="register-form-wrapper" @submit.prevent="submit">
-    <BaseInput v-model="email" data-test="email" placeholder="Email" />
+  <div v-if="!resetSuccess">
+    <form @submit.prevent="submit" class="register-form-wrapper">
+      <span class="reset-message">{{ errorResetMessage }}</span>
 
-    <BaseInput
-      v-model="password"
-      type="password"
-      data-test="password"
-      placeholder="Password" />
+      <BaseInput v-model="email" data-test="email" placeholder="Email" />
 
-    <div class="login-buttons">
-      <BhBaseButton @click="goToResetPassword" class="button">
-        FORGOT PASSWORD
-      </BhBaseButton>
-      <BhBaseButton type="submit" class="button">LOGIN</BhBaseButton>
-    </div>
-  </form>
+      <div class="login-buttons">
+        <BhBaseButton type="submit" class="button">Send</BhBaseButton>
+      </div>
+    </form>
 
-  <div class="hint">
-    <div class="hint-text">
-      *If you already placed an order and did not activate your account please
-      click activate account below.
-    </div>
     <div class="hint-text">
       *Don't have an account?
       <router-link :to="{ name: 'Register' }" class="active-link">
@@ -28,36 +17,37 @@
       </router-link>
     </div>
   </div>
+
+  <div v-else class="reset-password-success">
+    We have sent you the email on
+    <span class="email">{{ email }}</span> to reset your password.
+  </div>
 </template>
 
 <script setup>
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
   import { useStore } from 'vuex'
   import { action } from '@/store/constants'
-  import { useRouter } from 'vue-router'
 
   import BaseInput from '@/components/BaseInput'
   import BhBaseButton from '@/components/buttons/BhBaseButton'
 
   const store = useStore()
-  const router = useRouter()
 
   let email = ref('')
-  let password = ref('')
-
-  watch(email, () => {
-    console.log(email)
-  })
+  let resetSuccess = ref(false)
+  let errorResetMessage = ref('')
 
   const submit = async () => {
-    await store.dispatch(action.LOGIN, {
-      email: email.value,
-      password: password.value
+    const resetPassword = await store.dispatch(action.POST_REQUEST_PASSWORD, {
+      email: email.value
     })
-  }
 
-  const goToResetPassword = () => {
-    router.push({ name: 'ResetPassword' })
+    if (resetPassword.message) {
+      errorResetMessage.value = 'The user with this email was not found!'
+    } else {
+      resetSuccess.value = !resetSuccess.value
+    }
   }
 </script>
 
@@ -87,6 +77,11 @@
     margin: 50px 0;
   }
 
+  .reset-message {
+    font-size: 20px;
+    color: #fa1807;
+  }
+
   .hint-text {
     text-align: center;
 
@@ -109,8 +104,11 @@
     }
   }
 
-  .login-buttons {
-    display: flex;
-    justify-content: space-between;
+  .email {
+    color: #007bff;
+  }
+
+  .reset-password-success {
+    min-height: 100vh;
   }
 </style>

@@ -41,6 +41,7 @@ describe('Users', () => {
             id: expect.any(Number),
             password: expect.any(String),
             activation_link: expect.any(String),
+            reset_password_link: null,
             createdAt: expect.any(String),
             updatedAt: expect.any(String)
           }

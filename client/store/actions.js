@@ -37,7 +37,7 @@ export default {
       localStorage.setItem('token', user.accessToken)
       commit(mutator.SET_USER, user.user)
       commit(mutator.SET_AUTH, true)
-      await router.push({ name: 'home' })
+      await router.push({ name: 'Home' })
     } catch (e) {
       console.log(e)
     } finally {
@@ -51,7 +51,7 @@ export default {
       localStorage.removeItem('token')
       commit(mutator.SET_USER, null)
       commit(mutator.SET_AUTH, false)
-      await router.push({ name: 'home' })
+      await router.push({ name: 'Home' })
     } catch (e) {
       console.log(e)
     } finally {
@@ -150,6 +150,32 @@ export default {
       commit(mutator.SET_ORDERS, orders)
     } catch (e) {
       console.log(e)
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
+
+  async [action.POST_REQUEST_PASSWORD]({ commit }, { email }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const response = await api.postRequestPassword(email)
+      return response
+    } catch (e) {
+      console.log(e)
+      return { message: e.response.data.message }
+    } finally {
+      commit(mutator.SET_LOADING, false)
+    }
+  },
+
+  async [action.POST_RESET_PASSWORD]({ commit }, { resetLink, password }) {
+    commit(mutator.SET_LOADING, true)
+    try {
+      const response = await api.postResetPassword(resetLink, password)
+      return response
+    } catch (e) {
+      console.log(e)
+      return { message: e.response.data.message }
     } finally {
       commit(mutator.SET_LOADING, false)
     }

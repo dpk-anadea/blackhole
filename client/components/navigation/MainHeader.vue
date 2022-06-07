@@ -12,17 +12,17 @@
         <span class="nav-item"> Sample Packs </span>
         <span class="nav-item"> Plugins </span>
         <span class="nav-item"> Free Downloads </span>
-        <router-link :to="{ name: 'home' }" class="nav-item">
+        <router-link :to="{ name: 'Home' }" class="nav-item">
           Home Page
         </router-link>
-        <router-link :to="{ name: 'products' }" class="nav-item">
+        <router-link :to="{ name: 'Products' }" class="nav-item">
           Products
         </router-link>
-        <router-link v-if="!isAuth" :to="{ name: 'register' }" class="nav-item">
+        <router-link v-if="!isAuth" :to="{ name: 'Register' }" class="nav-item">
           Create account
         </router-link>
         <MyAccount data-test="my-account" v-if="isAuth" class="nav-item" />
-        <router-link v-else :to="{ name: 'login' }" class="nav-item">
+        <router-link v-else :to="{ name: 'Login' }" class="nav-item">
           Login
         </router-link>
         <router-link :to="{ name: 'Cart' }" class="nav-item">

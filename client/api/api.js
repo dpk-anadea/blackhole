@@ -36,6 +36,10 @@ export default {
     return fetch('post', 'stripe/pay', paymentDetails)
   },
 
+  async postRequestPassword(email) {
+    return fetch('post', 'reset-password', { email })
+  },
+
   async getOrders(userId, token) {
     const config = {
       headers: {
@@ -44,5 +48,9 @@ export default {
     }
 
     return fetch('get', `users/${userId}/orders`, config)
+  },
+
+  async postResetPassword(resetLink, password) {
+    return fetch('post', `reset-password/${resetLink}`, { password })
   }
 }

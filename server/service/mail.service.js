@@ -26,6 +26,20 @@ class MailService {
       html: data
     })
   }
+
+  async sendResetPasswordMail(to, link) {
+    const data = await ejs.renderFile(
+      path.join(__dirname, '../../views/mails/reset-password.ejs'),
+      { link }
+    )
+    await this.transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to,
+      subject: 'Activation account ' + process.env.API_URL,
+      text: '',
+      html: data
+    })
+  }
 }
 
 module.exports = new MailService()
