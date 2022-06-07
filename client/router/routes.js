@@ -9,8 +9,8 @@ import ThanksForBuyView from '@/views/ThanksForBuyView'
 import OrdersView from '@/views/OrdersView'
 import OrderView from '@/views/OrderView'
 import DownloadsView from '@/views/DownloadsView'
+import ForgotPasswordView from '@/views/ForgotPasswordView'
 import ResetPasswordView from '@/views/ResetPasswordView'
-import ChangePasswordView from '@/views/ChangePasswordView'
 
 export const routes = [
   {
@@ -71,11 +71,11 @@ export const routes = [
   {
     name: 'ResetPassword',
     path: '/reset',
-    component: ResetPasswordView
+    component: ForgotPasswordView
   },
   {
     name: 'ChangePassword',
     path: '/change-password/:resetLink',
-    component: ChangePasswordView
+    component: ResetPasswordView
   }
 ]

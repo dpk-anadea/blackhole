@@ -1,14 +1,14 @@
 <template>
-  <AccountLayout title="Change Password">
+  <AccountLayout title="Forgot Password">
     <template #form>
-      <ChangePasswordForm />
+      <ForgotPasswordForm />
     </template>
   </AccountLayout>
 </template>
 
 <script setup>
   import AccountLayout from '@/components/layout/AccountLayout'
-  import ChangePasswordForm from '@/components/forms/ChangePasswordForm'
+  import ForgotPasswordForm from '@/components/forms/ForgotPasswordForm'
 </script>
 
 <style scoped></style>

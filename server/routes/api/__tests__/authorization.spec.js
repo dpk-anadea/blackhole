@@ -150,11 +150,10 @@ describe('User authorization', () => {
   })
 
   describe('when reset password', () => {
-    const subject = async (email) =>
-      await request(app).post('/api/reset-password/').send({ email })
-
     it('send email', async () => {
-      const response = await subject(email)
+      const response = await request(app)
+        .post('/api/reset-password/')
+        .send({ email })
 
       expect(response.statusCode).toBe(200)
     })
@@ -165,13 +164,10 @@ describe('User authorization', () => {
       user = await userFactory.create('user')
     })
 
-    const subject = async (password) =>
-      await request(app)
+    it('update password', async () => {
+      const response = await request(app)
         .post(`/api/reset-password/${user.reset_password_link}`)
         .send({ password })
-
-    it('update password', async () => {
-      const response = await subject(password)
 
       expect(response.statusCode).toBe(200)
       expect(response.body).toMatch('Password changed!')

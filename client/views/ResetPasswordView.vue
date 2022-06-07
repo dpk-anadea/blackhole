@@ -1,5 +1,5 @@
 <template>
-  <AccountLayout title="Forgot Password">
+  <AccountLayout title="Change Password">
     <template #form>
       <ResetPasswordForm />
     </template>
