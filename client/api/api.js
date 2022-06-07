@@ -50,7 +50,7 @@ export default {
     return fetch('get', `users/${userId}/orders`, config)
   },
 
-  async postResetPassword(reset_link, password) {
-    return fetch('post', `reset-password/${reset_link}`, { password })
+  async postResetPassword(resetLink, password) {
+    return fetch('post', `reset-password/${resetLink}`, { password })
   }
 }

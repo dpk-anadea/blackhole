@@ -168,10 +168,10 @@ export default {
     }
   },
 
-  async [action.POST_RESET_PASSWORD]({ commit }, { reset_link, password }) {
+  async [action.POST_RESET_PASSWORD]({ commit }, { resetLink, password }) {
     commit(mutator.SET_LOADING, true)
     try {
-      const response = await api.postResetPassword(reset_link, password)
+      const response = await api.postResetPassword(resetLink, password)
       return response
     } catch (e) {
       console.log(e)

@@ -44,5 +44,5 @@ export const get = {
   IS_SHOW_FLASH_MESSAGE: 'IS_SHOW_FLASH_MESSAGE',
 
   ORDER: 'ORDER',
-  ORDERS: 'ORDERS',
+  ORDERS: 'ORDERS'
 }
