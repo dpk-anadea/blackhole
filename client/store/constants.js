@@ -35,7 +35,6 @@ export const mutator = {
 }
 
 export const get = {
-  USERS: 'USERS',
   CURRENT_USER: 'CURRENT_USER',
   IS_AUTHENTICATED: 'IS_AUTHENTICATED',
   LOADING: 'LOADING',
