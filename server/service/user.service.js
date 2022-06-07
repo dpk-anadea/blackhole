@@ -119,9 +119,7 @@ class UserService {
     })
     if (!user) throw ApiError.BadRequest('invalid link')
 
-    const hashPassword = await bcrypt.hash(password, 3)
-
-    await user.update({ password: hashPassword })
+    await user.update({ password: password })
     await user.save()
   }
 }

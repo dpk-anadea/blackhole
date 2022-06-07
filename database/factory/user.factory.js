@@ -17,7 +17,7 @@ factory.define('user', User, {
   ...user,
   phone: faker.phone.phoneNumber(),
   email: faker.internet.email(user.first_name, user.last_name),
-  password: hashPassword,
+  password: '123456',
   reset_password_link: resetLink,
   activated: false,
   activation_link: activationLink
