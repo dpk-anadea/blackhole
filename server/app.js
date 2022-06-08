@@ -6,6 +6,7 @@ const dotenv = require('dotenv')
 const mainRoutes = require('./routes/web/main.router')
 const apiRoutes = require('./routes/api')
 const errorMiddleware = require('./middlewares/error.middleware')
+const adminRouter = require('./admin')
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use(mainRoutes)
 app.use(express.json())
 app.use(cookieParser())
 app.use('/api', apiRoutes)
+app.use('/admin', adminRouter)
 app.use(errorMiddleware)
 
 app.use(express.static(path.join(__dirname, '../dist')))
