@@ -26,7 +26,7 @@
             @remove-product="removeProduct(product.id)"
             @update-count="(value) => updateQuantity(value, product)" />
         </div>
-        <div class="product-cost">${{ getCost(product) }}</div>
+        <div class="product-cost">{{ getCost(product) }}</div>
       </div>
     </div>
 
@@ -90,7 +90,9 @@
         action.GET_PRODUCTS
       ]),
       getCost(product) {
-        return +product.cost * product.quantity
+        return product.cost === 'free'
+          ? product.cost
+          : '$' + +product.cost * product.quantity
       },
       updateQuantity(value, product) {
         product.quantity = value
