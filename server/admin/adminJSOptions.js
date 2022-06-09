@@ -14,7 +14,6 @@ module.exports = {
           userOrders: {
             actionType: 'record',
             handler: async (request, response, context) => {
-              console.log('++++++++++++++++++++++++++++')
               const userOrders = await orderService.getOrders(
                 context.record.param('id')
               )
