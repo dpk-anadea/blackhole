@@ -1,6 +1,7 @@
 const AdminJS = require('adminjs')
 const db = require('../models')
-const { User, Order } = require('../models')
+const { User } = require('../models')
+const orderService = require('../service/order.service')
 
 module.exports = {
   databases: [db],
@@ -11,13 +12,15 @@ module.exports = {
       options: {
         actions: {
           userOrders: {
-            actionType: 'resource',
+            actionType: 'record',
             handler: async (request, response, context) => {
-              const user = context.record
-              const Orders = context._admin.findResource('Order')
-              const userOrder = Order.findAll(context.record.param('order_id'))
+              console.log('++++++++++++++++++++++++++++')
+              const userOrders = await orderService.getOrders(
+                context.record.param('id')
+              )
+              context.record.params.userOrders = userOrders
               return {
-                record: user.toJSON({ name: 'Dima' })
+                record: context.record.toJSON(context.currentAdmin)
               }
             },
             component: AdminJS.bundle('./UserOrders')
