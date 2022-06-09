@@ -1,11 +1,11 @@
 const { User } = require('../models')
-const userService = require('../service/user.service')
+const createUser = require('../service/user/createUser')
 
 class UsersController {
   async createUser(req, res, next) {
     try {
       const user = req.body
-      const userData = await userService.createUser(user)
+      const userData = await createUser(user)
       res.cookie('refreshToken', userData.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true
