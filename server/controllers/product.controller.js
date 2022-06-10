@@ -1,9 +1,11 @@
-const productService = require('../service/product.service')
+const getProducts = require('../service/product/getProducts')
+const createProduct = require('../service/product/createProduct')
+const deleteProduct = require('../service/product/deleteProduct')
 
 class ProductsController {
   async getProduct(req, res, next) {
     try {
-      const products = await productService.getProducts()
+      const products = await getProducts()
 
       res.json(products)
     } catch (err) {
@@ -14,7 +16,7 @@ class ProductsController {
   async createProduct(req, res, next) {
     try {
       const product = req.body
-      const productData = await productService.createProduct(product)
+      const productData = await createProduct(product)
 
       res.json(productData)
     } catch (err) {
@@ -25,7 +27,7 @@ class ProductsController {
   async deleteProduct(req, res, next) {
     try {
       const id = req.params.product_id
-      const productDetails = await productService.deleteProduct(id)
+      const productDetails = await deleteProduct(id)
       res.status(200).json({
         status: true,
         data: productDetails

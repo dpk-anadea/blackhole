@@ -1,10 +1,10 @@
-const stripeService = require('../service/stripe.service')
+const pay = require('../service/stripe.pay')
 class StripeController {
   async pay(req, res, next) {
     try {
       const { user_id: userId, products, token } = req.body
 
-      const stripeResponse = await stripeService.pay(userId, products, token)
+      const stripeResponse = await pay(userId, products, token)
 
       res.json(stripeResponse)
     } catch (err) {
