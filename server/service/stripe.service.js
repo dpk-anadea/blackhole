@@ -1,4 +1,4 @@
-const orderService = require('./order.service')
+const createOrder = require('./order/createOrder')
 const { Product } = require('../models')
 
 const stripe = require('stripe')(
@@ -29,7 +29,7 @@ class StripeService {
       source: token.id
     })
 
-    await orderService.createOrder(userId, productsData, totalCost)
+    await createOrder(userId, productsData, totalCost)
 
     return { receipt_url: charge.receipt_url, status: charge.status }
   }

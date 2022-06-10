@@ -1,7 +1,8 @@
 const uuid = require('uuid')
 const { User } = require('../../models')
 const ApiError = require('../../helpers/api-error')
-const tokenService = require('../token.service')
+const generateTokens = require('../auth-token/generateTokens')
+const saveToken = require('../auth-token/saveToken')
 const mailService = require('../mail.service')
 
 module.exports = async (userData) => {
@@ -31,11 +32,11 @@ module.exports = async (userData) => {
     `${process.env.API_URL}/api/activate/${activationLink}`
   )
 
-  const tokens = tokenService.generateTokens({
+  const tokens = generateTokens({
     id: user.id,
     email: user.email
   })
-  await tokenService.saveToken(user.id, tokens.refreshToken)
+  await saveToken(user.id, tokens.refreshToken)
 
   return { ...tokens, user }
 }

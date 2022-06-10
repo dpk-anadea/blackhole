@@ -1,7 +1,7 @@
 const AdminJS = require('adminjs')
 const db = require('../models')
 const { User } = require('../models')
-const orderService = require('../service/order.service')
+const getOrders = require('../service/order/getOrders')
 
 module.exports = {
   databases: [db],
@@ -14,9 +14,7 @@ module.exports = {
           userOrders: {
             actionType: 'record',
             handler: async (request, response, context) => {
-              const userOrders = await orderService.getOrders(
-                context.record.param('id')
-              )
+              const userOrders = await getOrders(context.record.param('id'))
               context.record.params.userOrders = userOrders
               return {
                 record: context.record.toJSON(context.currentAdmin)
