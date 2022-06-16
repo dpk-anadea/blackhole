@@ -21,9 +21,18 @@ module.exports = {
               }
             },
             component: AdminJS.bundle('./UserOrders')
+          },
+          userAccounts: {
+            actionType: 'resource',
+            component: AdminJS.bundle('./UserAccounts')
           }
         }
       }
     }
-  ]
+  ],
+  pages: {
+    Statistic: {
+      component: AdminJS.bundle('./Statistics')
+    }
+  }
 }
