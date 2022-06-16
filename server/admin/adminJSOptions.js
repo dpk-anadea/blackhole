@@ -2,6 +2,8 @@ const AdminJS = require('adminjs')
 const db = require('../models')
 const { User } = require('../models')
 const getOrders = require('../service/order/getOrders')
+const getUsers = require('../service/user/getUsers')
+const getSoldProducts = require('../service/statistic/getSoldProducts')
 
 module.exports = {
   databases: [db],
@@ -21,10 +23,6 @@ module.exports = {
               }
             },
             component: AdminJS.bundle('./UserOrders')
-          },
-          userAccounts: {
-            actionType: 'resource',
-            component: AdminJS.bundle('./UserAccounts')
           }
         }
       }
@@ -32,6 +30,11 @@ module.exports = {
   ],
   pages: {
     Statistic: {
+      handler: async (request, response, context) => {
+        const soldProducts = await getSoldProducts()
+        const users = await getUsers()
+        return { soldProducts: soldProducts, users: users }
+      },
       component: AdminJS.bundle('./Statistics')
     }
   }
