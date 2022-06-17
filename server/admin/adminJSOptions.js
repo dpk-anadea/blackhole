@@ -22,7 +22,7 @@ module.exports = {
                 record: context.record.toJSON(context.currentAdmin)
               }
             },
-            component: AdminJS.bundle('./UserOrders')
+            component: AdminJS.bundle('./components/UserOrders')
           }
         }
       }
@@ -30,12 +30,12 @@ module.exports = {
   ],
   pages: {
     Statistic: {
-      handler: async (request, response, context) => {
+      handler: async () => {
         const soldProducts = await getSoldProducts()
         const users = await getUsers()
         return { soldProducts: soldProducts, users: users }
       },
-      component: AdminJS.bundle('./Statistics')
+      component: AdminJS.bundle('./components/Statistics')
     }
   }
 }

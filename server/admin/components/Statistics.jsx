@@ -8,7 +8,7 @@ const ProductRow = ({soldProduct}) =>  (
     <TableRow>
         <TableCell>{soldProduct.name}</TableCell>
         <TableCell>{soldProduct.cost}</TableCell>
-        <TableCell>{soldProduct.count}</TableCell>
+        <TableCell>{soldProduct.total_quantity}</TableCell>
     </TableRow>
 )
 
