@@ -2,6 +2,8 @@ const AdminJS = require('adminjs')
 const db = require('../models')
 const { User } = require('../models')
 const getOrders = require('../service/order/getOrders')
+const getUsers = require('../service/user/getUsers')
+const getSoldProducts = require('../service/statistic/getSoldProducts')
 
 module.exports = {
   databases: [db],
@@ -20,10 +22,20 @@ module.exports = {
                 record: context.record.toJSON(context.currentAdmin)
               }
             },
-            component: AdminJS.bundle('./UserOrders')
+            component: AdminJS.bundle('./components/UserOrders')
           }
         }
       }
     }
-  ]
+  ],
+  pages: {
+    Statistic: {
+      handler: async () => {
+        const soldProducts = await getSoldProducts()
+        const users = await getUsers()
+        return { soldProducts: soldProducts, users: users }
+      },
+      component: AdminJS.bundle('./components/Statistics')
+    }
+  }
 }

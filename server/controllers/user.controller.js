@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const getUsers = require('../service/user/getUsers')
 const createUser = require('../service/user/createUser')
 
 class UsersController {
@@ -19,7 +19,8 @@ class UsersController {
 
   async getUsers(req, res, next) {
     try {
-      const users = await User.findAll()
+      const users = await getUsers()
+
       res.json(users)
     } catch (err) {
       next(err)
