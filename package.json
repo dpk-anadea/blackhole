@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "ts-node index",
+    "start": "node index",
     "dev": "nodemon",
     "serve": "vue-cli-service serve",
     "build:client": "vue-cli-service build",
