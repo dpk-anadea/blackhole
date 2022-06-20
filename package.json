@@ -6,7 +6,6 @@
   "scripts": {
     "start": "ts-node index",
     "dev": "nodemon",
-    "build": "rimraf ./build && tsc",
     "serve": "vue-cli-service serve",
     "build:client": "vue-cli-service build",
     "lint": "vue-cli-service lint",
