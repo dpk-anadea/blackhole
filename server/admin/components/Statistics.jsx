@@ -49,10 +49,12 @@ const Statistics = () => {
             {users
                 ? <Table>
                     <TableHead>
-                        <TableCell>Number of registered accounts</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Statistical data</TableCell>
                     </TableHead>
                     <TableBody>
                        <TableRow>
+                           <TableCell>Registered accounts</TableCell>
                             <TableCell>{users.length}</TableCell>
                        </TableRow>
                     </TableBody>
