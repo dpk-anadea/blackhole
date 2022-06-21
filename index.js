@@ -1,7 +1,7 @@
 const app = require('./server/app')
 const { sequelize } = require('./server/models')
 
-const PORT = process.env.APP_PORT || 3030
+const PORT = process.env.PORT || process.env.APP_PORT || 3030
 
 app.listen(PORT, async () => {
   console.log(`Server started on port ${PORT}`)
