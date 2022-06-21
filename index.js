@@ -8,3 +8,5 @@ app.listen(PORT, async () => {
   await sequelize.authenticate()
   console.log('Database Connected!')
 })
+
+app.get('/*', (req, res) => res.send('Index Page'))
